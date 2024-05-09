@@ -137,58 +137,92 @@ components:
       description: A html page.
       type: string
 
-    SemanticArtefact:
-      title: Semantic Artefact
-      description: Resource published or curated by a single agent.
+    Agent:
+      title: Agent
+      description: A dcterms Agent
       type: object
 
-    SemanticArtfeactCatalog:
-      title: Semantic Artfeact Catalog
+    Analytics:
+      title: Analytics
+      description: Number of visits an ontology received.
+
+    Catalog:
+      title: Catalog
       description: A curated collection of metadata about resources (e.g., datasets and data services in the context of a data catalog).
-      type: object
-      properties:
-        catalog:
-          title: catalog
-          description: A catalog whose contents are of interest in the context of this catalog.
-          $ref: "#/components/schemas/SemanticArtfeactCatalog"
-        dataset:
-          title: dataset
-          description: A collection of data that is listed in the catalog.
-          $ref: "#/components/schemas/Dataset"
-        record:
-          title: record
-          description: A record describing the registration of a single dataset or data service that is part of the catalog.
-          type: array
-          items:
-            $ref: "#/components/schemas/SemanticArtefactCatalogRecord"
-        service:
-          title: service
-          description: A site or endpoint that is listed in the catalog.
-          $ref: "#/components/schemas/SemanticArtefactService"
-        themeTaxonomy:
-          title: theme taxonomy
-          description: The knowledge organization system (KOS) used to classify catalog's datasets.
-          $ref: "#/components/schemas/SemanticArtefact"
+      allOf:
+        - $ref: '#/components/schemas/Dataset'
+        - type: object
+          properties:
+            catalog:
+              title: catalog
+              description: A catalog whose contents are of interest in the context of this catalog.
+              $ref: "#/components/schemas/SemanticArtfeactCatalog"
+            dataset:
+              title: dataset
+              description: A collection of data that is listed in the catalog.
+              $ref: "#/components/schemas/Dataset"
+            record:
+              title: record
+              description: A record describing the registration of a single dataset or data service that is part of the catalog.
+              type: array
+              items:
+                $ref: "#/components/schemas/SemanticArtefactCatalogRecord"
+            service:
+              title: service
+              description: A site or endpoint that is listed in the catalog.
+              $ref: "#/components/schemas/SemanticArtefactService"
+            themeTaxonomy:
+              title: theme taxonomy
+              description: The knowledge organization system (KOS) used to classify catalog's datasets.
+              $ref: "#/components/schemas/SemanticArtefact"
+
+    CatalogRecord:
+      title: Catalog Record
+      description: A record in a data catalog, describing the registration of a single dataset or data service.
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+
+    DataService:
+      title: Data service
+      description: A site or end-point providing operations related to the discovery of, access to, or processing functions on, data or related resources.
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            endpointDescription:
+              title: description of service end-point
+              description: A description of the service end-point, including its operations, parameters etc.
+              type: object
+            endpointURL:
+              title: service end-point
+              description: The root location or primary endpoint of the service (a web-resolvable IRI).
+              $ref: "#/components/schemas/RdfResource"
+            servesDataset:
+              tile: serves dataset
+              description: A collection of data that this DataService can distribute.
+              $ref: "#/components/schemas/Dataset"
 
     Dataset:
       title: Dataset
       description: A collection of data, published or curated by a single source, and available for access or download in one or more represenations.
-      type: object
-      properties:
-        distribution:
-          title: distribution
-          description: An available distribution of the dataset.
-          $ref: "#/components/schemas/SemanticArtefactDistribution"
-  
-    SemanticArtefactDistribution:
-      title: Semantic Artefact Distribution
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            distribution:
+              title: distribution
+              description: An available distribution of the dataset.
+              $ref: "#/components/schemas/SemanticArtefactDistribution"
+
+    Distribution:
+      title: Distribution
       description: A specific representation of a dataset. A dataset might be available in multiple serializations that may differ in various ways, including natural language, media-type or format, schematic organization, temporal and spatial resolution, level of detail or profiles (which might specify any or all of the above).
       type: object
       properties:
         accessURL:
           title: access address
           description: A URL of a resource that gives access to a distribution of the dataset. E.g. landing page, feed, SPARQL endpoint. Use for all cases except a simple download link, in which case downloadURL is preferred.
-          $ref: "#/components/schemas/Resource"
+          $ref: "#/components/schemas/RdfResource"
         byteSize:
           title: byte size
           description: The size of a distribution in bytes.
@@ -200,17 +234,7 @@ components:
         downloadURL:
           title: download URL
           description: The URL of the downloadable file in a given format. E.g. CSV file or RDF file. The format is indicated by the distribution's dct:format and/or dcat:mediaType.
-          $ref: "#/components/schemas/Resource"
-        hasRepresentationLanguage:
-          title: representation language
-          description: A language that is used to create an ontology.
-          type: string
-          format: uri
-        hasSyntax:
-          title: syntax
-          description: The syntax followed in the creation of an ontology.
-          type: string
-          format: uri
+          $ref: "#/components/schemas/RdfResource"
         mediaType:
           title: media type
           description: The media type of the distribution as defined by IANA.
@@ -219,85 +243,235 @@ components:
           title: packaging format
           description: The package format of the distribution in which one or more data files are grouped together, e.g. to enable a set of related files to be downloaded together.
           type: "#/components/schemas/MediaType"
-        prefLabelProperty:
-          title: object preferred label property
-          description: Property used to specify objects' preferred label.
-          type: string
-          format: uri
-        synonymProperty:
-          title: object synonym property
-          description: Property used to specify objects' synonyms.
-          type: string
-          format: uri
-        definitionProperty:
-          title: object definition property
-          description: Property used to specify objects' definition.
-          type: string
-          format: uri
-        authorProperty:
-          title: object author property
-          description: Property used to specify objects's author.
-          type: string
-          format: uri
-        obsoleteProperty:
-          title: object obsolete property
-          description: Property used to specify obsolete objects.
-          type: string
-          format: uri
-        hierarchyProperty:
-          title: transitive hierarchy property
-          description: Property used to specify the hierarchy (e.g. rdfs:subClassOf or skos:broader).
-          type: string
-          format: uri
-        obsoleteParent:
-          title: transitive hierarchy property
-          description: Property used to specify the root of an obsolete branch in the ontology.  
-          type: string
-          format: uri
-        sampleQueries:
-          title: sample queries
-          description: A set of queries (may be SPARQL, DL Queries) that are provided along with an ontology.
-          type: string
-          format: uri
-        metrics:
-          title: metrics
-          description: A generic property to store any metrics related to the ontology.
-          type: object
 
-    SemanticArtefactCatalogRecord:
-      # sub class dcat:Resource
-      title: Semantic Artefact Catalog Record
-      description: A record in a data catalog, describing the registration of a single dataset or data service.
+    EngineeringMethodology:
+      title: Engineering Methodology
+      description: Information about the engineering methodology.
+
+    Evaluation:
+      title: Evaluation
+      description: The results of evaluating an ontology. An ontology can have more than one evaluations.
+
+    KnowledgeRepresentationParadigm:
+      title: Knowledge Representation Paradigm
+
+    Group:
+      title: Group
+      description: A group of ontologies that the ontology is usually considered into.
+
+    MediaType:
+      title: Media Type
+      description: A dct MediaType
       type: object
 
-    SemanticArtefactService:
-      # sub class of dcat:Resource
-      title: Semantic Artefact Service
-      description: A site or end-point providing operations related to the discovery of, access to, or processing functions on, data or related resources.
+    Project:
+      title: Project
+      description: A foaf Project
       type: object
-      properties:
-        endpointDescription:
-          title: description of service end-point
-          description: A description of the service end-point, including its operations, parameters etc.
-          type: object
-        endpointURL:
-          title: service end-point
-          description: The root location or primary endpoint of the service (a web-resolvable IRI).
-          $ref: "#/components/schemas/Resource"
-        servesDataset:
-          tile: serves dataset
-          description: A collection of data that this DataService can distribute.
-          $ref: "#/components/schemas/Dataset"
 
-    Resource:
+    RdfResource:
       title: Resource
       description: A rdfs Resource
       type: object
 
-    MediaType:
-      title: MediaType
-      description: A dct MediaType
+    Resource:
+      title: Catalogued resource
+      description: Resource published or curated by a single agent.
       type: object
+      properties:
+        qualifiedRelation:
+          title: qualified relation
+          description: Link to a description of a relationship with another resource.
+          $ref: '#/components/schemas/Resource'
+
+    SemanticArtefact:
+      title: Semantic Artefact
+      description: Semantic Artefact is defined here as a machine-actionable and -readable formalisation of a conceptualisation enabling sharing and reuse by humans and machines. These artefacts may have a broad range of formalisation, from loose set of terms, taxonomies, thesauri to higher-order logics, and include the concepts/terms/classes constituting these. Moreover, semantic artefacts are serialised using a variety of digital representation formats, e.g., RDF Turtle, OWL-RDF, XML, JSON-LD.
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            acronym:
+              title: acronym
+              description: Short acronym label, often used as an identifier within some ontology platforms such as BioPortal or OBO Foundry.
+              type: string
+            analytics:
+              title: :analytics
+              description: This property shall be used to store any analytics for an ontology. E.g., number of visits an ontology received in a portal, number of downloads, etc.
+              $ref: "#/components/schemas/Analytics"
+            browsingUI:
+              title: browsing user interface
+              description: The user interface (URL) where the ontology may be browsed or searched.
+              type: string
+              format: uri
+            competencyQuestion:
+              title: competency question
+              description: A set of questions made to build an ontology at the design time.
+              type: string
+            conformsToKnowledgeRepresentationParadigm:
+              title: knowledge representation paradigm
+              description: A representation formalism that is followed to describe knowledge in an ontology. Example includes description logics, first order logic, etc. 
+              $ref: "#/components/schemas/KnowledgeRepresentationParadigm"
+            designedForTask:
+              title: designed for task
+              description: The purpose for which the ontology was originally designed.
+              $ref: "#/components/schemas/SemanticArtefactTask"
+            endorsedBy:
+              title: endorsed by
+              description: An ontology endorsed by an agent.
+              $ref: "#/components/schemas/Agent"
+            group:
+              title: group
+              description: A group of ontologies that the ontology is usually considered into.
+              $ref: "#/components/schemas/Group"
+            hasEvaluation:
+              title: evaluation
+              description: This property makes a relationship between an ontology and its evaluation result.
+              $ref: "#/components/schemas/Evaluation"
+            hasFormalityLevel:
+              title: formality level
+              description: The level of formality of an ontology.
+              type: string
+            knownUsage:
+              title: known usage
+              description: The applications where the ontology is being used.
+              type: string
+            semanticArtefactRelation:
+              title: generally related to
+              description: A general property for semantic artefact relations.
+              $ref: "#/components/schemas/SemanticArtefact"
+            status:
+              title: status
+              type: string
+            URI:
+              title: URI
+              description: The URI of the ontology which is described by this metadata.
+              type: string
+              format: uri
+            usedEngineeringMethodology:
+              title: engineering methodology
+              description: A methodolgy follwoing which an ontology is created.
+              $ref: "#/components/schemas/EngineeringMethodology"
+            usedInProject:
+              title: used in project
+              description: used in project
+              $ref: "#/components/schemas/Project"
+
+    SemanticArtfeactCatalog:
+      title: Semantic Artfeact Catalog
+      allOf:
+        - $ref: '#/components/schemas/Catalog'
+
+    SemanticArtefactCatalogRecord:
+      title: Semantic Artefact Catalog Record
+      allOf:
+        - $ref: '#/components/schemas/CatalogRecord'
+
+    SemanticArtefactDistribution:
+      title: Semantic Artefact Distribution
+      description: A specific representation of a semantic artefact
+      allOf:
+        - $ref: '#/components/schemas/Distribution'
+        - type: object
+          properties:
+            authorProperty:
+              title: object author property
+              description: Property used to specify objects's author.
+              type: string
+              format: uri
+            definitionProperty:
+              title: object definition property
+              description: Property used to specify objects' definition.
+              type: string
+              format: uri
+            hasRepresentationLanguage:
+              title: representation language
+              description: A language that is used to create an ontology.
+              type: string
+              format: uri
+            hasSyntax:
+              title: syntax
+              description: The syntax followed in the creation of an ontology.
+              type: string
+              format: uri
+            hierarchyProperty:
+              title: transitive hierarchy property
+              description: Property used to specify the hierarchy (e.g. rdfs:subClassOf or skos:broader).
+              type: string
+              format: uri
+            metrics:
+              title: metrics
+              description: A generic property to store any metrics related to the ontology.
+              type: object
+            obsoleteParent:
+              title: transitive hierarchy property
+              description: Property used to specify the root of an obsolete branch in the ontology.  
+              type: string
+              format: uri
+            obsoleteProperty:
+              title: object obsolete property
+              description: Property used to specify obsolete objects.
+              type: string
+              format: uri
+            prefLabelProperty:
+              title: object preferred label property
+              description: Property used to specify objects' preferred label.
+              type: string
+              format: uri
+            sampleQueries:
+              title: sample queries
+              description: A set of queries (may be SPARQL, DL Queries) that are provided along with an ontology.
+              type: string
+              format: uri
+            synonymProperty:
+              title: object synonym property
+              description: Property used to specify objects' synonyms.
+              type: string
+              format: uri
+
+    SemanticArtefactService:
+      title: Semantic Artefact Service
+      allOf:
+        - $ref: '#/components/schemas/DataService'
+
+    SemanticArtefactTask:
+      title: Semantic Artefact Task
+
+    Taxonomy:
+      allOf:
+        - $ref: '#/components/schemas/SemanticArtefact'
+
+    Terminology:
+      allOf:
+        - $ref: '#/components/schemas/SemanticArtefact'
+
+    Thesaurus:
+      allOf:
+        - $ref: '#/components/schemas/SemanticArtefact'
+
+    # comesFromTheSameDomain
+    # subPropertyOf semanticArtefactRelation
+
+    # generalizes
+    # subPropertyOf semanticArtefactRelation
+
+    # hasDisjunctionsWith
+    # subPropertyOf semanticArtefactRelation
+
+    # hasDisparateModelling
+    # subPropertyOf semanticArtefactRelation
+
+    # reliesOn
+    # subPropertyOf semanticArtefactRelation
+
+    # similar
+    # subPropertyOf semanticArtefactRelation
+
+    # specializes
+    # subPropertyOf semanticArtefactRelation
+
+    # usedBy
+    # subPropertyOf semanticArtefactRelation
 
 paths:
   # Infomation about the semantic artefact catalogue
