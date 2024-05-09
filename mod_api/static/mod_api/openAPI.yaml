@@ -3,7 +3,7 @@ servers:
   - url: https://localhost
 
 info:
-  description: This service provides ....
+  description: This service provides about semantic artefacts.
   title: MOD API
   version: 0.0.1
 
@@ -12,55 +12,20 @@ tags:
     description: Get information about a semantic artefact.
   - name: Catalogue
     description: Get information about the semantic artefact catalogue.
-  - name: Distribution
-  - description: Get information about a semantic artefact distribution.
   - name: Search
-    description: Search the vocabulries.
+    description: Search for semantic artefacts.
   - name: Documentation
-    description: Get documentation.
+    description: Get documentation about the service.
 
 components:
 
   parameters:
-    format_param_restricted:
-      description: | 
-        The response format.
-        
-        This will override any value of `Accept` in the request headers.
-        Possible values are `html` and `json`. The default value is `html`.
-      name: format
-      in: query
-      schema:
-        type: string
-        enum: 
-          - html
-          - json
-        default: html
-        example: html
-
-    format_param_index:
-      description: | 
-        The response format.
-        
-        This will override any value of `Accept` in the request headers.
-        Possible values are `html`, `json` and `xlxs`. The default value is `html`.
-      name: format
-      in: query
-      schema:
-        type: string
-        enum: 
-          - html
-          - json
-          - xlsx
-        default: html
-        example: html
-
     format_param:
       description: | 
         The response format.
         
         This will override any value of `Accept` in the request headers.
-        Possible values are `html`, `json` and `ttl`. The default value is `html`.
+        Possible values are `html`, `json`, `ttl` and `xml`. The default value is `html`.
       name: format
       in: query
       schema:
@@ -69,6 +34,7 @@ components:
           - html
           - json
           - ttl
+          - xml
         default: html
         example: html
 
@@ -95,12 +61,15 @@ components:
         text/html:
           schema:
             $ref: "#/components/schemas/html"
-        text/csv:
+        text/turtle:
           schema:
             type: string
         application/json:
           schema:
            $ref: "#/components/schemas/SemanticArtefact"
+        application/rdf+xml:
+          schema:
+            type: string
 
     catalog:
       description: "OK"
@@ -108,12 +77,15 @@ components:
         text/html:
           schema:
             $ref: "#/components/schemas/html"
-        text/csv:
+        text/turtle:
           schema:
             type: string
         application/json:
           schema:
            $ref: "#/components/schemas/SemanticArtfeactCatalog"
+        application/rdf+xml:
+          schema:
+            type: string
 
     distribution:
       description: "OK"
@@ -121,12 +93,15 @@ components:
         text/html:
           schema:
             $ref: "#/components/schemas/html"
-        text/csv:
+        text/turtle:
           schema:
             type: string
         application/json:
           schema:
            $ref: "#/components/schemas/SemanticArtefactDistribution"
+        application/rdf+xml:
+          schema:
+            type: string
 
     record:
       description: "OK"
@@ -134,12 +109,15 @@ components:
         text/html:
           schema:
             $ref: "#/components/schemas/html"
-        text/csv:
+        text/turtle:
           schema:
             type: string
         application/json:
           schema:
            $ref: "#/components/schemas/SemanticArtefactCatalogRecord"
+        application/rdf+xml:
+          schema:
+            type: string
 
     error_message:
       description: The provided parameters are incorrect.
@@ -169,8 +147,10 @@ components:
       description: A curated collection of metadata about resources (e.g., datasets and data services in the context of a data catalog).
       type: object
       properties:
-        catalogue:
-          $ref: "#/components/schemas/catalog"
+        catalog:
+          title: catalog
+          description: A catalog whose contents are of interest in the context of this catalog.
+          $ref: "#/components/schemas/SemanticArtfeactCatalog"
         dataset:
           title: dataset
           description: A collection of data that is listed in the catalog.
@@ -189,11 +169,6 @@ components:
           title: theme taxonomy
           description: The knowledge organization system (KOS) used to classify catalog's datasets.
           $ref: "#/components/schemas/SemanticArtefact"
-
-    catalog:
-      title: catalog
-      description: A catalog whose contents are of interest in the context of this catalog.
-      $ref: "#/components/schemas/SemanticArtfeactCatalog"
 
     Dataset:
       title: Dataset
@@ -315,16 +290,21 @@ components:
           $ref: "#/components/schemas/Dataset"
 
     Resource:
-      title: rdfs Resource
+      title: Resource
+      description: A rdfs Resource
       type: object
 
     MediaType:
-      title: dct MediaType
+      title: MediaType
+      description: A dct MediaType
       type: object
 
 paths:
   # Infomation about the semantic artefact catalogue
   /catalogue:
+    parameters:
+      - $ref: "#/components/parameters/format_param"
+
     get:
       tags:
         - Catalogue
@@ -371,7 +351,7 @@ paths:
 
     get:
       tags:
-        - Distribution
+        - Artefact
       summary: Get information about a semantic artefact distribution.
       description: Retrieves information about a semantic artefact distribution.
       operationId: getDistribution
@@ -390,7 +370,7 @@ paths:
 
     get:
       tags:
-        - Distribution
+        - Artefact
       summary: Get information about a semantic artefact catalog record.
       description: Retrieves information about a semantic artefact catalog record.
       operationId: getRecord
