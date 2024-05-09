@@ -137,10 +137,9 @@ components:
       description: A html page.
       type: string
 
-    Agent:
+    DctermsAgent:
       title: Agent
-      description: A dcterms Agent
-      type: object
+      description: A resource that acts or has the power to act.
 
     Analytics:
       title: Analytics
@@ -174,13 +173,34 @@ components:
             themeTaxonomy:
               title: theme taxonomy
               description: The knowledge organization system (KOS) used to classify catalog's datasets.
-              $ref: "#/components/schemas/SemanticArtefact"
+              $ref: "#/components/schemas/RdfsResource"
 
     CatalogRecord:
       title: Catalog Record
       description: A record in a data catalog, describing the registration of a single dataset or data service.
       allOf:
         - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            conformsTo:
+              title: Conforms To
+              description: An established standard to which the described resource conforms.
+            description:
+              title: Description
+              description: An account of the resource.
+            issued:
+              title: Date Issued
+              description: Date of formal issuance of the resource.
+            modified:
+              title: Date Modified
+              description: Date on which the resource was changed.
+            title:
+              title: Title
+              description: A name given to the resource.
+            primaryTopic:
+              title: The primary topic of some page or document.
+              description: The primaryTopic property relates a document to the main thing that the document is about.
+              $ref: "#/components/schemas/Resource"
 
     DataService:
       title: Data service
@@ -196,7 +216,7 @@ components:
             endpointURL:
               title: service end-point
               description: The root location or primary endpoint of the service (a web-resolvable IRI).
-              $ref: "#/components/schemas/RdfResource"
+              $ref: "#/components/schemas/RdfsResource"
             servesDataset:
               tile: serves dataset
               description: A collection of data that this DataService can distribute.
@@ -212,7 +232,7 @@ components:
             distribution:
               title: distribution
               description: An available distribution of the dataset.
-              $ref: "#/components/schemas/SemanticArtefactDistribution"
+              $ref: "#/components/schemas/Distribution"
 
     Distribution:
       title: Distribution
@@ -222,7 +242,7 @@ components:
         accessURL:
           title: access address
           description: A URL of a resource that gives access to a distribution of the dataset. E.g. landing page, feed, SPARQL endpoint. Use for all cases except a simple download link, in which case downloadURL is preferred.
-          $ref: "#/components/schemas/RdfResource"
+          $ref: "#/components/schemas/RdfsResource"
         byteSize:
           title: byte size
           description: The size of a distribution in bytes.
@@ -234,15 +254,15 @@ components:
         downloadURL:
           title: download URL
           description: The URL of the downloadable file in a given format. E.g. CSV file or RDF file. The format is indicated by the distribution's dct:format and/or dcat:mediaType.
-          $ref: "#/components/schemas/RdfResource"
+          $ref: "#/components/schemas/RdfsResource"
         mediaType:
           title: media type
           description: The media type of the distribution as defined by IANA.
-          type: "#/components/schemas/MediaType"
+          type: "#/components/schemas/DctMediaType"
         packageFormat:
           title: packaging format
           description: The package format of the distribution in which one or more data files are grouped together, e.g. to enable a set of related files to be downloaded together.
-          type: "#/components/schemas/MediaType"
+          type: "#/components/schemas/DctMediaType"
 
     EngineeringMethodology:
       title: Engineering Methodology
@@ -259,20 +279,17 @@ components:
       title: Group
       description: A group of ontologies that the ontology is usually considered into.
 
-    MediaType:
+    DctMediaType:
       title: Media Type
-      description: A dct MediaType
-      type: object
+      description: A file format or physical medium.
 
-    Project:
+    FoafProject:
       title: Project
-      description: A foaf Project
-      type: object
+      description: The Project class represents the class of things that are 'projects'. These may be formal or informal, collective or individual. It is often useful to indicate the homepage of a Project.
 
-    RdfResource:
+    RdfsResource:
       title: Resource
-      description: A rdfs Resource
-      type: object
+      description: The class resource, everything.
 
     Resource:
       title: Catalogued resource
@@ -319,7 +336,7 @@ components:
             endorsedBy:
               title: endorsed by
               description: An ontology endorsed by an agent.
-              $ref: "#/components/schemas/Agent"
+              $ref: "#/components/schemas/DctermsAgent"
             group:
               title: group
               description: A group of ontologies that the ontology is usually considered into.
@@ -355,7 +372,7 @@ components:
             usedInProject:
               title: used in project
               description: used in project
-              $ref: "#/components/schemas/Project"
+              $ref: "#/components/schemas/FoafProject"
 
     SemanticArtfeactCatalog:
       title: Semantic Artfeact Catalog
@@ -438,14 +455,17 @@ components:
       title: Semantic Artefact Task
 
     Taxonomy:
+      title: Taxonomy
       allOf:
         - $ref: '#/components/schemas/SemanticArtefact'
 
     Terminology:
+      title: Terminology
       allOf:
         - $ref: '#/components/schemas/SemanticArtefact'
 
     Thesaurus:
+      title: Thesaurus
       allOf:
         - $ref: '#/components/schemas/SemanticArtefact'
 
