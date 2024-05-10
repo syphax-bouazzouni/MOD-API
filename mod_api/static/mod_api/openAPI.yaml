@@ -1,4 +1,4 @@
-openapi: 3.0.2
+openapi: 3.1.0
 servers:
   - url: https://localhost
 
@@ -66,7 +66,7 @@ components:
             type: string
         application/json:
           schema:
-           $ref: "#/components/schemas/SemanticArtefact"
+            $ref: "#/components/schemas/SemanticArtefact"
         application/rdf+xml:
           schema:
             type: string
@@ -82,7 +82,7 @@ components:
             type: string
         application/json:
           schema:
-           $ref: "#/components/schemas/SemanticArtfeactCatalog"
+            $ref: "#/components/schemas/SemanticArtfeactCatalog"
         application/rdf+xml:
           schema:
             type: string
@@ -98,7 +98,7 @@ components:
             type: string
         application/json:
           schema:
-           $ref: "#/components/schemas/SemanticArtefactDistribution"
+            $ref: "#/components/schemas/SemanticArtefactDistribution"
         application/rdf+xml:
           schema:
             type: string
@@ -137,17 +137,14 @@ components:
       description: A html page.
       type: string
 
-    DctermsAgent:
-      title: Agent
-      description: A resource that acts or has the power to act.
-
     Analytics:
       title: Analytics
       description: Number of visits an ontology received.
 
+    # see https://www.w3.org/TR/vocab-dcat-2/#Class:Catalog
     Catalog:
       title: Catalog
-      description: A curated collection of metadata about resources (e.g., datasets and data services in the context of a data catalog).
+      description: A curated collection of metadata about resources (e.g., datasets and data services in the context of a data catalog)
       allOf:
         - $ref: '#/components/schemas/Dataset'
         - type: object
@@ -155,26 +152,39 @@ components:
             catalog:
               title: catalog
               description: A catalog whose contents are of interest in the context of this catalog.
-              $ref: "#/components/schemas/SemanticArtfeactCatalog"
+              $ref: "#/components/schemas/Catalog"
             dataset:
               title: dataset
               description: A collection of data that is listed in the catalog.
               $ref: "#/components/schemas/Dataset"
+            hasPart:
+              title: has part
+              description: An item that is listed in the catalog.
+              $ref: "#/components/schemas/Resource"
+            homepage:
+              title: homepage
+              description: A homepage of the catalog (a public Web document usually available in HTML).
+              $ref: "#/components/schemas/FoafDocument"
             record:
-              title: record
+              title: catalog record
               description: A record describing the registration of a single dataset or data service that is part of the catalog.
               type: array
               items:
-                $ref: "#/components/schemas/SemanticArtefactCatalogRecord"
+                $ref: "#/components/schemas/CatalogRecord"
+            resource:
+              title: resource
+              description: A resource that is listed in the catalog.
+              $ref: "#/components/schemas/Resource"
             service:
               title: service
-              description: A site or endpoint that is listed in the catalog.
-              $ref: "#/components/schemas/SemanticArtefactService"
+              description: A site or end-point that is listed in the catalog.
+              $ref: "#/components/schemas/DataService"
             themeTaxonomy:
-              title: theme taxonomy
-              description: The knowledge organization system (KOS) used to classify catalog's datasets.
+              title: themes
+              description: A knowledge organization system (KOS) used to classify catalog's datasets and services.
               $ref: "#/components/schemas/RdfsResource"
 
+    # see https://www.w3.org/TR/vocab-dcat-2/#Class:Catalog_Record
     CatalogRecord:
       title: Catalog Record
       description: A record in a data catalog, describing the registration of a single dataset or data service.
@@ -183,65 +193,105 @@ components:
         - type: object
           properties:
             conformsTo:
-              title: Conforms To
+              title: conforms to
               description: An established standard to which the described resource conforms.
+              $ref: "#/components/schemas/DctStandard" 
             description:
               title: Description
-              description: An account of the resource.
+              description: A free-text account of the record.
+              type: string
             issued:
-              title: Date Issued
-              description: Date of formal issuance of the resource.
+              title: listing date
+              description: The date of listing (i.e. formal recording) of the corresponding dataset or service in the catalog.
+              type: string
             modified:
-              title: Date Modified
-              description: Date on which the resource was changed.
+              title: update/modification date
+              description: Most recent date on which the catalog entry was changed, updated or modified.
+              type: string
             title:
               title: Title
               description: A name given to the resource.
+              type: string
             primaryTopic:
-              title: The primary topic of some page or document.
-              description: The primaryTopic property relates a document to the main thing that the document is about.
+              title: primary topic
+              description: The Resource (dataset or service) described in the record.
               $ref: "#/components/schemas/Resource"
 
+    # see https://www.w3.org/TR/vocab-dcat-2/#Class:Data_Service
     DataService:
       title: Data service
-      description: A site or end-point providing operations related to the discovery of, access to, or processing functions on, data or related resources.
+      description: A collection of operations that provides access to one or more datasets or data processing functions.
       allOf:
         - $ref: '#/components/schemas/Resource'
         - type: object
           properties:
             endpointDescription:
-              title: description of service end-point
-              description: A description of the service end-point, including its operations, parameters etc.
-              type: object
+              title: endpoint description
+              description: A description of the services available via the end-points, including their operations, parameters etc.
+              $ref: "#/components/schemas/RdfsResource"
             endpointURL:
-              title: service end-point
+              title: endpoint URL
               description: The root location or primary endpoint of the service (a web-resolvable IRI).
               $ref: "#/components/schemas/RdfsResource"
             servesDataset:
               tile: serves dataset
-              description: A collection of data that this DataService can distribute.
+              description: A collection of data that this data service can distribute.
               $ref: "#/components/schemas/Dataset"
 
+    # see https://www.w3.org/TR/vocab-dcat-2/#Class:Dataset
     Dataset:
       title: Dataset
-      description: A collection of data, published or curated by a single source, and available for access or download in one or more represenations.
+      description: A collection of data, published or curated by a single agent, and available for access or download in one or more representations.
       allOf:
         - $ref: '#/components/schemas/Resource'
         - type: object
           properties:
             distribution:
-              title: distribution
+              title: dataset distribution
               description: An available distribution of the dataset.
               $ref: "#/components/schemas/Distribution"
 
+    DctermsAgent:
+      title: Agent
+      description: A resource that acts or has the power to act.
+
+    DctLicenseDocument:
+      title: License Document
+      description: A legal document giving official permission to do something with a resource.
+
+    DctMediaType:
+      title: Media Type
+      description: A file format or physical medium.
+
+    DctMediaTypeOrExtent:
+      title: Media Type or Extent
+      description: A media type or extent.
+
+    DctRightsStatement:
+      title: Rights Statement
+      description: A statement about the intellectual property rights (IPR) held in or over a resource, a legal document giving official permission to do something with a resource, or a statement about access rights.
+
+    DctStandard:
+      title: Standard
+      description: A reference point against which other things can be evaluated or compared.
+
+    # see https://www.w3.org/TR/vocab-dcat-2/#Class:Distribution
     Distribution:
       title: Distribution
       description: A specific representation of a dataset. A dataset might be available in multiple serializations that may differ in various ways, including natural language, media-type or format, schematic organization, temporal and spatial resolution, level of detail or profiles (which might specify any or all of the above).
       type: object
       properties:
+        accessService:
+          title: access service
+          description: A data service that gives access to the distribution of the dataset
+          $ref: "#/components/schemas/DataService"
+        accessRights:
+          title: access rights
+          description: A rights statement that concerns how the distribution is accessed.
+          $ref: "#/components/schemas/DctRightsStatement"
         accessURL:
-          title: access address
-          description: A URL of a resource that gives access to a distribution of the dataset. E.g. landing page, feed, SPARQL endpoint. Use for all cases except a simple download link, in which case downloadURL is preferred.
+          title: access URL
+          description: A URL of the resource that gives access to a distribution of the dataset. E.g. landing page, feed, SPARQL endpoint.
           $ref: "#/components/schemas/RdfsResource"
         byteSize:
           title: byte size
@@ -250,19 +300,62 @@ components:
         compressFormat:
           title: compression format
           description: The compression format of the distribution in which the data is contained in a compressed form, e.g. to reduce the size of the downloadable file.
+          $ref: "#/components/schemas/DctMediaType"
+        conformsTo:
+          title: conforms to
+          description: An established standard to which the distribution conforms.
+          $ref: "#/components/schemas/DctStandard"
+        description:
+          title: description
+          description: A free-text account of the distribution.
           type: string
         downloadURL:
           title: download URL
-          description: The URL of the downloadable file in a given format. E.g. CSV file or RDF file. The format is indicated by the distribution's dct:format and/or dcat:mediaType.
+          description: The URL of the downloadable file in a given format. E.g. CSV file or RDF file. The format is indicated by the distribution's dct:format and/or dcat:mediaType
           $ref: "#/components/schemas/RdfsResource"
+        format:
+          title: format
+          description: The file format of the distribution.
+          $ref: "#/components/schemas/DctMediaTypeOrExtent"
+        hasPolicy:
+          title: has policy
+          description: An ODRL conformant policy expressing the rights associated with the distribution.
+          $ref: "#/components/schemas/OdrlPolicy"
+        issued:
+          title: release date
+          description: Date of formal issuance (e.g., publication) of the distribution.
+          type: string
+        license:
+          title: license
+          description: A legal document under which the distribution is made available.
+          $ref: "#/components/schemas/DctLicenseDocument"
         mediaType:
           title: media type
           description: The media type of the distribution as defined by IANA.
-          type: "#/components/schemas/DctMediaType"
+          $ref: "#/components/schemas/DctMediaType"
+        modified:
+          title: update/modification date
+          description: Most recent date on which the distribution was changed, updated or modified.
+          type: string
         packageFormat:
           title: packaging format
           description: The package format of the distribution in which one or more data files are grouped together, e.g. to enable a set of related files to be downloaded together.
-          type: "#/components/schemas/DctMediaType"
+          $ref: "#/components/schemas/DctMediaType"
+        rights:
+          title: rights
+          description: Information about rights held in and over the distribution.
+          $ref: "#/components/schemas/DctRightsStatement"
+        spatialResolutionInMeters:
+          title: spatial resolution
+          description: The minimum spatial separation resolvable in a dataset distribution, measured in meters.
+          type: number
+        temporalResolution:
+          title: temporal resolution
+          description: Minimum time period resolvable in the dataset distribution.
+        title:
+          title: title
+          description: A name given to the distribution.
+          type: string
 
     EngineeringMethodology:
       title: Engineering Methodology
@@ -272,20 +365,24 @@ components:
       title: Evaluation
       description: The results of evaluating an ontology. An ontology can have more than one evaluations.
 
-    KnowledgeRepresentationParadigm:
-      title: Knowledge Representation Paradigm
+    FoafDocument:
+      title: Document
+      description: A document.
+
+    FoafProject:
+      title: Project
+      description: The Project class represents the class of things that are 'projects'. These may be formal or informal, collective or individual. It is often useful to indicate the homepage of a Project.
 
     Group:
       title: Group
       description: A group of ontologies that the ontology is usually considered into.
 
-    DctMediaType:
-      title: Media Type
-      description: A file format or physical medium.
+    KnowledgeRepresentationParadigm:
+      title: Knowledge Representation Paradigm
 
-    FoafProject:
-      title: Project
-      description: The Project class represents the class of things that are 'projects'. These may be formal or informal, collective or individual. It is often useful to indicate the homepage of a Project.
+    OdrlPolicy:
+      title: Policy
+      description: A non-empty group of Permissions and/or Prohibitions.
 
     RdfsResource:
       title: Resource
