@@ -862,7 +862,7 @@ paths:
           $ref: "#/components/responses/error_message"
 
   # Get an iterator over all skos:Concept within an artefact
-  /artefact/{artefact}/concepts:
+  /artefact/{artefact}/resources/concepts:
     parameters:
       - $ref: "#/components/parameters/resources/artefact"
       - $ref: "#/components/parameters/format_param"
