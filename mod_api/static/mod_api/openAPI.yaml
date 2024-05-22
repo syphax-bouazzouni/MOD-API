@@ -844,7 +844,7 @@ paths:
           $ref: "#/components/responses/error_message"
 
   # Get an iterator over all owl:Classes within an artefact
-  /artefact/{artefact}/classes:
+  /artefact/{artefact}/resources/classes:
     parameters:
       - $ref: "#/components/parameters/artefact"
       - $ref: "#/components/parameters/format_param"
@@ -864,7 +864,7 @@ paths:
   # Get an iterator over all skos:Concept within an artefact
   /artefact/{artefact}/concepts:
     parameters:
-      - $ref: "#/components/parameters/artefact"
+      - $ref: "#/components/parameters/resources/artefact"
       - $ref: "#/components/parameters/format_param"
 
     get:
@@ -880,7 +880,7 @@ paths:
           $ref: "#/components/responses/error_message"
 
   # Get an iterator over all the rdf:Property within an artefact
-  /artefact/{artefact}/properties:
+  /artefact/{artefact}/resources/properties:
     parameters:
       - $ref: "#/components/parameters/artefact"
       - $ref: "#/components/parameters/format_param"
@@ -898,7 +898,7 @@ paths:
           $ref: "#/components/responses/error_message"
 
   # Get an iterator over all the instances (owl individuals) within an artefact
-  /artefact/{artefact}/individuals:
+  /artefact/{artefact}/resources/individuals:
     parameters:
       - $ref: "#/components/parameters/artefact"
       - $ref: "#/components/parameters/format_param"
@@ -916,7 +916,7 @@ paths:
           $ref: "#/components/responses/error_message"
 
   # Get an iterator over all the skos:Scheme within an artefact
-  /artefact/{artefact}/schemes:
+  /artefact/{artefact}/resources/schemes:
     parameters:
       - $ref: "#/components/parameters/artefact"
       - $ref: "#/components/parameters/format_param"
@@ -934,7 +934,7 @@ paths:
           $ref: "#/components/responses/error_message"
 
   # Get an iterator over all the skos:Collection within an artefact
-  /artefact/{artefact}/collection:
+  /artefact/{artefact}/resources/collection:
     parameters:
       - $ref: "#/components/parameters/artefact"
       - $ref: "#/components/parameters/format_param"
@@ -952,7 +952,7 @@ paths:
           $ref: "#/components/responses/error_message"
 
   # Get an iterator over all the skos-xl:Label within an artefact
-  /artefact/{artefact}/labels:
+  /artefact/{artefact}/resources/labels:
     parameters:
       - $ref: "#/components/parameters/artefact"
       - $ref: "#/components/parameters/format_param"
