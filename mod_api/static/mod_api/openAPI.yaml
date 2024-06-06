@@ -1027,7 +1027,7 @@ paths:
 
     get:
       tags:
-        - Records
+        - Record
       summary: Get information about all semantic artefact catalog records.
       description: Retrieves a collection of semantic artefact catalog records.
       operationId: getCatalogueRecords
@@ -1045,7 +1045,7 @@ paths:
 
     get:
       tags:
-        - Records
+        - Record
       summary: Get information about a semantic artefact catalog record.
       description: Retrieves information about a semantic artefact catalog record.
       operationId: getArtefactRecord
@@ -1062,7 +1062,7 @@ paths:
 
     get:
       tags:
-        - Distributions
+        - Distribution
       summary: Get information about all semantic artefact distributions.
       description: Retrieves a collection of semantic artefact distributions.
       operationId: getCatalogueDistributions
@@ -1079,7 +1079,7 @@ paths:
 
     get:
       tags:
-        - Distributions
+        - Distribution
       summary: Get information about the latest semantic artefact distribution for each atrefact.
       description: Retrieves a collection containing the latest semantic artefact distribution for each atrefact.
       operationId: getCatalogueDistributionsLatest
