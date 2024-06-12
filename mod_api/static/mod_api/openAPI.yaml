@@ -342,7 +342,6 @@ components:
 
     Analytics:
       title: Analytics
-      description: Number of visits an ontology received.
       type: string
 
     # see https://www.w3.org/TR/vocab-dcat-2/#Class:Catalog
@@ -627,13 +626,16 @@ components:
           type: string
 
     EngineeringMethodology:
-      title: Engineering Methodology
-      description: Information about the engineering methodology.
+      title: Semantic Artefact Engineering Methodology
       type: string
 
     Evaluation:
-      title: Evaluation
-      description: The results of evaluating an ontology. An ontology can have more than one evaluations.
+      title: Semantic Artefact Evaluation
+      description: The results of evaluating a semantic artefact. An artefact can have more than one evaluations.
+      type: string
+
+    FairAssessment:
+      title: FAIRness assessment"
       type: string
 
     FoafAgent:
@@ -652,8 +654,8 @@ components:
       type: string
 
     Group:
-      title: Group
-      description: A group of ontologies that the ontology is usually considered into.
+      title: Semantic Artefact Group
+      description: A group of multiple semantic artefacts (e.g., coming from the same source or project).
       type: string
 
     KnowledgeRepresentationParadigm:
@@ -805,19 +807,10 @@ components:
               title: :analytics
               description: This property shall be used to store any analytics for an ontology. E.g., number of visits an ontology received in a portal, number of downloads, etc.
               $ref: "#/components/schemas/Analytics"
-            browsingUI:
-              title: browsing user interface
-              description: The user interface (URL) where the ontology may be browsed or searched.
-              type: string
-              format: uri
             competencyQuestion:
               title: competency question
               description: A set of questions made to build an ontology at the design time.
               type: string
-            conformsToKnowledgeRepresentationParadigm:
-              title: knowledge representation paradigm
-              description: A representation formalism that is followed to describe knowledge in an ontology. Example includes description logics, first order logic, etc. 
-              $ref: "#/components/schemas/KnowledgeRepresentationParadigm"
             designedForTask:
               title: designed for task
               description: The purpose for which the ontology was originally designed.
@@ -842,6 +835,26 @@ components:
               title: known usage
               description: The applications where the ontology is being used.
               type: string
+            metrics:
+              title: metrics
+              description: A generic property to store any metrics (number) related to the ontology.
+              type: integer
+            numberOfEnsorments:
+              title: number of endorsmements
+              description: Number of endorsing organizations (maybe represented with mod:endorsedBy).
+              type: integer
+            numberOfEvaluations:
+              title: number of evaluations
+              description: Number of evaluations (maybe represented with mod:hasEvaluation).
+              type: integer
+            numberOfNotes:
+              title: number of notes or comments
+              description: Number of notes or comments (maybe represented with schema:comment) related to the ontologies.
+              type: integer
+            numberOfUsingProjects:
+              title: number of using projects
+              description: Number of projects (maybe represented with mod:usedInProject) using an ontology.
+              type: integer
             semanticArtefactRelation:
               title: generally related to
               description: A general property for semantic artefact relations.
@@ -854,28 +867,26 @@ components:
               description: The URI of the ontology which is described by this metadata.
               type: string
               format: uri
-            usedEngineeringMethodology:
-              title: engineering methodology
-              description: A methodolgy follwoing which an ontology is created.
-              $ref: "#/components/schemas/EngineeringMethodology"
             usedInProject:
               title: used in project
-              description: used in project
+              description: An ontology that is used in a project.
               $ref: "#/components/schemas/FoafProject"
 
     SemanticArtfeactCatalog:
       title: Semantic Artfeact Catalog
+      description: A dedicated web-based system that fosters the availability, discoverability and long-term preservation and maintenance of semantic artefacts.
       allOf:
         - $ref: '#/components/schemas/Catalog'
 
     SemanticArtefactCatalogRecord:
       title: Semantic Artefact Catalog Record
+      description: A record in a catalog, describing the registration of a single semantic artefact
       allOf:
         - $ref: '#/components/schemas/CatalogRecord'
 
     SemanticArtefactDistribution:
       title: Semantic Artefact Distribution
-      description: A specific representation of a semantic artefact
+      description: A specific representation and/or serialization of a semantic artefact.
       allOf:
         - $ref: '#/components/schemas/Distribution'
         - type: object
@@ -885,16 +896,69 @@ components:
               description: Property used to specify objects's author.
               type: string
               format: uri
+            averageChildCount:
+              title: average number of children per class
+              description: Average number of children per class (BioPortal definition).
+              type: integer
+            browsingUI:
+              title: browsing user interface
+              description: The user interface (URL) where the ontology may be browsed or searched.
+              type: string
+              format: uri
+            classesWithMoreThan25Children:
+              title: number of classes with more than 25 children
+              description: Number of classes that have more than 25 direct subclasses.
+              type: integer
+            classesWithNoAuthorMetadata:
+              title: number of classes with no author metadata
+              description: Number of classes with author metadata.
+              type: integer
+            classesWithNoDateMetadata:
+              title: number of classes with no date metadata
+              description: Number of classes with no date metadata.
+              type: integer
+            classesWithNoDefinition:
+              title: number of classes with no definition
+              description: Number of classes that have no value for the definition property.
+              type: integer
+            classesWithNoFormalDefinition:
+              title: number of classes with no formal or logical definition
+              description: Number of classes with no formal or logical definition.
+              type: integer
+            classesWithNoLabel:
+              title: number of classes with no label
+              description: Number of classes with no labels.
+              type: integer
+            classesWithOneChild:
+              title: number of classes with a single child
+              description: Number of classes that have only one subclass in the is-a hierarchy.
+              type: integer
+            conformsToKnowledgeRepresentationParadigm:
+              title: knowledge representation paradigm
+              description: A representation formalism that is followed to describe knowledge in an ontology. Example includes description logics, first order logic, etc. 
+              $ref: "#/components/schemas/KnowledgeRepresentationParadigm"
+            createdProperty:
+              title: object creation date property
+              description: Property used to specify the date of creation of a class or another object in the ontology.
+              type: string
+              format: uri
             definitionProperty:
               title: object definition property
               description: Property used to specify objects' definition.
               type: string
               format: uri
+            fairAssessment:
+              title: FAIR assessment
+              description: A FAIRness assessment result produced by a known or identified FAIRness assessment method or tool. It can be either a simple number or a structured result document explaining the assessment.
+              $ref: "#/components/schemas/FairAssessment"
+            fairScore:
+              title: FAIR assessment
+              description: A FAIRness assessment result produced by a known or identified FAIRness assessment method or tool. It can be either a simple number or a structured result document explaining the assessment.
+              type: integer
             hasRepresentationLanguage:
               title: representation language
               description: A language that is used to create an ontology.
               type: string
-              format: uri
             hasSyntax:
               title: syntax
               description: The syntax followed in the creation of an ontology.
@@ -905,12 +969,61 @@ components:
               description: Property used to specify the hierarchy (e.g. rdfs:subClassOf or skos:broader).
               type: string
               format: uri
+            maxChildCount:
+              title: maximum number of children per class
+              description: Maximum number of children per class (BioPortal definition).
+              type: integer              
+            maxDepth:
+              title: maximum depth of the hierachy
+              description: Maximum depth of the hierarchy tree.
+              type: integer
+            metadataVoc:
+              title: metadata vocabulary used
+              type: string
+              format: uri
             metrics:
               title: metrics
-              description: A generic property to store any metrics related to the ontology.
-              type: object
+              description: A generic property to store any metrics (number) related to the ontology.
+              type: integer
+            modifiedProperty:
+              title: object modification date property
+              description: Property used to specify the date of modification of a class or another object in the ontology.
+              type: string
+              format: uri
+            numberOfAxioms:
+              title: number of axioms or triples
+              description: The total number of axioms in an ontology.
+              type: integer
+            numberOfClasses:
+              title: number of classes
+              description: The total number of classes in an ontology.
+              type: integer
+            numberOfDataProperties:
+              title: number of data properties
+              description: The total number of data properties in an ontology.
+              type: integer
+            numberOfDeprecated:
+              title: number of deprecated objects
+              description: The total number of  in an ontology.
+              type: integer
+            numberOfIndividuals:
+              title: number of individuals
+              description: The total number of individuals in an ontology.
+              type: integer
+            numberOfLabels:
+              title: number of labels
+              description: Number of defined labels for any resources in an ontology (classes, properties, etc).
+              type: integer
+            numberOfObjectProperties:
+              title: number of object properties
+              description: The total number of object properties in an ontology.
+              type: integer
+            numberOfProperties:
+              title: number of properties
+              description: The total number of properties in an ontology.
+              type: integer
             obsoleteParent:
-              title: transitive hierarchy property
+              title: root of obsolete branch
               description: Property used to specify the root of an obsolete branch in the ontology.  
               type: string
               format: uri
@@ -928,15 +1041,19 @@ components:
               title: sample queries
               description: A set of queries (may be SPARQL, DL Queries) that are provided along with an ontology.
               type: string
-              format: uri
             synonymProperty:
               title: object synonym property
               description: Property used to specify objects' synonyms.
               type: string
               format: uri
+            usedEngineeringMethodology:
+              title: engineering methodology
+              description: A methodolgy following which an ontology is created.
+              $ref: "#/components/schemas/EngineeringMethodology"
 
     SemanticArtefactService:
       title: Semantic Artefact Service
+      description: A collection of operations that provides access to one or more semantic artefacts processing functions.
       allOf:
         - $ref: '#/components/schemas/DataService'
 
