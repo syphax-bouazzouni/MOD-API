@@ -57,6 +57,14 @@ components:
       schema:
         type: string
 
+    query:
+      description: The search query.
+      name: q
+      in: path
+      required: true
+      schema:
+        type: string
+
     page:
       description: The page number you want to retrieve.
       name: page
@@ -71,7 +79,7 @@ components:
       in: query
       schema:
         type: integer
-        default: 1
+        default: 50
 
   responses:
 
@@ -692,7 +700,7 @@ components:
       title: Individual
       description: An owl individual
       type: string
-
+       
     ProvActivity:
       title: Activity
       description: An activity is something that occurs over a period of time and acts upon or with entities; it may include consuming, processing, transforming, modifying, relocating, using, or generating entities.
@@ -1511,5 +1519,59 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/resources"
+        "404":
+          $ref: "#/components/responses/error_message"
+
+  # Search all semantic artefacts
+  /artefacts/search:
+    parameters:
+      - $ref: "#/components/parameters/format_param"
+      - $ref: "#/components/parameters/query"
+
+    get:
+      tags:
+        - Search
+      summary: Get information about all semantic artefacts that match the search criteria.
+      description: Retrieves a collection of all semantic artefacts that match the search criteria.
+      operationId: searchArtefacts
+      responses:
+        "200":
+          $ref: "#/components/responses/artefacts"
+        "404":
+          $ref: "#/components/responses/error_message"
+
+  # Search all semantic artefact distributions
+  /distributions/search:
+    parameters:
+      - $ref: "#/components/parameters/format_param"
+      - $ref: "#/components/parameters/query"
+
+    get:
+      tags:
+        - Search
+      summary: Get information about all semantic artefact distributions that match the search criteria.
+      description: Retrieves a collection of semantic artefact distributions that match the search criteria.
+      operationId: searchCatalogueDistributions
+      responses:
+        "200":
+          $ref: "#/components/responses/distributions"
+        "404":
+          $ref: "#/components/responses/error_message"
+
+  # Search all semantic artefact catalog records
+  /records/search:
+    parameters:
+      - $ref: "#/components/parameters/format_param"
+      - $ref: "#/components/parameters/query"
+
+    get:
+      tags:
+        - Search
+      summary: Get information about all semantic artefact catalog records that match the search criteria.
+      description: Retrieves a collection of semantic artefact catalog records that match the search criteria.
+      operationId: searchCatalogueRecords
+      responses:
+        "200":
+          $ref: "#/components/responses/records"
         "404":
           $ref: "#/components/responses/error_message"
