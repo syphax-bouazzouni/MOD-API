@@ -1575,3 +1575,57 @@ paths:
           $ref: "#/components/responses/records"
         "404":
           $ref: "#/components/responses/error_message"
+
+  # Search all semantic artefacts
+  /search/artefacts:
+    parameters:
+      - $ref: "#/components/parameters/format_param"
+      - $ref: "#/components/parameters/query"
+
+    get:
+      tags:
+        - Search
+      summary: Get information about all semantic artefacts that match the search criteria.
+      description: Retrieves a collection of all semantic artefacts that match the search criteria.
+      operationId: searchArtefacts
+      responses:
+        "200":
+          $ref: "#/components/responses/artefacts"
+        "404":
+          $ref: "#/components/responses/error_message"
+
+  # Search all semantic artefact distributions
+  /search/distributions:
+    parameters:
+      - $ref: "#/components/parameters/format_param"
+      - $ref: "#/components/parameters/query"
+
+    get:
+      tags:
+        - Search
+      summary: Get information about all semantic artefact distributions that match the search criteria.
+      description: Retrieves a collection of semantic artefact distributions that match the search criteria.
+      operationId: searchCatalogueDistributions
+      responses:
+        "200":
+          $ref: "#/components/responses/distributions"
+        "404":
+          $ref: "#/components/responses/error_message"
+
+  # Search all semantic artefact catalog records
+  /search/records:
+    parameters:
+      - $ref: "#/components/parameters/format_param"
+      - $ref: "#/components/parameters/query"
+
+    get:
+      tags:
+        - Search
+      summary: Get information about all semantic artefact catalog records that match the search criteria.
+      description: Retrieves a collection of semantic artefact catalog records that match the search criteria.
+      operationId: searchCatalogueRecords
+      responses:
+        "200":
+          $ref: "#/components/responses/records"
+        "404":
+          $ref: "#/components/responses/error_message"
