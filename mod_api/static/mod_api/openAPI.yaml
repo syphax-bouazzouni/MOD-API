@@ -127,10 +127,12 @@ components:
               type: string
         application/json:
           schema:
-            type: array
-            title: List of Semantic Artefacts
-            items:
-              $ref: "#/components/schemas/SemanticArtefact"
+            allOff:
+              - $ref: "#/components/schemas/Pagination"
+              - type: array
+                title: List of Semantic Artefacts
+                items:
+                  $ref: "#/components/schemas/SemanticArtefact"
         application/rdf+xml:
           schema:
             type: array
@@ -777,7 +779,22 @@ components:
       title: Individual
       description: An owl individual
       type: string
-       
+
+    Pagination:
+      title: Pagination
+      description: Fields associated with pagination.
+      type: object
+      properties:
+        firstPage:
+          title: first page
+          description: The URL of the first page of the results
+        previousPage:
+          title: previous page
+          description: The URL of the previous page of the results
+        nextPage:
+          title: next page
+          description: The URL of the next page of the results
+
     ProvActivity:
       title: Activity
       description: An activity is something that occurs over a period of time and acts upon or with entities; it may include consuming, processing, transforming, modifying, relocating, using, or generating entities.
