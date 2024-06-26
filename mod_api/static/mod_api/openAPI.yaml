@@ -181,6 +181,7 @@ components:
         text/turtle:
           schema:
             type: array
+            title: List of 
             items:
               type: "#/components/schemas/SkosCollection"
               application/json:
@@ -198,6 +199,7 @@ components:
         application/json:
           schema:
             type: array
+            title: List of 
             items:
               type: "#/components/schemas/SkosConcept"
         application/rdf+xml:
@@ -236,6 +238,7 @@ components:
         application/json:
           schema:
             type: array
+            title: List of 
             items:
               $ref: "#/components/schemas/SemanticArtefactDistribution"
         application/rdf+xml:
@@ -245,6 +248,7 @@ components:
               type: string
 
     individuals:
+      title: List of Owl Individuals
       description: "OK"
       content:
         text/html:
@@ -275,7 +279,7 @@ components:
           schema:
             type: array
             items:
-              $ref: "#/components/schemas/RdfProperty"
+              $ref: "#/components/schemas/RdfsProperty"
         application/rdf+xml:
           schema:
             type: string
@@ -397,7 +401,7 @@ components:
               - type: array
                 title: List of Rdf Properties
                 items:
-                  $ref: "#/components/schemas/RdfProperty"
+                  $ref: "#/components/schemas/RdfsProperty"
               - $ref: "#/components/schemas/SemanticArtefactCatalogRecord"
               - type: array
                 title: List of Semantic Artefact Catalog Records
