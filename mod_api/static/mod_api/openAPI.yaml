@@ -181,7 +181,7 @@ components:
         text/turtle:
           schema:
             type: array
-            title: List of 
+            title: List of Skos Collections
             items:
               type: "#/components/schemas/SkosCollection"
               application/json:
@@ -199,7 +199,7 @@ components:
         application/json:
           schema:
             type: array
-            title: List of 
+            title: List of Skos Concepts
             items:
               type: "#/components/schemas/SkosConcept"
         application/rdf+xml:
@@ -238,7 +238,7 @@ components:
         application/json:
           schema:
             type: array
-            title: List of 
+            title: List of Semantic Artefact Distributions
             items:
               $ref: "#/components/schemas/SemanticArtefactDistribution"
         application/rdf+xml:
@@ -248,7 +248,6 @@ components:
               type: string
 
     individuals:
-      title: List of Owl Individuals
       description: "OK"
       content:
         text/html:
@@ -260,6 +259,7 @@ components:
         application/json:
           schema:
             type: array
+            title: List of Owl Individuals
             items:
               type: "#/components/schemas/OwlIndividual"
         application/rdf+xml:
@@ -278,6 +278,7 @@ components:
         application/json:
           schema:
             type: array
+            title: List of Rdfs Properties
             items:
               $ref: "#/components/schemas/RdfsProperty"
         application/rdf+xml:
@@ -316,6 +317,7 @@ components:
         application/json:
           schema:
             type: array
+            title: List of Semantic Artefact Catalog Records
             items:
               $ref: "#/components/schemas/SemanticArtefactCatalogRecord"
         application/rdf+xml:
@@ -336,6 +338,7 @@ components:
         application/json:
           schema:
             type: array
+            title: List of Rdfs Resources
             items:
               type: "#/components/schemas/RdfsResource"
         application/rdf+xml:
@@ -354,6 +357,7 @@ components:
         application/json:
           schema:
             type: array
+            title: List of Skos Schemes
             items:
               type: "#/components/schemas/SkosScheme"
         application/rdf+xml:
@@ -399,7 +403,7 @@ components:
                 items:
                   $ref: "#/components/schemas/OwlIndividual"
               - type: array
-                title: List of Rdf Properties
+                title: List of Rdfs Properties
                 items:
                   $ref: "#/components/schemas/RdfsProperty"
               - $ref: "#/components/schemas/SemanticArtefactCatalogRecord"
@@ -412,7 +416,7 @@ components:
                 items:
                   $ref: "#/components/schemas/RdfsResource"
               - type: array
-                title: List of Skos Scheme
+                title: List of Skos Schemes
                 items:
                   $ref: "#/components/schemas/SkosScheme"
         application/rdf+xml:
