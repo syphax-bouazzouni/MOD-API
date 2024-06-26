@@ -367,12 +367,15 @@ components:
           schema:
             oneOf:
               - type: array
+                title: List of SemanticArtefacts
                 items:
                   $ref: "#/components/schemas/SemanticArtefact"
               - type: array
+                title: List of SemanticArtfeactCatalogs
                 items:
                   $ref: "#/components/schemas/SemanticArtfeactCatalog"
               - type: array
+                title: List of OwlClasses
                 items:
                   $ref: "#/components/schemas/OwlClass"
               - type: array
@@ -1630,7 +1633,7 @@ paths:
           $ref: "#/components/responses/error_message"
 
   # Search all of the metadata in a catalogue
-  /records/search:
+  /search/metadata:
     parameters:
       - $ref: "#/components/parameters/format_param"
       - $ref: "#/components/parameters/query"
