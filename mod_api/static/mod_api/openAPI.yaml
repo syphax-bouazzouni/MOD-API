@@ -127,7 +127,7 @@ components:
               type: string
         application/json:
           schema:
-            allOff:
+            allOf:
               - $ref: "#/components/schemas/Pagination"
               - type: array
                 title: List of Semantic Artefacts
