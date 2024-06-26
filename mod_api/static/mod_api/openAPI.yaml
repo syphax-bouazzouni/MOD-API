@@ -17,7 +17,7 @@ tags:
   - name: Record
     description: Get information about semantic artefact catalogue records.
   - name: Search
-    description: Search for semantic artefacts.
+    description: Search the metadata and catalogue content.
   - name: Documentation
     description: Get documentation about the service.
 
@@ -56,6 +56,14 @@ components:
       required: true
       schema:
         type: string
+
+    display:
+      description: The parameters to display.
+      name: display
+      in: path
+      schema:
+        type: string
+        default: all
 
     query:
       description: The search query.
@@ -342,6 +350,57 @@ components:
             type: array
             items:
               type: "#/components/schemas/SkosScheme"
+        application/rdf+xml:
+          schema:
+            type: string
+
+    searchResult:
+      description: "OK"
+      content:
+        text/html:
+          schema:
+            $ref: "#/components/schemas/html"
+        text/turtle:
+          schema:
+            type: string
+        application/json:
+          schema:
+            oneOf:
+              - type: array
+                items:
+                  $ref: "#/components/schemas/SemanticArtefact"
+              - type: array
+                items:
+                  $ref: "#/components/schemas/SemanticArtfeactCatalog"
+              - type: array
+                items:
+                  $ref: "#/components/schemas/OwlClass"
+              - type: array
+                items:
+                  $ref: "#/components/schemas/SkosCollection"
+              - type: array
+                items:
+                  $ref: "#/components/schemas/SkosConcept"
+              - $ref: "#/components/schemas/SemanticArtefactDistribution"
+              - type: array
+                items:
+                  $ref: "#/components/schemas/SemanticArtefactDistribution"
+              - type: array
+                items:
+                  $ref: "#/components/schemas/OwlIndividual"
+              - type: array
+                items:
+                  $ref: "#/components/schemas/RdfProperty"
+              - $ref: "#/components/schemas/SemanticArtefactCatalogRecord"
+              - type: array
+                items:
+                  $ref: "#/components/schemas/SemanticArtefactCatalogRecord"
+              - type: array
+                items:
+                  $ref: "#/components/schemas/RdfsResource"
+              - type: array
+                items:
+                  $ref: "#/components/schemas/SkosScheme"
         application/rdf+xml:
           schema:
             type: string
@@ -1151,6 +1210,7 @@ paths:
   /:
     parameters:
       - $ref: "#/components/parameters/format_param"
+      - $ref: "#/components/parameters/display"
 
     get:
       tags:
@@ -1167,6 +1227,7 @@ paths:
       - $ref: "#/components/parameters/format_param"
       - $ref: "#/components/parameters/page"
       - $ref: "#/components/parameters/pagesize"
+      - $ref: "#/components/parameters/display"
 
     get:
       tags:
@@ -1185,6 +1246,7 @@ paths:
     parameters:
       - $ref: "#/components/parameters/artefactID"
       - $ref: "#/components/parameters/format_param"
+      - $ref: "#/components/parameters/display"
 
     get:
       tags:
@@ -1204,6 +1266,7 @@ paths:
       - $ref: "#/components/parameters/format_param"
       - $ref: "#/components/parameters/page"
       - $ref: "#/components/parameters/pagesize"
+      - $ref: "#/components/parameters/display"
 
     get:
       tags:
@@ -1223,6 +1286,7 @@ paths:
       - $ref: "#/components/parameters/format_param"
       - $ref: "#/components/parameters/page"
       - $ref: "#/components/parameters/pagesize"
+      - $ref: "#/components/parameters/display"
 
     get:
       tags:
@@ -1253,6 +1317,7 @@ paths:
       - $ref: "#/components/parameters/format_param"
       - $ref: "#/components/parameters/page"
       - $ref: "#/components/parameters/pagesize"
+      - $ref: "#/components/parameters/display"
 
     get:
       tags:
@@ -1271,6 +1336,7 @@ paths:
     parameters:
       - $ref: "#/components/parameters/artefactID"
       - $ref: "#/components/parameters/format_param"
+      - $ref: "#/components/parameters/display"
 
     get:
       tags:
@@ -1291,6 +1357,7 @@ paths:
       - $ref: "#/components/parameters/format_param"
       - $ref: "#/components/parameters/page"
       - $ref: "#/components/parameters/pagesize"
+      - $ref: "#/components/parameters/display"
 
     get:
       tags:
@@ -1310,6 +1377,7 @@ paths:
       - $ref: "#/components/parameters/artefactID"
       - $ref: "#/components/parameters/distributionID"
       - $ref: "#/components/parameters/format_param"
+      - $ref: "#/components/parameters/display"
 
     get:
       tags:
@@ -1331,6 +1399,7 @@ paths:
       - $ref: "#/components/parameters/format_param"
       - $ref: "#/components/parameters/page"
       - $ref: "#/components/parameters/pagesize"
+      - $ref: "#/components/parameters/display"
 
     get:
       tags:
@@ -1349,6 +1418,7 @@ paths:
     parameters:
       - $ref: "#/components/parameters/artefactID"
       - $ref: "#/components/parameters/format_param"
+      - $ref: "#/components/parameters/display"
 
     get:
       tags:
@@ -1522,26 +1592,27 @@ paths:
         "404":
           $ref: "#/components/responses/error_message"
 
-  # Search all semantic artefacts
-  /artefacts/search:
+  # Search the metadata and content in the catalogue
+  /search:
     parameters:
       - $ref: "#/components/parameters/format_param"
       - $ref: "#/components/parameters/query"
+      - $ref: "#/components/parameters/display"
 
     get:
       tags:
         - Search
       summary: Get information about all semantic artefacts that match the search criteria.
-      description: Retrieves a collection of all semantic artefacts that match the search criteria.
-      operationId: searchArtefacts
+      description: The returned data should include a decription of the type of data that is being returned.
+      operationId: search
       responses:
         "200":
-          $ref: "#/components/responses/artefacts"
+          $ref: "#/components/responses/searchResult"
         "404":
           $ref: "#/components/responses/error_message"
 
-  # Search all semantic artefact distributions
-  /distributions/search:
+  # Search all of the content in a catalogue
+  /search/content:
     parameters:
       - $ref: "#/components/parameters/format_param"
       - $ref: "#/components/parameters/query"
@@ -1549,83 +1620,30 @@ paths:
     get:
       tags:
         - Search
-      summary: Get information about all semantic artefact distributions that match the search criteria.
-      description: Retrieves a collection of semantic artefact distributions that match the search criteria.
-      operationId: searchCatalogueDistributions
+      summary: Search all of the content in a catalogue.
+      description: The returned data should include a decription of the type of data that is being returned.
+      operationId: searchContent
       responses:
         "200":
-          $ref: "#/components/responses/distributions"
+          $ref: "#/components/responses/searchResult"
         "404":
           $ref: "#/components/responses/error_message"
 
-  # Search all semantic artefact catalog records
+  # Search all of the metadata in a catalogue
   /records/search:
     parameters:
       - $ref: "#/components/parameters/format_param"
       - $ref: "#/components/parameters/query"
+      - $ref: "#/components/parameters/display"
 
     get:
       tags:
         - Search
-      summary: Get information about all semantic artefact catalog records that match the search criteria.
-      description: Retrieves a collection of semantic artefact catalog records that match the search criteria.
-      operationId: searchCatalogueRecords
+      summary: Search all of the metadata in a catalogue.
+      description: The returned data should include a decription of the type of data that is being returned.
+      operationId: searchMetadata
       responses:
         "200":
-          $ref: "#/components/responses/records"
-        "404":
-          $ref: "#/components/responses/error_message"
-
-  # Search all semantic artefacts
-  /search/artefacts:
-    parameters:
-      - $ref: "#/components/parameters/format_param"
-      - $ref: "#/components/parameters/query"
-
-    get:
-      tags:
-        - Search
-      summary: Get information about all semantic artefacts that match the search criteria.
-      description: Retrieves a collection of all semantic artefacts that match the search criteria.
-      operationId: searchArtefacts
-      responses:
-        "200":
-          $ref: "#/components/responses/artefacts"
-        "404":
-          $ref: "#/components/responses/error_message"
-
-  # Search all semantic artefact distributions
-  /search/distributions:
-    parameters:
-      - $ref: "#/components/parameters/format_param"
-      - $ref: "#/components/parameters/query"
-
-    get:
-      tags:
-        - Search
-      summary: Get information about all semantic artefact distributions that match the search criteria.
-      description: Retrieves a collection of semantic artefact distributions that match the search criteria.
-      operationId: searchCatalogueDistributions
-      responses:
-        "200":
-          $ref: "#/components/responses/distributions"
-        "404":
-          $ref: "#/components/responses/error_message"
-
-  # Search all semantic artefact catalog records
-  /search/records:
-    parameters:
-      - $ref: "#/components/parameters/format_param"
-      - $ref: "#/components/parameters/query"
-
-    get:
-      tags:
-        - Search
-      summary: Get information about all semantic artefact catalog records that match the search criteria.
-      description: Retrieves a collection of semantic artefact catalog records that match the search criteria.
-      operationId: searchCatalogueRecords
-      responses:
-        "200":
-          $ref: "#/components/responses/records"
+          $ref: "#/components/responses/searchResult"
         "404":
           $ref: "#/components/responses/error_message"
