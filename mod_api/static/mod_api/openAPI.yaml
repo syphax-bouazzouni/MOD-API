@@ -3,19 +3,19 @@ servers:
   - url: https://localhost
 
 info:
-  description: This service provides about semantic artefacts.
-  title: MOD API
+  description: This Application Programming Interface (API) has been developed to promote interoperability of Semantic Artefact Catalogues in the European Open Science Cloud (EOSC) ecosystem and beyond. 
+  title: Metadata for Ontology Description and Publication Ontology Application Program Interface
   version: 0.0.1
 
 tags:
   - name: Artefact
-    description: Get information about a semantic artefact.
+    description: Get information about semantic artefact(s) (ontologies, terminologies, taxonomies, thesauri, vocabularies, metadata schemas and semantic standards) or their resources.
   - name: Catalogue
     description: Get information about the semantic artefact catalogue.
   - name: Distribution
     description: Get information about the semantic artefact distributions.
   - name: Record
-    description: Get information about semantic artefact catalogue records.
+    description: Get semantic artefact catalogue records.
   - name: Search
     description: Search the metadata and catalogue content.
   - name: Documentation
@@ -1637,7 +1637,7 @@ paths:
     get:
       tags:
         - Search
-      summary: Get information about all semantic artefacts that match the search criteria.
+      summary: Search all of the metadata and content in a catalogue.
       description: The returned data should include a decription of the type of data that is being returned.
       operationId: search
       responses:
@@ -1656,7 +1656,7 @@ paths:
       tags:
         - Search
       summary: Search all of the content in a catalogue.
-      description: The returned data should include a decription of the type of data that is being returned.
+      description: The returned data should include a decription of the type of data that is being returned. For example the resturned content could be SKOS Concepts or OWL Classes.
       operationId: searchContent
       responses:
         "200":
