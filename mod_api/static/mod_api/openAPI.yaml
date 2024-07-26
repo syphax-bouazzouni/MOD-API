@@ -12,8 +12,6 @@ tags:
     description: Get information about semantic artefact(s) (ontologies, terminologies, taxonomies, thesauri, vocabularies, metadata schemas and semantic standards) or their resources.
   - name: Catalogue
     description: Get information about the semantic artefact catalogue.
-  - name: Distribution
-    description: Get information about the semantic artefact distributions.
   - name: Record
     description: Get semantic artefact catalogue records.
   - name: Search
@@ -89,6 +87,14 @@ components:
         type: integer
         default: 50
 
+    resourceID:
+      description: The ID of the resource.
+      name: resourceID
+      in: path
+      required: true
+      schema:
+        type: string
+
   responses:
 
     notes:
@@ -107,9 +113,13 @@ components:
         text/turtle:
           schema:
             type: string
-        application/json:
+        application/ld+json:
           schema:
-            $ref: "#/components/schemas/SemanticArtefact"
+            allOf:
+              - type: object
+                title: Context
+                $ref: "#/components/schemas/Context"
+              - $ref: "#/components/schemas/modSemanticArtefact"
         application/rdf+xml:
           schema:
             type: string
@@ -125,14 +135,17 @@ components:
             type: array
             items:
               type: string
-        application/json:
+        application/ld+json:
           schema:
             allOf:
               - $ref: "#/components/schemas/Pagination"
+              - type: object
+                title: Context
+                $ref: "#/components/schemas/Context"
               - type: array
                 title: List of Semantic Artefacts
                 items:
-                  $ref: "#/components/schemas/SemanticArtefact"
+                  $ref: "#/components/schemas/modSemanticArtefact"
         application/rdf+xml:
           schema:
             type: array
@@ -148,9 +161,13 @@ components:
         text/turtle:
           schema:
             type: string
-        application/json:
+        application/ld+json:
           schema:
-            $ref: "#/components/schemas/SemanticArtfeactCatalog"
+            allOf:
+              - type: object
+                title: Context
+                $ref: "#/components/schemas/Context"
+              - $ref: "#/components/schemas/modSemanticArtfeactCatalog"
         application/rdf+xml:
           schema:
             type: string
@@ -164,12 +181,12 @@ components:
         text/turtle:
           schema:
             type: string
-        application/json:
+        application/ld+json:
           schema:
             type: array
             title: List of Owl Classes
             items:
-              type: "#/components/schemas/OwlClass"
+              $ref: "#/components/schemas/owlClass"
         application/rdf+xml:
           schema:
             type: string
@@ -182,12 +199,16 @@ components:
             $ref: "#/components/schemas/html"
         text/turtle:
           schema:
+            type: string
+        application/ld+json:
+          schema:
             type: array
             title: List of Skos Collections
             items:
-              type: "#/components/schemas/SkosCollection"
-              application/json:
+              $ref: "#/components/schemas/skosCollection"
         application/rdf+xml:
+          schema:
+            type: string
 
     concepts:
       description: "OK"
@@ -198,12 +219,12 @@ components:
         text/turtle:
           schema:
             type: string
-        application/json:
+        application/ld+json:
           schema:
             type: array
             title: List of Skos Concepts
             items:
-              type: "#/components/schemas/SkosConcept"
+              $ref: "#/components/schemas/skosConcept"
         application/rdf+xml:
           schema:
             type: string
@@ -217,9 +238,13 @@ components:
         text/turtle:
           schema:
             type: string
-        application/json:
+        application/ld+json:
           schema:
-            $ref: "#/components/schemas/SemanticArtefactDistribution"
+            allOf:
+              - type: object
+                title: Context
+                $ref: "#/components/schemas/Context"
+              - $ref: "#/components/schemas/modSemanticArtefactDistribution"
         application/rdf+xml:
           schema:
             type: string
@@ -237,12 +262,16 @@ components:
             type: array
             items:
               type: string
-        application/json:
+        application/ld+json:
           schema:
-            type: array
-            title: List of Semantic Artefact Distributions
-            items:
-              $ref: "#/components/schemas/SemanticArtefactDistribution"
+            allOf:
+              - type: object
+                title: Context
+                $ref: "#/components/schemas/Context"
+              - type: array
+                title: List of Semantic Artefact Distributions
+                items:
+                  $ref: "#/components/schemas/modSemanticArtefactDistribution"
         application/rdf+xml:
           schema:
             type: array
@@ -258,12 +287,12 @@ components:
         text/turtle:
           schema:
             type: string
-        application/json:
+        application/ld+json:
           schema:
             type: array
             title: List of Owl Individuals
             items:
-              type: "#/components/schemas/OwlIndividual"
+              $ref: "#/components/schemas/owlIndividual"
         application/rdf+xml:
           schema:
             type: string
@@ -277,12 +306,12 @@ components:
         text/turtle:
           schema:
             type: string
-        application/json:
+        application/ld+json:
           schema:
             type: array
-            title: List of Rdfs Properties
+            title: List of RDFS Properties
             items:
-              $ref: "#/components/schemas/RdfsProperty"
+              $ref: "#/components/schemas/rdfsProperty"
         application/rdf+xml:
           schema:
             type: string
@@ -296,9 +325,13 @@ components:
         text/turtle:
           schema:
             type: string
-        application/json:
+        application/ld+json:
           schema:
-           $ref: "#/components/schemas/SemanticArtefactCatalogRecord"
+            allOf:
+              - type: object
+                title: Context
+                $ref: "#/components/schemas/Context"
+              - $ref: "#/components/schemas/modSemanticArtefactCatalogRecord"
         application/rdf+xml:
           schema:
             type: string
@@ -316,12 +349,16 @@ components:
             type: array
             items:
               type: string
-        application/json:
+        application/ld+json:
           schema:
-            type: array
-            title: List of Semantic Artefact Catalog Records
-            items:
-              $ref: "#/components/schemas/SemanticArtefactCatalogRecord"
+            allOf:
+              - type: object
+                title: Context
+                $ref: "#/components/schemas/Context"
+              - type: array
+                title: List of Semantic Artefact Catalog Records
+                items:
+                  $ref: "#/components/schemas/modSemanticArtefactCatalogRecord"
         application/rdf+xml:
           schema:
             type: array
@@ -337,12 +374,30 @@ components:
         text/turtle:
           schema:
             type: string
-        application/json:
+        application/ld+json:
+          schema:
+            type: object
+            title: RDFS Resource
+            $ref: "#/components/schemas/rdfsResource"
+        application/rdf+xml:
+          schema:
+            type: string
+
+    resource:
+      description: "OK"
+      content:
+        text/html:
+          schema:
+            $ref: "#/components/schemas/html"
+        text/turtle:
+          schema:
+            type: string
+        application/ld+json:
           schema:
             type: array
-            title: List of Rdfs Resources
+            title: List of RDFS Resources
             items:
-              type: "#/components/schemas/RdfsResource"
+              $ref: "#/components/schemas/rdfsResource"
         application/rdf+xml:
           schema:
             type: string
@@ -356,12 +411,12 @@ components:
         text/turtle:
           schema:
             type: string
-        application/json:
+        application/ld+json:
           schema:
             type: array
             title: List of Skos Schemes
             items:
-              type: "#/components/schemas/SkosScheme"
+              $ref: "#/components/schemas/skosScheme"
         application/rdf+xml:
           schema:
             type: string
@@ -375,52 +430,52 @@ components:
         text/turtle:
           schema:
             type: string
-        application/json:
+        application/ld+json:
           schema:
             oneOf:
               - type: array
                 title: List of Semantic Artefacts
                 items:
-                  $ref: "#/components/schemas/SemanticArtefact"
-              - $ref: "#/components/schemas/SemanticArtfeactCatalog"
+                  $ref: "#/components/schemas/modSemanticArtefact"
+              - $ref: "#/components/schemas/modSemanticArtfeactCatalog"
               - type: array
                 title: List of Owl Classes
                 items:
-                  $ref: "#/components/schemas/OwlClass"
+                  $ref: "#/components/schemas/owlClass"
               - type: array
                 title: List of Skos Collections
                 items:
-                  $ref: "#/components/schemas/SkosCollection"
+                  $ref: "#/components/schemas/skosCollection"
               - type: array
                 title: List of Skos Concepts
                 items:
-                  $ref: "#/components/schemas/SkosConcept"
-              - $ref: "#/components/schemas/SemanticArtefactDistribution"
+                  $ref: "#/components/schemas/skosConcept"
+              - $ref: "#/components/schemas/modSemanticArtefactDistribution"
               - type: array
                 title: List of Semantic Artefact Distributions
                 items:
-                  $ref: "#/components/schemas/SemanticArtefactDistribution"
+                  $ref: "#/components/schemas/modSemanticArtefactDistribution"
               - type: array
                 title: List of Owl Individuals
                 items:
-                  $ref: "#/components/schemas/OwlIndividual"
+                  $ref: "#/components/schemas/owlIndividual"
               - type: array
-                title: List of Rdfs Properties
+                title: List of RDFS Properties
                 items:
-                  $ref: "#/components/schemas/RdfsProperty"
-              - $ref: "#/components/schemas/SemanticArtefactCatalogRecord"
+                  $ref: "#/components/schemas/rdfsProperty"
+              - $ref: "#/components/schemas/modSemanticArtefactCatalogRecord"
               - type: array
                 title: List of Semantic Artefact Catalog Records
                 items:
-                  $ref: "#/components/schemas/SemanticArtefactCatalogRecord"
+                  $ref: "#/components/schemas/modSemanticArtefactCatalogRecord"
               - type: array
-                title: List of Rdfs Resources
+                title: List of RDFS Resources
                 items:
-                  $ref: "#/components/schemas/RdfsResource"
+                  $ref: "#/components/schemas/rdfsResource"
               - type: array
                 title: List of Skos Schemes
                 items:
-                  $ref: "#/components/schemas/SkosScheme"
+                  $ref: "#/components/schemas/skosScheme"
         application/rdf+xml:
           schema:
             type: string
@@ -443,342 +498,954 @@ components:
       description: A html page.
       type: string
 
-    Analytics:
-      title: Analytics
-      type: string
+    Context:
+      type: object
+      properties:
+        '@Context':
+          type: object
+          properties:
+            dc:
+              title: dc
+              example: http://purl.org/dc/elements/1.1/
+            dcat:
+              title: dcat
+              example: http://www.w3.org/ns/dcat#
+            dct:
+              title: dcat
+              example: http://purl.org/dc/terms/
+            dctype:
+              title: dct
+              example: http://purl.org/dc/dcmitype/
+            foaf:
+              title: foaf
+              example: http://xmlns.com/foaf/0.1/
+            locn:
+              title: locn
+              example: http://www.w3.org/ns/locn#
+            mod:
+              title: mod
+              example: https://w3id.org/mod#
+            odrl:
+              title: odrl
+              example: http://www.w3.org/ns/odrl/2/
+            owl:
+              title: owl
+              example: http://www.w3.org/2002/07/owl#
+            prov:
+              title: prov
+              example: http://www.w3.org/ns/prov#
+            rdf:
+              title: rdf
+              example: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+            rdfs:
+              title: rdfs
+              example: http://www.w3.org/2000/01/rdf-schema#
+            skos:
+              title: skos
+              example: http://www.w3.org/2004/02/skos/core#
+            time:
+              title: time
+              example: http://www.w3.org/2006/time#
+            vcard:
+              title: vcard
+              example: http://www.w3.org/2006/vcard/ns#
+            xsd:
+              title: xsd
+              example: http://www.w3.org/2001/XMLSchema#
 
     # see https://www.w3.org/TR/vocab-dcat-2/#Class:Catalog
-    Catalog:
+    dcatCatalog:
       title: Catalog
       description: A curated collection of metadata about resources (e.g., datasets and data services in the context of a data catalog)
       allOf:
-        - $ref: '#/components/schemas/Dataset'
+        - $ref: '#/components/schemas/dcatDataset'
         - type: object
           properties:
-            catalog:
+            dcat:catalog:
               title: catalog
               description: A catalog whose contents are of interest in the context of this catalog.
-              $ref: "#/components/schemas/Catalog"
-            dataset:
+              $ref: "#/components/schemas/dcatCatalog"
+            dcat:dataset:
               title: dataset
               description: A collection of data that is listed in the catalog.
-              $ref: "#/components/schemas/Dataset"
-            hasPart:
+              $ref: "#/components/schemas/dcatDataset"
+            dct:hasPart:
               title: has part
               description: An item that is listed in the catalog.
-              $ref: "#/components/schemas/Resource"
-            homepage:
+              $ref: "#/components/schemas/dcatResource"
+            foaf:homepage:
               title: homepage
               description: A homepage of the catalog (a public Web document usually available in HTML).
-              $ref: "#/components/schemas/FoafDocument"
-            record:
+              $ref: "#/components/schemas/foafDocument"
+            dcat:record:
               title: catalog record
               description: A record describing the registration of a single dataset or data service that is part of the catalog.
               type: array
               items:
-                $ref: "#/components/schemas/CatalogRecord"
-            resource:
+                $ref: "#/components/schemas/dcatCatalogRecord"
+            dcat:resource:
               title: resource
               description: A resource that is listed in the catalog.
-              $ref: "#/components/schemas/Resource"
-            service:
+              $ref: "#/components/schemas/dcatResource"
+            dcat:service:
               title: service
               description: A site or end-point that is listed in the catalog.
-              $ref: "#/components/schemas/DataService"
-            themeTaxonomy:
+              $ref: "#/components/schemas/dcatDataService"
+            dcat:themeTaxonomy:
               title: themes
               description: A knowledge organization system (KOS) used to classify catalog's datasets and services.
-              $ref: "#/components/schemas/RdfsResource"
+              $ref: "#/components/schemas/rdfsResource"
 
     # see https://www.w3.org/TR/vocab-dcat-2/#Class:Catalog_Record
-    CatalogRecord:
+    dcatCatalogRecord:
       title: Catalog Record
       description: A record in a data catalog, describing the registration of a single dataset or data service.
       allOf:
-        - $ref: '#/components/schemas/Resource'
+        - $ref: '#/components/schemas/dcatResource'
         - type: object
           properties:
-            conformsTo:
+            dct:conformsTo:
               title: conforms to
               description: An established standard to which the described resource conforms.
-              $ref: "#/components/schemas/DctStandard" 
-            description:
+              $ref: "#/components/schemas/dctStandard" 
+            dct:description:
               title: Description
               description: A free-text account of the record.
-              type: string
-            issued:
+              $ref: "#/components/schemas/rdfsLiteral"
+            dct:issued:
               title: listing date
               description: The date of listing (i.e. formal recording) of the corresponding dataset or service in the catalog.
-              type: string
-            modified:
+              $ref: "#/components/schemas/rdfsLiteral"
+            dct:modified:
               title: update/modification date
               description: Most recent date on which the catalog entry was changed, updated or modified.
-              type: string
-            title:
+              $ref: "#/components/schemas/rdfsLiteral"
+            dct:title:
               title: Title
               description: A name given to the resource.
-              type: string
-            primaryTopic:
+              $ref: "#/components/schemas/rdfsLiteral"
+            foaf:primaryTopic:
               title: primary topic
               description: The Resource (dataset or service) described in the record.
-              $ref: "#/components/schemas/Resource"
+              $ref: "#/components/schemas/dcatResource"
 
     # see https://www.w3.org/TR/vocab-dcat-2/#Class:Data_Service
-    DataService:
+    dcatDataService:
       title: Data service
       description: A collection of operations that provides access to one or more datasets or data processing functions.
       allOf:
-        - $ref: '#/components/schemas/Resource'
+        - $ref: '#/components/schemas/dcatResource'
         - type: object
           properties:
-            endpointDescription:
+            dcat:endpointDescription:
               title: endpoint description
               description: A description of the services available via the end-points, including their operations, parameters etc.
-              $ref: "#/components/schemas/RdfsResource"
-            endpointURL:
+              $ref: "#/components/schemas/rdfsResource"
+            dcat:endpointURL:
               title: endpoint URL
               description: The root location or primary endpoint of the service (a web-resolvable IRI).
-              $ref: "#/components/schemas/RdfsResource"
-            servesDataset:
+              $ref: "#/components/schemas/rdfsResource"
+            dcat:servesDataset:
               tile: serves dataset
               description: A collection of data that this data service can distribute.
-              $ref: "#/components/schemas/Dataset"
+              $ref: "#/components/schemas/dcatDataset"
 
     # see https://www.w3.org/TR/vocab-dcat-2/#Class:Dataset
-    Dataset:
+    dcatDataset:
       title: Dataset
       description: A collection of data, published or curated by a single agent, and available for access or download in one or more representations.
       allOf:
-        - $ref: '#/components/schemas/Resource'
+        - $ref: '#/components/schemas/dcatResource'
         - type: object
           properties:
-            accrualPeriodicity:
+            dct:accrualPeriodicity:
               title: frequency
               description: The frequency at which dataset is published.
-              $ref: "#/components/schemas/DctFrequency"
-            distribution:
+              $ref: "#/components/schemas/dctFrequency"
+            dcat:distribution:
               title: dataset distribution
               description: An available distribution of the dataset.
-              $ref: "#/components/schemas/Distribution"
-            spatial:
+              $ref: "#/components/schemas/dcatDistribution"
+            dct:spatial:
               title: spatial/geographical coverage
               description: The geographical area covered by the dataset.
-              $ref: "#/components/schemas/DctLocation"
-            spatialResolutionInMeters:
+              $ref: "#/components/schemas/dctLocation"
+            dcat:spatialResolutionInMeters:
               title: spatial resolution
               description: Minimum spatial separation resolvable in a dataset, measured in meters.
-              type: number
-            temporal:
+              $ref: "#/components/schemas/xsdDecimal"
+            dct:temporal:
               title: temporal coverage
               description: The temporal period that the dataset covers.
-              $ref: "#/components/schemas/DctPeriodOfTime"
-            temporalResolution:
+              $ref: "#/components/schemas/dctPeriodOfTime"
+            dcat:temporalResolution:
               title: temporal resolution
               description: Minimum time period resolvable in the dataset.
-              $ref: "#/components/schemas/XsdDuration"
-            wasGeneratedBy:
+              $ref: "#/components/schemas/xsdDuration"
+            prov:wasGeneratedBy:
               title: was generated by
               description: An activity that generated, or provides the business context for, the creation of the dataset.
-              $ref: "#/components/schemas/ProvActivity"
-
-    DctAgent:
-      title: Agent
-      description: A resource that acts or has the power to act.
-      type: string
-
-    DctFrequency:
-      title: Frequency
-      description: A rate at which something recurs.
-      type: string
-
-    DctIsReferencedBy:
-      title: Is Referenced By
-      description: A related resource that references, cites, or otherwise points to the described resource.
-      type: string
-
-    DctLicenseDocument:
-      title: License Document
-      description: A legal document giving official permission to do something with a resource.
-      type: string
-
-    DctLocation:
-      title: Location
-      description: A spatial region or named place.
-      type: string
-
-    DctLinguisticSystem:
-      title: Linguistic System
-      description: A system of signs, symbols, sounds, gestures, or rules used in communication.
-      type: string
-
-    DctMediaType:
-      title: Media Type
-      description: A file format or physical medium.
-      type: string
-
-    DctMediaTypeOrExtent:
-      title: Media Type or Extent
-      description: A media type or extent.
-      type: string
-
-    DctPeriodOfTime:
-      title: Period of Time
-      description: An interval of time that is named or defined by its start and end dates.
-      type: string
-
-    DctRelation:
-      title: Relation
-      description: A related resource.
-      type: string
-
-    DctRightsStatement:
-      title: Rights Statement
-      description: A statement about the intellectual property rights (IPR) held in or over a resource, a legal document giving official permission to do something with a resource, or a statement about access rights.
-      type: string
-
-    DctStandard:
-      title: Standard
-      description: A reference point against which other things can be evaluated or compared.
-      type: string
-
-    DcType:
-      title: Type
-      description: The nature or genre of the resource.
-      type: string
+              $ref: "#/components/schemas/provActivity"
 
     # see https://www.w3.org/TR/vocab-dcat-2/#Class:Distribution
-    Distribution:
+    dcatDistribution:
       title: Distribution
       description: A specific representation of a dataset. A dataset might be available in multiple serializations that may differ in various ways, including natural language, media-type or format, schematic organization, temporal and spatial resolution, level of detail or profiles (which might specify any or all of the above).
       type: object
       properties:
-        accessService:
+        dcat:accessService:
           title: access service
           description: A data service that gives access to the distribution of the dataset
-          $ref: "#/components/schemas/DataService"
-        accessRights:
+          $ref: "#/components/schemas/dcatDataService"
+        dct:accessRights:
           title: access rights
           description: A rights statement that concerns how the distribution is accessed.
-          $ref: "#/components/schemas/DctRightsStatement"
-        accessURL:
+          $ref: "#/components/schemas/dctRightsStatement"
+        dcat:accessURL:
           title: access URL
           description: A URL of the resource that gives access to a distribution of the dataset. E.g. landing page, feed, SPARQL endpoint.
-          $ref: "#/components/schemas/RdfsResource"
-        byteSize:
+          $ref: "#/components/schemas/rdfsResource"
+        dcat:byteSize:
           title: byte size
           description: The size of a distribution in bytes.
-          type: number
-        compressFormat:
+          $ref: "#/components/schemas/xsdDecimal"
+        dcat:compressFormat:
           title: compression format
           description: The compression format of the distribution in which the data is contained in a compressed form, e.g. to reduce the size of the downloadable file.
-          $ref: "#/components/schemas/DctMediaType"
-        conformsTo:
+          $ref: "#/components/schemas/dctMediaType"
+        dct:conformsTo:
           title: conforms to
           description: An established standard to which the distribution conforms.
-          $ref: "#/components/schemas/DctStandard"
-        description:
+          $ref: "#/components/schemas/dctStandard"
+        dct:description:
           title: description
           description: A free-text account of the distribution.
-          type: string
-        downloadURL:
+          $ref: "#/components/schemas/rdfsLiteral"
+        dcat:downloadURL:
           title: download URL
           description: The URL of the downloadable file in a given format. E.g. CSV file or RDF file. The format is indicated by the distribution's dct:format and/or dcat:mediaType
-          $ref: "#/components/schemas/RdfsResource"
-        format:
+          $ref: "#/components/schemas/rdfsResource"
+        dct:format:
           title: format
           description: The file format of the distribution.
-          $ref: "#/components/schemas/DctMediaTypeOrExtent"
-        hasPolicy:
+          $ref: "#/components/schemas/dctMediaTypeOrExtent"
+        odrl:hasPolicy:
           title: has policy
           description: An ODRL conformant policy expressing the rights associated with the distribution.
-          $ref: "#/components/schemas/OdrlPolicy"
-        issued:
+          $ref: "#/components/schemas/odrlPolicy"
+        dct:issued:
           title: release date
           description: Date of formal issuance (e.g., publication) of the distribution.
-          type: string
-        license:
+          $ref: "#/components/schemas/rdfsLiteral"
+        dct:license:
           title: license
           description: A legal document under which the distribution is made available.
-          $ref: "#/components/schemas/DctLicenseDocument"
-        mediaType:
+          $ref: "#/components/schemas/dctLicenseDocument"
+        dcat:mediaType:
           title: media type
           description: The media type of the distribution as defined by IANA.
-          $ref: "#/components/schemas/DctMediaType"
-        modified:
+          $ref: "#/components/schemas/dctMediaType"
+        dct:modified:
           title: update/modification date
           description: Most recent date on which the distribution was changed, updated or modified.
-          type: string
-        packageFormat:
+          $ref: "#/components/schemas/rdfsLiteral"
+        dcat:packageFormat:
           title: packaging format
           description: The package format of the distribution in which one or more data files are grouped together, e.g. to enable a set of related files to be downloaded together.
-          $ref: "#/components/schemas/DctMediaType"
-        rights:
+          $ref: "#/components/schemas/dctMediaType"
+        dct:rights:
           title: rights
           description: Information about rights held in and over the distribution.
-          $ref: "#/components/schemas/DctRightsStatement"
-        spatialResolutionInMeters:
+          $ref: "#/components/schemas/dctRightsStatement"
+        dcat:spatialResolutionInMeters:
           title: spatial resolution
           description: The minimum spatial separation resolvable in a dataset distribution, measured in meters.
-          type: number
-        temporalResolution:
+          $ref: "#/components/schemas/xsdDecimal"
+        dcat:temporalResolution:
           title: temporal resolution
           description: Minimum time period resolvable in the dataset distribution.
-        title:
+          $ref: "#/components/schemas/xsdDuration"
+        dct:title:
           title: title
           description: A name given to the distribution.
-          type: string
+          $ref: "#/components/schemas/rdfsLiteral"
 
-    EngineeringMethodology:
+    # see https://www.w3.org/TR/vocab-dcat-2/#Class:Resource
+    dcatResource:
+      title: Catalogued resource
+      description: Resource published or curated by a single agent.
+      type: object
+      properties:
+        dct:accessRights:
+          title: access rights
+          description: Information about who can access the resource or an indication of its security status.
+          $ref: "#/components/schemas/dctRightsStatement"
+        dct:conformsTo:
+          title: conforms to
+          description: An established standard to which the described resource conforms.
+          $ref: "#/components/schemas/dctStandard"
+        dcat:contactPoint:
+          title: contact point
+          description: Relevant contact information for the cataloged resource. Use of vCard is recommended [VCARD-RDF].
+          $ref: "#/components/schemas/vcardKind"
+        dct:creator:
+          title: resource creator
+          description: The entity responsible for producing the resource.
+          $ref: "#/components/schemas/foafAgent"
+        dct:description:
+          title: description
+          description: A free-text account of the item.
+          $ref: "#/components/schemas/dctIdentifier"
+        odrl:hasPolicy:
+          title: has policy
+          description: An ODRL conformant policy expressing the rights associated with the resource.
+          $ref: "#/components/schemas/odrlPolicy"
+        dct:identifier:
+          title: identifier
+          description: A unique identifier of the item.
+          $ref: "#/components/schemas/dctIdentifier"
+        dct:isReferencedBy:
+          title: is referenced by
+          description: A related resource, such as a publication, that references, cites, or otherwise points to the cataloged resource.
+          $ref: "#/components/schemas/dctIsReferencedBy"
+        dct:issued:
+          title: release date
+          description: Date of formal issuance (e.g., publication) of the item.
+          $ref: "#/components/schemas/dctIdentifier"
+        dcat:keyword:
+          title:  keyword/tag
+          description: A keyword or tag describing the resource.
+          $ref: "#/components/schemas/dctIdentifier"
+        dcat:landingPage:
+          title: landing page
+          description: A Web page that can be navigated to in a Web browser to gain access to the catalog, a dataset, its distributions and/or additional information.
+          $ref: "#/components/schemas/foafDocument"
+        dct:language:
+          title: language
+          description: A language of the item. This refers to the natural language used for textual metadata (i.e. titles, descriptions, etc) of a cataloged resource (i.e. dataset or service) or the textual values of a dataset distribution
+          $ref: "#/components/schemas/dctLinguisticSystem"
+        dct:license:
+          title: license
+          description: A legal document under which the resource is made available.
+          $ref: "#/components/schemas/dctLicenseDocument"
+        dct:modified:
+          title: update/modification date
+          description: Most recent date on which the item was changed, updated or modified.
+          $ref: "#/components/schemas/dctIdentifier"
+        dct:publisher:
+          title: publisher
+          descrip#tion: The entity responsible for making the item available.
+          $ref: "#/components/schemas/foafAgent"
+        prov:qualifiedAttribution:
+          title: qualified attribution
+          description: Link to an Agent having some form of responsibility for the resource
+          $ref: "#/components/schemas/provAttribution"
+        dcat:qualifiedRelation:
+          title: qualified relation
+          description: Link to a description of a relationship with another resource.
+          $ref: "#/components/schemas/dcatResource"
+        dct:relation:
+          title: resource relation
+          description: A resource with an unspecified relationship to the cataloged item.
+          $ref: "#/components/schemas/dctRelation"
+        dct:rights:
+          title: rights
+          description: A statement that concerns all rights not addressed with dct:license or dct:accessRights, such as copyright statements.
+          $ref: "#/components/schemas/dctRightsStatement"
+        dcat:theme:
+          title: theme/category
+          description: A main category of the resource. A resource can have multiple themes.
+          $ref: "#/components/schemas/skosConcept"
+        dct:title:
+          title: title
+          description: A name given to the item.
+          $ref: "#/components/schemas/dctIdentifier"
+        dct:type:
+          title: type/genre
+          description: The nature or genre of the resource.
+          $ref: "#/components/schemas/dcType"
+
+    dctAgent:
+      type: object
+      properties:
+        '@id':
+          example: https://example.org/Agent/AgentID
+        '@type':
+          title: Agent
+          description: A resource that acts or has the power to act.
+          example: dct:Agent
+
+    dctFrequency:
+      type: object
+      properties:
+        '@id':
+          example: https://example.org/Frequency/FrequencyID
+        '@type':
+          title: Frequency
+          description: A rate at which something recurs.
+          example: dct:Frequency
+
+    dctIdentifier:
+      type: object
+      properties:
+        '@id':
+          example: https://example.org/identifier/identifierID
+        '@type':
+          title: Identifier
+          description: An unambiguous reference to the resource within a given context.
+          example: dct:identifier
+
+    dctIsReferencedBy:
+      type: object
+      properties:
+        '@id':
+          example: https://example.org/isReferencedBy/isReferencedByID
+        '@type':
+          title: Is Referenced By
+          description: A related resource that references, cites, or otherwise points to the described resource.
+          example: dct:isReferencedBy
+
+    dctLicenseDocument:
+      type: object
+      properties:
+        '@id':
+          example: https://example.org/LicenseDocument/LicenseDocumentID
+        '@type':
+          title: License Document
+          description: A legal document giving official permission to do something with a resource.
+          example: dct:LicenseDocument
+
+    dctLocation:
+      type: object
+      properties:
+        '@id':
+          example: https://example.org/Location/LocationID
+        '@type':
+          title: Location
+          description: A spatial region or named place.
+          example: dct:Location
+
+    dctLinguisticSystem:
+      type: object
+      properties:
+        '@id':
+          example: https://example.org/LinguisticSystem/LinguisticSystemID
+        '@type':
+          title: Linguistic System
+          description: A system of signs, symbols, sounds, gestures, or rules used in communication.
+          example: dct:LinguisticSystem
+
+    dctMediaType:
+      type: object
+      properties:
+        '@id':
+          example: https://example.org/MediaType/MediaTypeID
+        '@type':
+          title: Media Type
+          description: A file format or physical medium.
+          example: dct:MediaType
+
+    dctMediaTypeOrExtent:
+      type: object
+      properties:
+        '@id':
+          example: https://example.org/MediaTypeOrExtent/MediaTypeOrExtentID
+        '@type':
+          title: Media Type or Extent
+          description: A media type or extent.
+          example: dct:MediaTypeOrExtent
+
+    dctPeriodOfTime:
+      type: object
+      properties:
+        '@id':
+          example: https://example.org/PeriodOfTime/PeriodOfTimeID
+        '@type':
+          title: Period of Time
+          description: An interval of time that is named or defined by its start and end dates.
+          example: dct:PeriodOfTime
+
+    dctRelation:
+      type: object
+      properties:
+        '@id':
+          example: https://example.org/relation/relationID
+        '@type':
+          title: Relation
+          description: A related resource.
+          example: dct:relation
+
+    dctRightsStatement:
+      type: object
+      properties:
+        '@id':
+          example: https://example.org/RightsStatement/RightsStatementID
+        '@type':
+          title: Rights Statement
+          description: A statement about the intellectual property rights (IPR) held in or over a resource, a legal document giving official permission to do something with a resource, or a statement about access rights.
+          example: dct:RightsStatement
+
+    dctStandard:
+      type: object
+      properties:
+        '@id':
+          example: https://example.org/Standard/StandardID
+        '@type':
+          title: Standard
+          description: A reference point against which other things can be evaluated or compared.
+          example: dct:Standard
+
+    dcType:
+      type: object
+      properties:
+        '@id':
+          example: https://example.org/Type/TypeID
+        '@type':
+          title: Type
+          description: The nature or genre of the resource.
+          example: dt:type
+
+    foafAgent:
+      type: object
+      properties:
+        '@id':
+          example: https://example.org/Agent/AgentID
+        '@type':
+          title: Agent
+          description: An agent (eg. person, group, software or physical artifact).
+          example: foaf:Agent
+
+    foafDocument:
+      type: object
+      properties:
+        '@id':
+          example: https://example.org/Document/DocumentID
+        '@type':
+          title: Document
+          description: A document.
+          example: foaf:Document
+
+    foafProject:
+      type: object
+      properties:
+        '@id':
+          example: https://example.org/Project/ProjectID
+        '@type':
+          title: Project
+          description: The Project class represents the class of things that are 'projects'. These may be formal or informal, collective or individual. It is often useful to indicate the homepage of a Project.
+          example: foaf:Project
+
+    modAnalytics:
+      type: object
+      properties:
+        '@id':
+          example: https://example.org/Analytics/AnalyticsID
+        '@type':
+          type: array
+          items:
+            example: mod:Analytics
+
+    modEngineeringMethodology:
       title: Semantic Artefact Engineering Methodology
-      type: string
+      type: object
+      properties:
+        '@id':
+          example: https://example.org/EngineeringMethodology/EngineeringMethodologyID
+        '@type':
+          type: array
+          items:
+            example: mod:EngineeringMethodology
 
-    Evaluation:
+    modEvaluation:
       title: Semantic Artefact Evaluation
       description: The results of evaluating a semantic artefact. An artefact can have more than one evaluations.
-      type: string
+      type: object
+      properties:
+        '@id':
+          example: https://example.org/Evaluation/EvaluationID
+        '@type':
+          type: array
+          items:
+            example: mod:Evaluation
 
-    FairAssessment:
+    modFairAssessment:
       title: FAIRness assessment"
-      type: string
+      type: object
+      properties:
+        '@id':
+          example: https://example.org/FairAssessment/FairAssessmentID
+        '@type':
+          type: array
+          items:
+            example: mod:FairAssessment
 
-    FoafAgent:
-      title: Agent
-      description: An agent (eg. person, group, software or physical artifact).
-      type: string
-
-    FoafDocument:
-      title: Document
-      description: A document.
-      type: string
-
-    FoafProject:
-      title: Project
-      description: The Project class represents the class of things that are 'projects'. These may be formal or informal, collective or individual. It is often useful to indicate the homepage of a Project.
-      type: string
-
-    Group:
+    modGroup:
       title: Semantic Artefact Group
       description: A group of multiple semantic artefacts (e.g., coming from the same source or project).
-      type: string
+      type: object
+      properties:
+        '@id':
+          example: https://example.org/Group/GroupID
+        '@type':
+          type: array
+          items:
+            example: mod:Group
 
-    KnowledgeRepresentationParadigm:
+    modKnowledgeRepresentationParadigm:
       title: Knowledge Representation Paradigm
-      type: string
+      type: object
+      properties:
+        '@id':
+          example: https://example.org/KnowledgeRepresentationParadigm/KnowledgeRepresentationParadigmID
+        '@type':
+          type: array
+          items:
+            example: mod:KnowledgeRepresentationParadigm
 
-    OdrlPolicy:
-      title: Policy
-      description: A non-empty group of Permissions and/or Prohibitions.
-      type: string
+    modSemanticArtefact:
+      title: Semantic Artefact
+      description: Semantic Artefact is defined here as a machine-actionable and -readable formalisation of a conceptualisation enabling sharing and reuse by humans and machines. These artefacts may have a broad range of formalisation, from loose set of terms, taxonomies, thesauri to higher-order logics, and include the concepts/terms/classes constituting these. Moreover, semantic artefacts are serialised using a variety of digital representation formats, e.g., RDF Turtle, OWL-RDF, XML, JSON-LD.
+      allOf:
+        - type: object
+          properties:
+            '@id':
+              example: https://example.org/SemanticArtefact/SemanticArtefactID
+            '@type':
+              type: array
+              items:
+                example: mod:SemanticArtefact
+        -  $ref: '#/components/schemas/dcatResource'
+        - type: object
+          properties:
+            mod:acronym:
+              title: acronym
+              description: Short acronym label, often used as an identifier within some ontology platforms such as BioPortal or OBO Foundry.
+              $ref: "#/components/schemas/xsdString"
+            mod:analytics:
+              title: analytics
+              description: This property shall be used to store any analytics for an ontology. E.g., number of visits an ontology received in a portal, number of downloads, etc.
+              $ref: "#/components/schemas/modAnalytics"
+            mod:competencyQuestion:
+              title: competency question
+              description: A set of questions made to build an ontology at the design time.
+              $ref: "#/components/schemas/xsdString"
+            mod:designedForTask:
+              title: designed for task
+              description: The purpose for which the ontology was originally designed.
+              $ref: "#/components/schemas/modSemanticArtefactService"
+            mod:endorsedBy:
+              title: endorsed by
+              description: An ontology endorsed by an agent.
+              $ref: "#/components/schemas/dctAgent"
+            mod:group:
+              title: group
+              description: A group of ontologies that the ontology is usually considered into.
+              $ref: "#/components/schemas/modGroup"
+            mod:hasEvaluation:
+              title: evaluation
+              description: This property makes a relationship between an ontology and its evaluation result.
+              $ref: "#/components/schemas/modEvaluation"
+            mod:hasFormalityLevel:
+              title: formality level
+              description: The level of formality of an ontology.
+              $ref: "#/components/schemas/xsdString"
+            mod:knownUsage:
+              title: known usage
+              description: The applications where the ontology is being used.
+              $ref: "#/components/schemas/xsdString"
+            mod:metrics:
+              title: metrics
+              description: A generic property to store any metrics (number) related to the ontology.
+              $ref: "#/components/schemas/xsdNonNegativeInteger"
+            mod:numberOfEnsorments:
+              title: number of endorsmements
+              description: Number of endorsing organizations (maybe represented with mod:endorsedBy).
+              $ref: "#/components/schemas/xsdNonNegativeInteger"
+            mod:numberOfEvaluations:
+              title: number of evaluations
+              description: Number of evaluations (maybe represented with mod:hasEvaluation).
+              $ref: "#/components/schemas/xsdNonNegativeInteger"
+            mod:numberOfNotes:
+              title: number of notes or comments
+              description: Number of notes or comments (maybe represented with schema:comment) related to the ontologies.
+              $ref: "#/components/schemas/xsdNonNegativeInteger"
+            mod:numberOfUsingProjects:
+              title: number of using projects
+              description: Number of projects (maybe represented with mod:usedInProject) using an ontology.
+              $ref: "#/components/schemas/xsdNonNegativeInteger"
+            mod:semanticArtefactRelation:
+              title: generally related to
+              description: A general property for semantic artefact relations.
+              $ref: "#/components/schemas/modSemanticArtefact"
+            mod:status:
+              title: status
+              $ref: "#/components/schemas/xsdString"
+            mod:URI:
+              title: URI
+              description: The URI of the ontology which is described by this metadata.
+              $ref: "#/components/schemas/xsdAnyURI"
+            usedInProject:
+              title: used in project
+              description: An ontology that is used in a project.      
+              $ref: "#/components/schemas/foafProject"
 
-    OwlClass:
-      title: Class
-      description: An owl class.
-      type: string
+    modSemanticArtfeactCatalog:
+      title: Semantic Artfeact Catalog
+      description: A dedicated web-based system that fosters the availability, discoverability and long-term preservation and maintenance of semantic artefacts.
+      allOf:
+        - type: object
+          properties:
+            '@id':
+              example: https://example.org/SemanticArtefactCatalog/SemanticArtefactCatalogID
+            '@type':
+              type: array
+              items:
+                example: mod:SemanticArtefactCatalog
+        - $ref: '#/components/schemas/dcatCatalog'
 
-    OwlIndividual:
-      title: Individual
-      description: An owl individual
-      type: string
+    modSemanticArtefactCatalogRecord:
+      title: Semantic Artefact Catalog Record
+      description: A record in a catalog, describing the registration of a single semantic artefact
+      allOf:
+        - type: object
+          properties:
+            '@id':
+              example: https://example.org/SemanticArtefactCatalogRecord/SemanticArtefactCatalogRecordID
+            '@type':
+              type: array
+              items:
+                example: mod:SemanticArtefactCatalogRecord
+        - $ref: '#/components/schemas/dcatCatalogRecord'
+
+    modSemanticArtefactDistribution:
+      title: Semantic Artefact Distribution
+      description: A specific representation and/or serialization of a semantic artefact.
+      allOf:
+        - type: object
+          properties:
+            '@id':
+              example: https://example.org/SemanticArtefactDistribution/SemanticArtefactDistributionID
+            '@type':
+              type: array
+              items:
+                example: mod:SemanticArtefactDistribution
+        - $ref: '#/components/schemas/dcatDistribution'
+        - type: object
+          properties:
+            mod:authorProperty:
+              title: object author property
+              description: Property used to specify objects's author.
+              $ref: "#/components/schemas/xsdAnyURI"
+            mod:averageChildCount:
+              title: average number of children per class
+              description: Average number of children per class (BioPortal definition).
+              $ref: "#/components/schemas/xsdDecimal"
+            mod:browsingUI:
+              title: browsing user interface
+              description: The user interface (URL) where the ontology may be browsed or searched.
+              $ref: "#/components/schemas/xsdAnyURI"
+            mod:classesWithMoreThan25Children:
+              title: number of classes with more than 25 children
+              description: Number of classes that have more than 25 direct subclasses.
+              $ref: "#/components/schemas/xsdNonNegativeInteger"
+            mod:classesWithNoAuthorMetadata:
+              title: number of classes with no author metadata
+              description: Number of classes with author metadata.
+              $ref: "#/components/schemas/xsdNonNegativeInteger"
+            mod:classesWithNoDateMetadata:
+              title: number of classes with no date metadata
+              description: Number of classes with no date metadata.
+              $ref: "#/components/schemas/xsdNonNegativeInteger"
+            mod:classesWithNoDefinition:
+              title: number of classes with no definition
+              description: Number of classes that have no value for the definition property.
+              $ref: "#/components/schemas/xsdNonNegativeInteger"
+            mod:classesWithNoFormalDefinition:
+              title: number of classes with no formal or logical definition
+              description: Number of classes with no formal or logical definition.
+              $ref: "#/components/schemas/xsdNonNegativeInteger"
+            mod:classesWithNoLabel:
+              title: number of classes with no label
+              description: Number of classes with no labels.
+              $ref: "#/components/schemas/xsdNonNegativeInteger"
+            mod:classesWithOneChild:
+              title: number of classes with a single child
+              description: Number of classes that have only one subclass in the is-a hierarchy.
+              $ref: "#/components/schemas/xsdNonNegativeInteger"
+            mod:conformsToKnowledgeRepresentationParadigm:
+              title: knowledge representation paradigm
+              description: A representation formalism that is followed to describe knowledge in an ontology. Example includes description logics, first order logic, etc. 
+              $ref: "#/components/schemas/modKnowledgeRepresentationParadigm"
+            mod:createdProperty:
+              title: object creation date property
+              description: Property used to specify the date of creation of a class or another object in the ontology.
+              $ref: "#/components/schemas/xsdAnyURI"
+            mod:definitionProperty:
+              title: object definition property
+              description: Property used to specify objects' definition.
+              $ref: "#/components/schemas/xsdAnyURI"
+            mod:fairAssessment:
+              title: FAIR assessment
+              description: A FAIRness assessment result produced by a known or identified FAIRness assessment method or tool. It can be either a simple number or a structured result document explaining the assessment.
+              $ref: "#/components/schemas/modFairAssessment"
+            mod:fairScore:
+              title: FAIR assessment
+              description: A FAIRness assessment result produced by a known or identified FAIRness assessment method or tool. It can be either a simple number or a structured result document explaining the assessment.
+              $ref: "#/components/schemas/xsdNonNegativeInteger"
+            mod:hasRepresentationLanguage:
+              title: representation language
+              description: A language that is used to create an ontology.
+              $ref: "#/components/schemas/xsdString"
+            mod:hasSyntax:
+              title: syntax
+              description: The syntax followed in the creation of an ontology.
+              $ref: "#/components/schemas/xsdAnyURI"
+            mod:hierarchyProperty:
+              title: transitive hierarchy property
+              description: Property used to specify the hierarchy (e.g. rdfs:subClassOf or skos:broader).
+              $ref: "#/components/schemas/xsdAnyURI"
+            mod:maxChildCount:
+              title: maximum number of children per class
+              description: Maximum number of children per class (BioPortal definition).
+              $ref: "#/components/schemas/xsdNonNegativeInteger"
+            mod:maxDepth:
+              title: maximum depth of the hierachy
+              description: Maximum depth of the hierarchy tree.
+              $ref: "#/components/schemas/xsdNonNegativeInteger"
+            mod:metadataVoc:
+              title: metadata vocabulary used
+              $ref: "#/components/schemas/xsdAnyURI"
+            mod:metrics:
+              title: metrics
+              description: A generic property to store any metrics (number) related to the ontology.
+              $ref: "#/components/schemas/xsdNonNegativeInteger"
+            mod:modifiedProperty:
+              title: object modification date property
+              description: Property used to specify the date of modification of a class or another object in the ontology.
+              $ref: "#/components/schemas/xsdAnyURI"
+            mod:numberOfAxioms:
+              title: number of axioms or triples
+              description: The total number of axioms in an ontology.
+              $ref: "#/components/schemas/xsdNonNegativeInteger"
+            mod:numberOfClasses:
+              title: number of classes
+              description: The total number of classes in an ontology.
+              type: integer
+            mod:numberOfDataProperties:
+              title: number of data properties
+              description: The total number of data properties in an ontology.
+              $ref: "#/components/schemas/xsdNonNegativeInteger"
+            mod:numberOfDeprecated:
+              title: number of deprecated objects
+              description: The total number of  in an ontology.
+              $ref: "#/components/schemas/xsdNonNegativeInteger"
+            mod:numberOfIndividuals:
+              title: number of individuals
+              description: The total number of individuals in an ontology.
+              $ref: "#/components/schemas/xsdNonNegativeInteger"
+            mod:numberOfLabels:
+              title: number of labels
+              description: Number of defined labels for any resources in an ontology (classes, properties, etc).
+              $ref: "#/components/schemas/xsdNonNegativeInteger"
+            mod:numberOfObjectProperties:
+              title: number of object properties
+              description: The total number of object properties in an ontology.
+              $ref: "#/components/schemas/xsdNonNegativeInteger"
+            mod:numberOfProperties:
+              title: number of properties
+              description: The total number of properties in an ontology.
+              $ref: "#/components/schemas/xsdNonNegativeInteger"
+            mod:obsoleteParent:
+              title: root of obsolete branch
+              description: Property used to specify the root of an obsolete branch in the ontology.  
+              $ref: "#/components/schemas/xsdAnyURI"
+            mod:obsoleteProperty:
+              title: object obsolete property
+              description: Property used to specify obsolete objects.
+              $ref: "#/components/schemas/xsdAnyURI"
+            mod:prefLabelProperty:
+              title: object preferred label property
+              description: Property used to specify objects' preferred label.
+              $ref: "#/components/schemas/xsdAnyURI"
+            mod:sampleQueries:
+              title: sample queries
+              description: A set of queries (may be SPARQL, DL Queries) that are provided along with an ontology.
+              $ref: "#/components/schemas/xsdAnyURI"
+            mod:synonymProperty:
+              title: object synonym property
+              description: Property used to specify objects' synonyms.
+              $ref: "#/components/schemas/xsdAnyURI"
+            mod:usedEngineeringMethodology:
+              title: engineering methodology
+              description: A methodolgy following which an ontology is created.
+              $ref: "#/components/schemas/modEngineeringMethodology"
+
+
+    modSemanticArtefactService:
+      title: Semantic Artefact Service
+      description: A collection of operations that provides access to one or more semantic artefacts processing functions.
+      allOf:
+        - type: object
+          properties:
+            '@id':
+              example: https://example.org/SemanticArtefactService/SemanticArtefactServiceID
+            '@type':
+              type: array
+              items:
+                example: mod:SemanticArtefactService
+        - $ref: '#/components/schemas/dcatDataService'
+
+    modSemanticArtefactTask:
+      title: Semantic Artefact Task
+      allOf:
+        - type: object
+          properties:
+            '@id':
+              example: https://example.org/SemanticArtefactTask/SemanticArtefactTaskID
+            '@type':
+              type: array
+              items:
+                example: mod:SemanticArtefactTask
+        - $ref: '#/components/schemas/owlClass'
+
+    modTaxonomy:
+      title: Taxonomy
+      allOf:
+        - $ref: '#/components/schemas/modSemanticArtefact'
+
+    modTerminology:
+      title: Terminology
+      allOf:
+        - $ref: '#/components/schemas/modSemanticArtefact'
+
+    modThesaurus:
+      title: Thesaurus
+      allOf:
+        - $ref: '#/components/schemas/modSemanticArtefact'
+
+    odrlPolicy:
+      type: object
+      properties:
+        '@type':
+          title: Policy
+          description: A non-empty group of Permissions and/or Prohibitions.
+          example: odrl:Policy
+
+    owlClass:
+      type: object
+      properties:
+        '@type':
+          title: Class
+          description: An owl class.
+          example: owl:Class
+
+    owlIndividual:
+      type: object
+      properties:
+        '@type':
+          title: Individual
+          description: An owl individual
+          example: owl:Individual
 
     Pagination:
       title: Pagination
@@ -795,426 +1462,120 @@ components:
           title: next page
           description: The URL of the next page of the results
 
-    ProvActivity:
-      title: Activity
-      description: An activity is something that occurs over a period of time and acts upon or with entities; it may include consuming, processing, transforming, modifying, relocating, using, or generating entities.
-      type: string
-
-    ProvAttribution:
-      title: Attribution
-      description: Attribution is the ascribing of an entity to an agent. When an entity e is attributed to agent ag, entity e was generated by some unspecified activity that in turn was associated to agent ag. Thus, this relation is useful when the activity is not known, or irrelevant.
-      type: string
-
-    RdfsProperty:
-      title: Property
-      description: rdf:Property is the class of RDF properties. rdf:Property is an instance of rdfs:Class.
-      type: string
-
-    RdfsResource:
-      title: Resource
-      description: The class resource, everything.
-      type: string
-
-    # see https://www.w3.org/TR/vocab-dcat-2/#Class:Resource
-    Resource:
-      title: Catalogued resource
-      description: Resource published or curated by a single agent.
+    provActivity:
       type: object
       properties:
-        accessRights:
-          title: access rights
-          description: Information about who can access the resource or an indication of its security status.
-          $ref: "#/components/schemas/DctRightsStatement"
-        conformsTo:
-          title: conforms to
-          description: An established standard to which the described resource conforms.
-          $ref: "#/components/schemas/DctStandard"
-        contactPoint:
-          title: contact point
-          description: Relevant contact information for the cataloged resource. Use of vCard is recommended [VCARD-RDF].
-          $ref: "#/components/schemas/VcardKind"
-        creator:
-          title: resource creator
-          description: The entity responsible for producing the resource.
-          $ref: "#/components/schemas/FoafAgent"
-        description:
-          title: description
-          description: A free-text account of the item.
-          type: string
-        hasPolicy:
-          title: has policy
-          description: An ODRL conformant policy expressing the rights associated with the resource.
-          $ref: "#/components/schemas/OdrlPolicy"
-        identifier:
-          title: identifier
-          description: A unique identifier of the item.
-          type: string
-        isReferencedBy:
-          title: is referenced by
-          description: A related resource, such as a publication, that references, cites, or otherwise points to the cataloged resource.
-          $ref: "#/components/schemas/DctIsReferencedBy"
-        issued:
-          title: release date
-          description: Date of formal issuance (e.g., publication) of the item.
-          type: string
-        keyword:
-          title:  keyword/tag
-          description: A keyword or tag describing the resource.
-          type: string
-        landingPage:
-          title: landing page
-          description: A Web page that can be navigated to in a Web browser to gain access to the catalog, a dataset, its distributions and/or additional information.
-          $ref: "#/components/schemas/FoafDocument"
-        language:
-          title: language
-          description: A language of the item. This refers to the natural language used for textual metadata (i.e. titles, descriptions, etc) of a cataloged resource (i.e. dataset or service) or the textual values of a dataset distribution
-          $ref: "#/components/schemas/DctLinguisticSystem"
-        license:
-          title: license
-          description: A legal document under which the resource is made available.
-          $ref: "#/components/schemas/DctLicenseDocument"
-        modified:
-          title: update/modification date
-          description: Most recent date on which the item was changed, updated or modified.
-          type: string
-        publisher:
-          title: publisher
-          description: The entity responsible for making the item available.
-          $ref: "#/components/schemas/FoafAgent"
-        qualifiedAttribution:
-          title: qualified attribution
-          description: Link to an Agent having some form of responsibility for the resource
-          $ref: "#/components/schemas/ProvAttribution"
-        qualifiedRelation:
-          title: qualified relation
-          description: Link to a description of a relationship with another resource.
-          $ref: "#/components/schemas/Resource"
-        relation:
-          title: resource relation
-          description: A resource with an unspecified relationship to the cataloged item.
-          $ref: "#/components/schemas/DctRelation"
-        rights:
-          title: rights
-          description: A statement that concerns all rights not addressed with dct:license or dct:accessRights, such as copyright statements.
-          $ref: "#/components/schemas/DctRightsStatement"
-        theme:
-          title: theme/category
-          description: A main category of the resource. A resource can have multiple themes.
-          $ref: "#/components/schemas/SkosConcept"
-        title:
-          title: title
-          description: A name given to the item.
-          type: string
-        type:
-          title: type/genre
-          description: The nature or genre of the resource.
-          $ref: "#/components/schemas/DcType"
+      '@type':
+          title: Activity
+          description: An activity is something that occurs over a period of time and acts upon or with entities; it may include consuming, processing, transforming, modifying, relocating, using, or generating entities.
+          example: prov:Activity
 
-    SemanticArtefact:
-      title: Semantic Artefact
-      description: Semantic Artefact is defined here as a machine-actionable and -readable formalisation of a conceptualisation enabling sharing and reuse by humans and machines. These artefacts may have a broad range of formalisation, from loose set of terms, taxonomies, thesauri to higher-order logics, and include the concepts/terms/classes constituting these. Moreover, semantic artefacts are serialised using a variety of digital representation formats, e.g., RDF Turtle, OWL-RDF, XML, JSON-LD.
-      allOf:
-        - $ref: '#/components/schemas/Resource'
-        - type: object
-          properties:
-            acronym:
-              title: acronym
-              description: Short acronym label, often used as an identifier within some ontology platforms such as BioPortal or OBO Foundry.
-              type: string
-            analytics:
-              title: :analytics
-              description: This property shall be used to store any analytics for an ontology. E.g., number of visits an ontology received in a portal, number of downloads, etc.
-              $ref: "#/components/schemas/Analytics"
-            competencyQuestion:
-              title: competency question
-              description: A set of questions made to build an ontology at the design time.
-              type: string
-            designedForTask:
-              title: designed for task
-              description: The purpose for which the ontology was originally designed.
-              $ref: "#/components/schemas/SemanticArtefactTask"
-            endorsedBy:
-              title: endorsed by
-              description: An ontology endorsed by an agent.
-              $ref: "#/components/schemas/DctAgent"
-            group:
-              title: group
-              description: A group of ontologies that the ontology is usually considered into.
-              $ref: "#/components/schemas/Group"
-            hasEvaluation:
-              title: evaluation
-              description: This property makes a relationship between an ontology and its evaluation result.
-              $ref: "#/components/schemas/Evaluation"
-            hasFormalityLevel:
-              title: formality level
-              description: The level of formality of an ontology.
-              type: string
-            knownUsage:
-              title: known usage
-              description: The applications where the ontology is being used.
-              type: string
-            metrics:
-              title: metrics
-              description: A generic property to store any metrics (number) related to the ontology.
-              type: integer
-            numberOfEnsorments:
-              title: number of endorsmements
-              description: Number of endorsing organizations (maybe represented with mod:endorsedBy).
-              type: integer
-            numberOfEvaluations:
-              title: number of evaluations
-              description: Number of evaluations (maybe represented with mod:hasEvaluation).
-              type: integer
-            numberOfNotes:
-              title: number of notes or comments
-              description: Number of notes or comments (maybe represented with schema:comment) related to the ontologies.
-              type: integer
-            numberOfUsingProjects:
-              title: number of using projects
-              description: Number of projects (maybe represented with mod:usedInProject) using an ontology.
-              type: integer
-            semanticArtefactRelation:
-              title: generally related to
-              description: A general property for semantic artefact relations.
-              $ref: "#/components/schemas/SemanticArtefact"
-            status:
-              title: status
-              type: string
-            URI:
-              title: URI
-              description: The URI of the ontology which is described by this metadata.
-              type: string
-              format: uri
-            usedInProject:
-              title: used in project
-              description: An ontology that is used in a project.
-              $ref: "#/components/schemas/FoafProject"
+    provAttribution:
+      type: object
+      properties:
+        '@type':
+          title: Attribution
+          description: Attribution is the ascribing of an entity to an agent. When an entity e is attributed to agent ag, entity e was generated by some unspecified activity that in turn was associated to agent ag. Thus, this relation is useful when the activity is not known, or irrelevant.
+          example: prov:Attribution
 
-    SemanticArtfeactCatalog:
-      title: Semantic Artfeact Catalog
-      description: A dedicated web-based system that fosters the availability, discoverability and long-term preservation and maintenance of semantic artefacts.
-      allOf:
-        - $ref: '#/components/schemas/Catalog'
+    rdfsLiteral:
+      type: object
+      properties:
+        '@type':
+          title: Literal
+          description: The class of literal values, eg. textual strings and integers.
+          example: rdfs:Literal
+        '@value':
+          example: Lorem ipsum
 
-    SemanticArtefactCatalogRecord:
-      title: Semantic Artefact Catalog Record
-      description: A record in a catalog, describing the registration of a single semantic artefact
-      allOf:
-        - $ref: '#/components/schemas/CatalogRecord'
+    rdfsProperty:
+      type: object
+      properties:
+        '@type':
+          title: Property
+          description: rdf:Property is the class of RDF properties. rdf:Property is an instance of rdfs:Class.
+          example: rdfs:Property
 
-    SemanticArtefactDistribution:
-      title: Semantic Artefact Distribution
-      description: A specific representation and/or serialization of a semantic artefact.
-      allOf:
-        - $ref: '#/components/schemas/Distribution'
-        - type: object
-          properties:
-            authorProperty:
-              title: object author property
-              description: Property used to specify objects's author.
-              type: string
-              format: uri
-            averageChildCount:
-              title: average number of children per class
-              description: Average number of children per class (BioPortal definition).
-              type: integer
-            browsingUI:
-              title: browsing user interface
-              description: The user interface (URL) where the ontology may be browsed or searched.
-              type: string
-              format: uri
-            classesWithMoreThan25Children:
-              title: number of classes with more than 25 children
-              description: Number of classes that have more than 25 direct subclasses.
-              type: integer
-            classesWithNoAuthorMetadata:
-              title: number of classes with no author metadata
-              description: Number of classes with author metadata.
-              type: integer
-            classesWithNoDateMetadata:
-              title: number of classes with no date metadata
-              description: Number of classes with no date metadata.
-              type: integer
-            classesWithNoDefinition:
-              title: number of classes with no definition
-              description: Number of classes that have no value for the definition property.
-              type: integer
-            classesWithNoFormalDefinition:
-              title: number of classes with no formal or logical definition
-              description: Number of classes with no formal or logical definition.
-              type: integer
-            classesWithNoLabel:
-              title: number of classes with no label
-              description: Number of classes with no labels.
-              type: integer
-            classesWithOneChild:
-              title: number of classes with a single child
-              description: Number of classes that have only one subclass in the is-a hierarchy.
-              type: integer
-            conformsToKnowledgeRepresentationParadigm:
-              title: knowledge representation paradigm
-              description: A representation formalism that is followed to describe knowledge in an ontology. Example includes description logics, first order logic, etc. 
-              $ref: "#/components/schemas/KnowledgeRepresentationParadigm"
-            createdProperty:
-              title: object creation date property
-              description: Property used to specify the date of creation of a class or another object in the ontology.
-              type: string
-              format: uri
-            definitionProperty:
-              title: object definition property
-              description: Property used to specify objects' definition.
-              type: string
-              format: uri
-            fairAssessment:
-              title: FAIR assessment
-              description: A FAIRness assessment result produced by a known or identified FAIRness assessment method or tool. It can be either a simple number or a structured result document explaining the assessment.
-              $ref: "#/components/schemas/FairAssessment"
-            fairScore:
-              title: FAIR assessment
-              description: A FAIRness assessment result produced by a known or identified FAIRness assessment method or tool. It can be either a simple number or a structured result document explaining the assessment.
-              type: integer
-            hasRepresentationLanguage:
-              title: representation language
-              description: A language that is used to create an ontology.
-              type: string
-            hasSyntax:
-              title: syntax
-              description: The syntax followed in the creation of an ontology.
-              type: string
-              format: uri
-            hierarchyProperty:
-              title: transitive hierarchy property
-              description: Property used to specify the hierarchy (e.g. rdfs:subClassOf or skos:broader).
-              type: string
-              format: uri
-            maxChildCount:
-              title: maximum number of children per class
-              description: Maximum number of children per class (BioPortal definition).
-              type: integer              
-            maxDepth:
-              title: maximum depth of the hierachy
-              description: Maximum depth of the hierarchy tree.
-              type: integer
-            metadataVoc:
-              title: metadata vocabulary used
-              type: string
-              format: uri
-            metrics:
-              title: metrics
-              description: A generic property to store any metrics (number) related to the ontology.
-              type: integer
-            modifiedProperty:
-              title: object modification date property
-              description: Property used to specify the date of modification of a class or another object in the ontology.
-              type: string
-              format: uri
-            numberOfAxioms:
-              title: number of axioms or triples
-              description: The total number of axioms in an ontology.
-              type: integer
-            numberOfClasses:
-              title: number of classes
-              description: The total number of classes in an ontology.
-              type: integer
-            numberOfDataProperties:
-              title: number of data properties
-              description: The total number of data properties in an ontology.
-              type: integer
-            numberOfDeprecated:
-              title: number of deprecated objects
-              description: The total number of  in an ontology.
-              type: integer
-            numberOfIndividuals:
-              title: number of individuals
-              description: The total number of individuals in an ontology.
-              type: integer
-            numberOfLabels:
-              title: number of labels
-              description: Number of defined labels for any resources in an ontology (classes, properties, etc).
-              type: integer
-            numberOfObjectProperties:
-              title: number of object properties
-              description: The total number of object properties in an ontology.
-              type: integer
-            numberOfProperties:
-              title: number of properties
-              description: The total number of properties in an ontology.
-              type: integer
-            obsoleteParent:
-              title: root of obsolete branch
-              description: Property used to specify the root of an obsolete branch in the ontology.  
-              type: string
-              format: uri
-            obsoleteProperty:
-              title: object obsolete property
-              description: Property used to specify obsolete objects.
-              type: string
-              format: uri
-            prefLabelProperty:
-              title: object preferred label property
-              description: Property used to specify objects' preferred label.
-              type: string
-              format: uri
-            sampleQueries:
-              title: sample queries
-              description: A set of queries (may be SPARQL, DL Queries) that are provided along with an ontology.
-              type: string
-            synonymProperty:
-              title: object synonym property
-              description: Property used to specify objects' synonyms.
-              type: string
-              format: uri
-            usedEngineeringMethodology:
-              title: engineering methodology
-              description: A methodolgy following which an ontology is created.
-              $ref: "#/components/schemas/EngineeringMethodology"
+    rdfsResource:
+      type: object
+      properties:
+        '@type':
+          title: Resource
+          description: The class resource, everything.
+          example: rdfs:Resource
 
-    SemanticArtefactService:
-      title: Semantic Artefact Service
-      description: A collection of operations that provides access to one or more semantic artefacts processing functions.
-      allOf:
-        - $ref: '#/components/schemas/DataService'
+    skosCollection:
+      type: object
+      properties:
+        '@type':
+          title: Collection
+          example: skos:Collection
 
-    SemanticArtefactTask:
-      title: Semantic Artefact Task
-      type: string
+    skosConcept:
+      type: object
+      properties:
+        '@type':
+          title: Concept
+          example: skos:Concept
 
-    SkosCollection:
-      title: Collection
-      type: string
+    skosScheme:
+      type: object
+      properties:
+        '@type':
+          title: Scheme
+          example: skos:Scheme
 
-    SkosConcept:
-      title: Concept
-      type: string
+    vcardKind:
+      type: object
+      properties:
+        '@id':
+          example: https://example.org/vcardKind/vcardKindID 
+        '@type':
+          title: kind
+          description: The parent class for all vcard objects
+          example: vcard:Kind
+        fn:
+          example: Corky Crystal
+        nickname:
+          example: Corks
 
-    SkosScheme:
-      title: Scheme
-      type: string
+    xsdDecimal:
+      type: object
+      properties:
+        '@type':
+          example: xsd:decimal
+        '@value':
+          example: 4
 
-    Taxonomy:
-      title: Taxonomy
-      allOf:
-        - $ref: '#/components/schemas/SemanticArtefact'
+    xsdDuration:
+      type: object
+      properties:
+        '@type':
+          example: xsd:duration
 
-    Terminology:
-      title: Terminology
-      allOf:
-        - $ref: '#/components/schemas/SemanticArtefact'
+    xsdNonNegativeInteger:
+      type: object
+      properties:
+        '@type':
+          example: xsd:nonNegativeInteger
+        '@value':
+          example: 5
 
-    Thesaurus:
-      title: Thesaurus
-      allOf:
-        - $ref: '#/components/schemas/SemanticArtefact'
+    xsdString:
+      type: object
+      properties:
+        '@type':
+          example: xsd:string
+        '@value':
+          example: Lorem ipsum
 
-    VcardKind:
-      title: kind
-      description: The parent class for all vcard objects
-      type: string
-
-    XsdDuration:
-      title:
-      description: A datatype that represents durations of time.
-      type: string
+    xsdAnyURI:
+      type: object
+      properties:
+        '@type':
+          example: xsd:anyURI
+        '@value':
+          example: https://example.org
 
     # comesFromTheSameDomain
     # subPropertyOf semanticArtefactRelation
@@ -1288,50 +1649,10 @@ paths:
         - Record
       summary: Get information about a semantic artefact catalog record.
       description: Retrieves information about a semantic artefact catalog record.
-      operationId: getArtefactRecord
+      operationId: getRecord
       responses:
         "200":
           $ref: "#/components/responses/record"
-        "404":
-          $ref: "#/components/responses/error_message"
-
-  # Information about all semantic artefact distributions
-  /distributions:
-    parameters:
-      - $ref: "#/components/parameters/format_param"
-      - $ref: "#/components/parameters/page"
-      - $ref: "#/components/parameters/pagesize"
-      - $ref: "#/components/parameters/display"
-
-    get:
-      tags:
-        - Distribution
-      summary: Get information about all semantic artefact distributions.
-      description: Retrieves a collection of semantic artefact distributions.
-      operationId: getCatalogueDistributions
-      responses:
-        "200":
-          $ref: "#/components/responses/distributions"
-        "404":
-          $ref: "#/components/responses/error_message"
-
-  # Information about the latest semantic artefact distribution for each atrefact
-  /distribution/latest:
-    parameters:
-      - $ref: "#/components/parameters/format_param"
-      - $ref: "#/components/parameters/page"
-      - $ref: "#/components/parameters/pagesize"
-      - $ref: "#/components/parameters/display"
-
-    get:
-      tags:
-        - Distribution
-      summary: Get information about the latest semantic artefact distribution for each atrefact.
-      description: Retrieves a collection containing the latest semantic artefact distribution for each atrefact.
-      operationId: getCatalogueDistributionsLatest
-      responses:
-        "200":
-          $ref: "#/components/responses/distributions"
         "404":
           $ref: "#/components/responses/error_message"
 
@@ -1484,6 +1805,27 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/resources"
+        "404":
+          $ref: "#/components/responses/error_message"
+
+  # Get a list of all the resources within an artefact
+  /artefacts/{artefactID}/resources/{resourceID}:
+    parameters:
+      - $ref: "#/components/parameters/artefactID"
+      - $ref: "#/components/parameters/resourceID"
+      - $ref: "#/components/parameters/format_param"
+      - $ref: "#/components/parameters/page"
+      - $ref: "#/components/parameters/pagesize"
+
+    get:
+      tags:
+        - Artefact
+      summary: Get a specific resources from within an artefact.
+      description: Retrieves a specific resources from within an artefact.
+      operationId: getArtefactResource
+      responses:
+        "200":
+          $ref: "#/components/responses/resource"
         "404":
           $ref: "#/components/responses/error_message"
 
