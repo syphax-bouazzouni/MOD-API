@@ -138,14 +138,19 @@ components:
         application/ld+json:
           schema:
             allOf:
-              - $ref: "#/components/schemas/Pagination"
+              - type: object
+                title: Pagination
+                $ref: "#/components/schemas/Pagination"
               - type: object
                 title: Context
                 $ref: "#/components/schemas/Context"
-              - type: array
-                title: List of Semantic Artefacts
-                items:
-                  $ref: "#/components/schemas/modSemanticArtefact"
+              - modSemanticArtefact:
+                type: object
+                properties:
+                  mod:SemanticArtefact:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/modSemanticArtefact"
         application/rdf+xml:
           schema:
             type: array
@@ -1448,19 +1453,23 @@ components:
           example: owl:Individual
 
     Pagination:
-      title: Pagination
-      description: Fields associated with pagination.
       type: object
       properties:
-        firstPage:
-          title: first page
-          description: The URL of the first page of the results
-        previousPage:
-          title: previous page
-          description: The URL of the previous page of the results
-        nextPage:
-          title: next page
-          description: The URL of the next page of the results
+        'pagination':
+          type: object
+          properties:
+            firstPage:
+              title: first page
+              description: The URL of the first page of the results
+              example: 'https://example.org/ont1?page=1&pagesize=50'
+            previousPage:
+              title: previous page
+              description: The URL of the previous page of the results
+              example: 'https://example.org/ont1?page=3&pagesize=50'
+            nextPage:
+              title: next page
+              description: The URL of the next page of the results
+              example: 'https://example.org/ont1?page=5&pagesize=50'
 
     provActivity:
       type: object
