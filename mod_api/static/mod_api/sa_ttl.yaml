@@ -1,0 +1,332 @@
+type: string
+example: '@prefix dc: <http://purl.org/dc/terms/> .
+
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+@prefix ns0: <https://w3id.org/mod#> .
+
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+
+<https://example.org/SemanticArtefact/SemanticArtefactID>
+
+  a <https://w3id.org/mod#SemanticArtefact> ;
+
+  dc:accessRights <https://example.org/RightsStatement/RightsStatementID> ;
+
+  dc:conformsTo <https://example.org/Standard/StandardID> ;
+
+  dc:creator <https://example.org/Agent/AgentID> ;
+
+  dc:description <https://example.org/identifier/identifierID> ;
+
+  dc:identifier <https://example.org/identifier/identifierID> ;
+
+  dc:isReferencedBy <https://example.org/isReferencedBy/isReferencedByID> ;
+
+  dc:issued <https://example.org/identifier/identifierID> ;
+
+  dc:language <https://example.org/LinguisticSystem/LinguisticSystemID> ;
+
+  dc:license <https://example.org/LicenseDocument/LicenseDocumentID> ;
+
+  dc:modified <https://example.org/identifier/identifierID> ;
+
+  dc:publisher <https://example.org/Agent/AgentID> ;
+
+  dc:relation <https://example.org/relation/relationID> ;
+
+  dc:rights <https://example.org/RightsStatement/RightsStatementID> ;
+
+  dc:title <https://example.org/identifier/identifierID> ;
+
+  dc:type <https://example.org/Type/TypeID> ;
+
+  dcat:contactPoint <https://example.org/vcardKind/vcardKindID> ;
+
+  dcat:keyword <https://example.org/identifier/identifierID> ;
+
+  dcat:landingPage <https://example.org/Document/DocumentID> ;
+
+  dcat:qualifiedRelation "string"^^xsd:string ;
+
+  dcat:theme [
+
+    a skos:Concept ;
+
+    skos:prefLabel "cars"^^xsd:string
+
+  ] ;
+
+  odrl:hasPolicy <https://example.org/Policy/PolicyID> ;
+
+  prov:qualifiedAttribution <https://example.org/Attribution/AttributionID> ;
+
+  ns0:URI "https://example.org"^^xsd:anyURI ;
+
+  ns0:acronym "Lorem ipsum"^^xsd:string ;
+
+  ns0:analytics <https://example.org/Analytics/AnalyticsID> ;
+
+  ns0:competencyQuestion "Lorem ipsum"^^xsd:string ;
+
+  ns0:designedForTask <https://example.org/SemanticArtefactService/SemanticArtefactServiceID> ;
+
+  ns0:endorsedBy <https://example.org/Agent/AgentID> ;
+
+  ns0:group <https://example.org/Group/GroupID> ;
+
+  ns0:hasEvaluation <https://example.org/Evaluation/EvaluationID> ;
+
+  ns0:hasFormalityLevel "Lorem ipsum"^^xsd:string ;
+
+  ns0:knownUsage "Lorem ipsum"^^xsd:string ;
+
+  ns0:metrics "5"^^xsd:nonNegativeInteger ;
+
+  ns0:numberOfEnsorments "5"^^xsd:nonNegativeInteger ;
+
+  ns0:numberOfEvaluations "5"^^xsd:nonNegativeInteger ;
+
+  ns0:numberOfNotes "5"^^xsd:nonNegativeInteger ;
+
+  ns0:numberOfUsingProjects "5"^^xsd:nonNegativeInteger ;
+
+  ns0:semanticArtefactRelation "string"^^xsd:string ;
+
+  ns0:status "Lorem ipsum"^^xsd:string ;
+
+  ns0:usedInProject <https://example.org/Project/ProjectID> .
+
+
+<https://example.org/RightsStatement/RightsStatementID> a dc:RightsStatement .
+
+<https://example.org/Standard/StandardID> a dc:Standard .
+
+<https://example.org/Agent/AgentID> a foaf:Agent, dc:Agent .
+
+<https://example.org/identifier/identifierID> a dc:identifier .
+
+<https://example.org/isReferencedBy/isReferencedByID> a dc:isReferencedBy .
+
+<https://example.org/LinguisticSystem/LinguisticSystemID> a dc:LinguisticSystem .
+
+<https://example.org/LicenseDocument/LicenseDocumentID> a dc:LicenseDocument .
+
+<https://example.org/relation/relationID> a dc:relation .
+
+<https://example.org/Type/TypeID> a <dt:type> .
+
+<https://example.org/vcardKind/vcardKindID>
+
+  a vcard:Kind ;
+
+  vcard:fn "Corky Crystal"^^xsd:string ;
+
+  vcard:nickname "Corks"^^xsd:string .
+
+
+<https://example.org/Document/DocumentID> a foaf:Document .
+
+<https://example.org/Policy/PolicyID> a odrl:Policy .
+
+<https://example.org/Attribution/AttributionID> a prov:Attribution .
+
+<https://example.org/Analytics/AnalyticsID> a ns0:Analytics .
+
+<https://example.org/SemanticArtefactService/SemanticArtefactServiceID>
+
+  a ns0:SemanticArtefactService ;
+
+  dc:accessRights <https://example.org/RightsStatement/RightsStatementID> ;
+
+  dc:conformsTo <https://example.org/Standard/StandardID> ;
+
+  dc:creator <https://example.org/Agent/AgentID> ;
+
+  dc:description <https://example.org/identifier/identifierID> ;
+
+  dc:identifier <https://example.org/identifier/identifierID> ;
+
+  dc:isReferencedBy <https://example.org/isReferencedBy/isReferencedByID> ;
+
+  dc:issued <https://example.org/identifier/identifierID> ;
+
+  dc:language <https://example.org/LinguisticSystem/LinguisticSystemID> ;
+
+  dc:license <https://example.org/LicenseDocument/LicenseDocumentID> ;
+
+  dc:modified <https://example.org/identifier/identifierID> ;
+
+  dc:publisher <https://example.org/Agent/AgentID> ;
+
+  dc:relation <https://example.org/relation/relationID> ;
+
+  dc:rights <https://example.org/RightsStatement/RightsStatementID> ;
+
+  dc:title <https://example.org/identifier/identifierID> ;
+
+  dc:type <https://example.org/Type/TypeID> ;
+
+  dcat:contactPoint <https://example.org/vcardKind/vcardKindID> ;
+
+  dcat:endpointDescription [ a rdfs:Resource ] ;
+
+  dcat:endpointURL [ a rdfs:Resource ] ;
+
+  dcat:keyword <https://example.org/identifier/identifierID> ;
+
+  dcat:landingPage <https://example.org/Document/DocumentID> ;
+
+  dcat:qualifiedRelation "string"^^xsd:string ;
+
+  dcat:servesDataset [
+
+    dc:accessRights <https://example.org/RightsStatement/RightsStatementID> ;
+
+    dc:accrualPeriodicity <https://example.org/Frequency/FrequencyID> ;
+
+    dc:conformsTo <https://example.org/Standard/StandardID> ;
+
+    dc:creator <https://example.org/Agent/AgentID> ;
+
+    dc:description <https://example.org/identifier/identifierID> ;
+
+    dc:identifier <https://example.org/identifier/identifierID> ;
+
+    dc:isReferencedBy <https://example.org/isReferencedBy/isReferencedByID> ;
+
+    dc:issued <https://example.org/identifier/identifierID> ;
+
+    dc:language <https://example.org/LinguisticSystem/LinguisticSystemID> ;
+
+    dc:license <https://example.org/LicenseDocument/LicenseDocumentID> ;
+
+    dc:modified <https://example.org/identifier/identifierID> ;
+
+    dc:publisher <https://example.org/Agent/AgentID> ;
+
+    dc:relation <https://example.org/relation/relationID> ;
+
+    dc:rights <https://example.org/RightsStatement/RightsStatementID> ;
+
+    dc:spatial <https://example.org/Location/LocationID> ;
+
+    dc:temporal <https://example.org/PeriodOfTime/PeriodOfTimeID> ;
+
+    dc:title <https://example.org/identifier/identifierID> ;
+
+    dc:type <https://example.org/Type/TypeID> ;
+
+    dcat:contactPoint <https://example.org/vcardKind/vcardKindID> ;
+
+    dcat:distribution [
+
+      dc:accessRights <https://example.org/RightsStatement/RightsStatementID> ;
+
+      dc:conformsTo <https://example.org/Standard/StandardID> ;
+
+      dc:description "Lorem ipsum"^^rdfs:Literal ;
+
+      dc:format <https://example.org/MediaTypeOrExtent/MediaTypeOrExtentID> ;
+
+      dc:issued "Lorem ipsum"^^rdfs:Literal ;
+
+      dc:license <https://example.org/LicenseDocument/LicenseDocumentID> ;
+
+      dc:modified "Lorem ipsum"^^rdfs:Literal ;
+
+      dc:rights <https://example.org/RightsStatement/RightsStatementID> ;
+
+      dc:title "Lorem ipsum"^^rdfs:Literal ;
+
+      dcat:accessService "string"^^xsd:string ;
+
+      dcat:accessURL [ a rdfs:Resource ] ;
+
+      dcat:byteSize 4.0 ;
+
+      dcat:compressFormat <https://example.org/MediaType/MediaTypeID> ;
+
+      dcat:downloadURL [ a rdfs:Resource ] ;
+
+      dcat:mediaType <https://example.org/MediaType/MediaTypeID> ;
+
+      dcat:packageFormat <https://example.org/MediaType/MediaTypeID> ;
+
+      dcat:spatialResolutionInMeters 4.0 ;
+
+      dcat:temporalResolution [ a xsd:duration ] ;
+
+      odrl:hasPolicy <https://example.org/Policy/PolicyID>
+
+    ] ;
+
+    dcat:keyword <https://example.org/identifier/identifierID> ;
+
+    dcat:landingPage <https://example.org/Document/DocumentID> ;
+
+    dcat:qualifiedRelation "string"^^xsd:string ;
+
+    dcat:spatialResolutionInMeters 4.0 ;
+
+    dcat:temporalResolution [ a xsd:duration ] ;
+
+    dcat:theme [
+
+      a skos:Concept ;
+
+      skos:prefLabel "cars"^^xsd:string
+
+    ] ;
+
+    odrl:hasPolicy <https://example.org/Policy/PolicyID> ;
+
+    prov:qualifiedAttribution <https://example.org/Attribution/AttributionID> ;
+
+    prov:wasGeneratedBy <https://example.org/Activity/ActivityID>
+
+  ] ;
+
+  dcat:theme [
+
+    a skos:Concept ;
+
+    skos:prefLabel "cars"^^xsd:string
+
+  ] ;
+
+  odrl:hasPolicy <https://example.org/Policy/PolicyID> ;
+
+  prov:qualifiedAttribution <https://example.org/Attribution/AttributionID> .
+
+
+<https://example.org/Frequency/FrequencyID> a dc:Frequency .
+
+<https://example.org/Location/LocationID> a dc:Location .
+
+<https://example.org/PeriodOfTime/PeriodOfTimeID> a dc:PeriodOfTime .
+
+<https://example.org/MediaTypeOrExtent/MediaTypeOrExtentID> a dc:MediaTypeOrExtent .
+
+<https://example.org/MediaType/MediaTypeID> a dc:MediaType .
+
+<https://example.org/Activity/ActivityID> a prov:Activity .
+
+<https://example.org/Group/GroupID> a ns0:Group .
+
+<https://example.org/Evaluation/EvaluationID> a ns0:Evaluation .
+
+<https://example.org/Project/ProjectID> a foaf:Project .'

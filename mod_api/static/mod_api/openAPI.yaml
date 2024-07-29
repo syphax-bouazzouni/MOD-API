@@ -112,7 +112,7 @@ components:
             $ref: "#/components/schemas/html"
         text/turtle:
           schema:
-            type: string
+              $ref: "./sa_ttl.yaml"
         application/ld+json:
           schema:
             allOf:
