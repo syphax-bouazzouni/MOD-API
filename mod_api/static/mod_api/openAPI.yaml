@@ -112,7 +112,7 @@ components:
             $ref: "#/components/schemas/html"
         text/turtle:
           schema:
-              $ref: "./sa_ttl.yaml"
+            $ref: "./sa_ttl.yaml"
         application/ld+json:
           schema:
             allOf:
@@ -122,7 +122,7 @@ components:
               - $ref: "#/components/schemas/modSemanticArtefact"
         application/rdf+xml:
           schema:
-            type: string
+            $ref: "./sa_rdf_xml.yaml"
 
     artefacts:
       description: "OK"
@@ -134,7 +134,7 @@ components:
           schema:
             type: array
             items:
-              type: string
+              $ref: "./sa_ttl.yaml"
         application/ld+json:
           schema:
             allOf:
@@ -155,7 +155,7 @@ components:
           schema:
             type: array
             items:
-              type: string
+              $ref: "./sa_rdf_xml.yaml"
 
     catalog:
       description: "OK"

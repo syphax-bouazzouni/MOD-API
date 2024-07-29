@@ -11,7 +11,7 @@ example: '@prefix dc: <http://purl.org/dc/terms/> .
 
 @prefix prov: <http://www.w3.org/ns/prov#> .
 
-@prefix ns0: <https://w3id.org/mod#> .
+@prefix mod: <https://w3id.org/mod#> .
 
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 
@@ -74,41 +74,41 @@ example: '@prefix dc: <http://purl.org/dc/terms/> .
 
   prov:qualifiedAttribution <https://example.org/Attribution/AttributionID> ;
 
-  ns0:URI "https://example.org"^^xsd:anyURI ;
+  mod:URI "https://example.org"^^xsd:anyURI ;
 
-  ns0:acronym "Lorem ipsum"^^xsd:string ;
+  mod:acronym "Lorem ipsum"^^xsd:string ;
 
-  ns0:analytics <https://example.org/Analytics/AnalyticsID> ;
+  mod:analytics <https://example.org/Analytics/AnalyticsID> ;
 
-  ns0:competencyQuestion "Lorem ipsum"^^xsd:string ;
+  mod:competencyQuestion "Lorem ipsum"^^xsd:string ;
 
-  ns0:designedForTask <https://example.org/SemanticArtefactService/SemanticArtefactServiceID> ;
+  mod:designedForTask <https://example.org/SemanticArtefactService/SemanticArtefactServiceID> ;
 
-  ns0:endorsedBy <https://example.org/Agent/AgentID> ;
+  mod:endorsedBy <https://example.org/Agent/AgentID> ;
 
-  ns0:group <https://example.org/Group/GroupID> ;
+  mod:group <https://example.org/Group/GroupID> ;
 
-  ns0:hasEvaluation <https://example.org/Evaluation/EvaluationID> ;
+  mod:hasEvaluation <https://example.org/Evaluation/EvaluationID> ;
 
-  ns0:hasFormalityLevel "Lorem ipsum"^^xsd:string ;
+  mod:hasFormalityLevel "Lorem ipsum"^^xsd:string ;
 
-  ns0:knownUsage "Lorem ipsum"^^xsd:string ;
+  mod:knownUsage "Lorem ipsum"^^xsd:string ;
 
-  ns0:metrics "5"^^xsd:nonNegativeInteger ;
+  mod:metrics "5"^^xsd:nonNegativeInteger ;
 
-  ns0:numberOfEnsorments "5"^^xsd:nonNegativeInteger ;
+  mod:numberOfEnsorments "5"^^xsd:nonNegativeInteger ;
 
-  ns0:numberOfEvaluations "5"^^xsd:nonNegativeInteger ;
+  mod:numberOfEvaluations "5"^^xsd:nonNegativeInteger ;
 
-  ns0:numberOfNotes "5"^^xsd:nonNegativeInteger ;
+  mod:numberOfNotes "5"^^xsd:nonNegativeInteger ;
 
-  ns0:numberOfUsingProjects "5"^^xsd:nonNegativeInteger ;
+  mod:numberOfUsingProjects "5"^^xsd:nonNegativeInteger ;
 
-  ns0:semanticArtefactRelation "string"^^xsd:string ;
+  mod:semanticArtefactRelation "string"^^xsd:string ;
 
-  ns0:status "Lorem ipsum"^^xsd:string ;
+  mod:status "Lorem ipsum"^^xsd:string ;
 
-  ns0:usedInProject <https://example.org/Project/ProjectID> .
+  mod:usedInProject <https://example.org/Project/ProjectID> .
 
 
 <https://example.org/RightsStatement/RightsStatementID> a dc:RightsStatement .
@@ -144,11 +144,11 @@ example: '@prefix dc: <http://purl.org/dc/terms/> .
 
 <https://example.org/Attribution/AttributionID> a prov:Attribution .
 
-<https://example.org/Analytics/AnalyticsID> a ns0:Analytics .
+<https://example.org/Analytics/AnalyticsID> a mod:Analytics .
 
 <https://example.org/SemanticArtefactService/SemanticArtefactServiceID>
 
-  a ns0:SemanticArtefactService ;
+  a mod:SemanticArtefactService ;
 
   dc:accessRights <https://example.org/RightsStatement/RightsStatementID> ;
 
@@ -325,8 +325,8 @@ example: '@prefix dc: <http://purl.org/dc/terms/> .
 
 <https://example.org/Activity/ActivityID> a prov:Activity .
 
-<https://example.org/Group/GroupID> a ns0:Group .
+<https://example.org/Group/GroupID> a mod:Group .
 
-<https://example.org/Evaluation/EvaluationID> a ns0:Evaluation .
+<https://example.org/Evaluation/EvaluationID> a mod:Evaluation .
 
 <https://example.org/Project/ProjectID> a foaf:Project .'
