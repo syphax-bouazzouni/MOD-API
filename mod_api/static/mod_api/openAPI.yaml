@@ -122,7 +122,13 @@ components:
               - $ref: "#/components/schemas/modSemanticArtefact"
         application/rdf+xml:
           schema:
-            $ref: "./sa_rdf_xml.yaml"
+            type: array
+            xml:
+              name: rdf
+              wrapped: true
+            items:
+              type: string
+              example: In progress
 
     artefacts:
       description: "OK"
@@ -154,8 +160,12 @@ components:
         application/rdf+xml:
           schema:
             type: array
+            xml:
+              name: rdf
+              wrapped: true
             items:
-              $ref: "./sa_rdf_xml.yaml"
+              type: string
+              example: In progress
 
     catalog:
       description: "OK"
@@ -172,10 +182,15 @@ components:
               - type: object
                 title: Context
                 $ref: "#/components/schemas/Context"
-              - $ref: "#/components/schemas/modSemanticArtfeactCatalog"
+              - $ref: "#/components/schemas/modSemanticArtefactCatalog"
         application/rdf+xml:
           schema:
-            type: string
+            type: array
+            xml:
+              name: rdf
+              wrapped: true
+            items:
+              example: In progress
 
     classes:
       description: "OK"
@@ -194,7 +209,12 @@ components:
               $ref: "#/components/schemas/owlClass"
         application/rdf+xml:
           schema:
-            type: string
+            type: array
+            xml:
+              name: rdf
+              wrapped: true
+            items:
+              example: In progress
 
     collections:
       description: "OK"
@@ -213,7 +233,12 @@ components:
               $ref: "#/components/schemas/skosCollection"
         application/rdf+xml:
           schema:
-            type: string
+            type: array
+            xml:
+              name: rdf
+              wrapped: true
+            items:
+              example: In progress
 
     concepts:
       description: "OK"
@@ -232,7 +257,12 @@ components:
               $ref: "#/components/schemas/skosConcept"
         application/rdf+xml:
           schema:
-            type: string
+            type: array
+            xml:
+              name: rdf
+              wrapped: true
+            items:
+              example: In progress
 
     distribution:
       description: "OK"
@@ -252,7 +282,12 @@ components:
               - $ref: "#/components/schemas/modSemanticArtefactDistribution"
         application/rdf+xml:
           schema:
-            type: string
+            type: array
+            xml:
+              name: rdf
+              wrapped: true
+            items:
+              example: In progress
 
     distributions:
       description: "OK"
@@ -280,8 +315,11 @@ components:
         application/rdf+xml:
           schema:
             type: array
+            xml:
+              name: rdf
+              wrapped: true
             items:
-              type: string
+              example: In progress
 
     individuals:
       description: "OK"
@@ -300,7 +338,12 @@ components:
               $ref: "#/components/schemas/owlIndividual"
         application/rdf+xml:
           schema:
-            type: string
+            type: array
+            xml:
+              name: rdf
+              wrapped: true
+            items:
+              example: In progress
 
     properties:
       description: "OK"
@@ -319,7 +362,12 @@ components:
               $ref: "#/components/schemas/rdfsProperty"
         application/rdf+xml:
           schema:
-            type: string
+            type: array
+            xml:
+              name: rdf
+              wrapped: true
+            items:
+              example: In progress
 
     record:
       description: "OK"
@@ -339,7 +387,12 @@ components:
               - $ref: "#/components/schemas/modSemanticArtefactCatalogRecord"
         application/rdf+xml:
           schema:
-            type: string
+            type: array
+            xml:
+              name: rdf
+              wrapped: true
+            items:
+              example: In progress
 
     records:
       description: "OK"
@@ -367,8 +420,11 @@ components:
         application/rdf+xml:
           schema:
             type: array
+            xml:
+              name: rdf
+              wrapped: true
             items:
-              type: string
+              example: In progress
 
     resources:
       description: "OK"
@@ -386,7 +442,12 @@ components:
             $ref: "#/components/schemas/rdfsResource"
         application/rdf+xml:
           schema:
-            type: string
+            type: array
+            xml:
+              name: rdf
+              wrapped: true
+            items:
+              example: In progress
 
     resource:
       description: "OK"
@@ -405,7 +466,12 @@ components:
               $ref: "#/components/schemas/rdfsResource"
         application/rdf+xml:
           schema:
-            type: string
+            type: array
+            xml:
+              name: rdf
+              wrapped: true
+            items:
+              example: In progress
 
     schemes:
       description: "OK"
@@ -424,7 +490,12 @@ components:
               $ref: "#/components/schemas/skosScheme"
         application/rdf+xml:
           schema:
-            type: string
+            type: array
+            xml:
+              name: rdf
+              wrapped: true
+            items:
+              example: In progress
 
     searchResult:
       description: "OK"
@@ -442,7 +513,7 @@ components:
                 title: List of Semantic Artefacts
                 items:
                   $ref: "#/components/schemas/modSemanticArtefact"
-              - $ref: "#/components/schemas/modSemanticArtfeactCatalog"
+              - $ref: "#/components/schemas/modSemanticArtefactCatalog"
               - type: array
                 title: List of Owl Classes
                 items:
@@ -483,7 +554,12 @@ components:
                   $ref: "#/components/schemas/skosScheme"
         application/rdf+xml:
           schema:
-            type: string
+            type: array
+            xml:
+              name: rdf
+              wrapped: true
+            items:
+              example: In progress
 
     error_message:
       description: The provided parameters are incorrect.
@@ -1194,7 +1270,7 @@ components:
               description: An ontology that is used in a project.      
               $ref: "#/components/schemas/foafProject"
 
-    modSemanticArtfeactCatalog:
+    modSemanticArtefactCatalog:
       title: Semantic Artfeact Catalog
       description: A dedicated web-based system that fosters the availability, discoverability and long-term preservation and maintenance of semantic artefacts.
       allOf:
