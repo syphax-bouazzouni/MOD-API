@@ -7,4 +7,6 @@ Semantic artefacts (SA) (a broader term to include ontologies, terminologies, ta
 This Application Programming Interface (API) has been developed to promote interoperability of Semantic Artefact Catalogues in the European Open Science Cloud (EOSC) ecosystem and beyond. This API is formalised by means of a [Swagger template](mod_api/static/mod_api/openAPI.yaml) that shall guide for the implementation of Web REST API. The objects returned by an implementation of the API shall all be standard semantic objects either from a W3C Recommendation (RDFS, OWL and SKOS) or MOD.  We are expecting the MOD-API for Semantic Artefact Catalogues will enable interoperability and unified access to their content, enabling seamless querying and use by stakeholders independent of domain.
 
 
-For full details of the API please refer to the [user documentation](https://fair-impact.github.io/MOD-API/).
+For full details of the API please refer to the [FAIR-IMPACT D4.3 Deliverable](https://zenodo.org/records/12579779).
+
+The Swagger specification is available here: https://fair-impact.github.io/MOD-API .
