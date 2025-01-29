@@ -946,7 +946,7 @@ components:
           description: The nature or genre of the resource.
           $ref: "#/components/schemas/dcType"
 
-    dctAgent:
+    dctermsAgent:
       type: object
       properties:
         '@id':
@@ -956,7 +956,7 @@ components:
           description: A resource that acts or has the power to act.
           example: dcterms:Agent
 
-    dctFrequency:
+    dctermsFrequency:
       type: object
       properties:
         '@id':
@@ -966,7 +966,7 @@ components:
           description: A rate at which something recurs.
           example: dcterms:Frequency
 
-    dctIdentifier:
+    dctermsIdentifier:
       type: object
       properties:
         '@id':
@@ -976,7 +976,17 @@ components:
           description: An unambiguous reference to the resource within a given context.
           example: dcterms:identifier
 
-    dctIsReferencedBy:
+   dctermsIsPartOf:
+      type: object
+      properties:
+        '@id':
+          example: https://example.org/identifier/isPartOfID
+        '@type':
+          title: Is Part Of
+          description: A related resource in which the described resource is physically or logically included.
+          example: dcterms:isPartOf
+
+    dctermsIsReferencedBy:
       type: object
       properties:
         '@id':
@@ -986,7 +996,7 @@ components:
           description: A related resource that references, cites, or otherwise points to the described resource.
           example: dcterms:isReferencedBy
 
-    dctLicenseDocument:
+    dctermsLicenseDocument:
       type: object
       properties:
         '@id':
@@ -996,7 +1006,7 @@ components:
           description: A legal document giving official permission to do something with a resource.
           example: dcterms:LicenseDocument
 
-    dctLocation:
+    dctermsLocation:
       type: object
       properties:
         '@id':
@@ -1006,7 +1016,7 @@ components:
           description: A spatial region or named place.
           example: dcterms:Location
 
-    dctLinguisticSystem:
+    dctermsLinguisticSystem:
       type: object
       properties:
         '@id':
@@ -1016,7 +1026,7 @@ components:
           description: A system of signs, symbols, sounds, gestures, or rules used in communication.
           example: dcterms:LinguisticSystem
 
-    dctMediaType:
+    dctermsMediaType:
       type: object
       properties:
         '@id':
@@ -1026,7 +1036,7 @@ components:
           description: A file format or physical medium.
           example: dcterms:MediaType
 
-    dctMediaTypeOrExtent:
+    dctermsMediaTypeOrExtent:
       type: object
       properties:
         '@id':
@@ -1036,7 +1046,7 @@ components:
           description: A media type or extent.
           example: dcterms:MediaTypeOrExtent
 
-    dctPeriodOfTime:
+    dctermsPeriodOfTime:
       type: object
       properties:
         '@id':
@@ -1046,7 +1056,7 @@ components:
           description: An interval of time that is named or defined by its start and end dates.
           example: dcterms:PeriodOfTime
 
-    dctRelation:
+    dctermsRelation:
       type: object
       properties:
         '@id':
@@ -1056,7 +1066,7 @@ components:
           description: A related resource.
           example: dcterms:relation
 
-    dctRightsStatement:
+    dctermsRightsStatement:
       type: object
       properties:
         '@id':
@@ -1066,7 +1076,7 @@ components:
           description: A statement about the intellectual property rights (IPR) held in or over a resource, a legal document giving official permission to do something with a resource, or a statement about access rights.
           example: dcterms:RightsStatement
 
-    dctStandard:
+    dctermsStandard:
       type: object
       properties:
         '@id':
@@ -1198,6 +1208,10 @@ components:
         -  $ref: '#/components/schemas/dcatResource'
         - type: object
           properties:
+            dcterms:isPartOf:
+               title: is part of (view of)
+               description: Shall be used to identify a subset or a view of an ontology
+               $ref: "#/components/schemas/dctermsIisPartOf"
             mod:acronym:
               title: acronym
               description: Short acronym label, often used as an identifier within some ontology platforms such as BioPortal or OBO Foundry.
@@ -1283,6 +1297,12 @@ components:
               items:
                 example: mod:SemanticArtefactCatalog
         - $ref: '#/components/schemas/dcatCatalog'
+        - type: object
+          properties:
+            dcterms:isPartOf:
+               title: is part of (view of)
+               description: Shall be used to identify a subset or a view of an ontology
+               $ref: "#/components/schemas/dctermsIisPartOf"
 
     modSemanticArtefactCatalogRecord:
       title: Semantic Artefact Catalog Record
