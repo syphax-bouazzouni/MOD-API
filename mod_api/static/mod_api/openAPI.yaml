@@ -1221,11 +1221,11 @@ components:
             dcterms:hasVersion:
               title: has version
               description: A related ontology that is a version, edition, or adtapation of the described ontology.
-			  $ref: "#/components/schemas/dctermsHasVersion"
+              $ref: "#/components/schemas/dctermsHasVersion"
             dcterms:isPartOf:
               title: is part of (view of)
               description: Shall be used to identify a subset or a view of an ontology.
-			  $ref: "#/components/schemas/dctermsIsPartOf"
+              $ref: "#/components/schemas/dctermsIsPartOf"
             mod:acronym:
               title: acronym
               description: Short acronym label, often used as an identifier within some ontology platforms such as BioPortal or OBO Foundry.
