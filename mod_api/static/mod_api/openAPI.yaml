@@ -966,6 +966,16 @@ components:
           description: A rate at which something recurs.
           example: dcterms:Frequency
 
+    dctermsHasVersion:
+      type: object
+      properties:
+        '@id':
+          example: https://example.org/hasVersion/hasVersionID
+        '@type':
+          title: Has Version
+          description: A related resource that is a version, edition, or adaptation of the described resource.
+          example: dcterms:hasVersion
+
     dctermsIdentifier:
       type: object
       properties:
@@ -976,11 +986,11 @@ components:
           description: An unambiguous reference to the resource within a given context.
           example: dcterms:identifier
 
-   dctermsIsPartOf:
+    dctermsIsPartOf:
       type: object
       properties:
         '@id':
-          example: https://example.org/identifier/isPartOfID
+          example: https://example.org/isPartOf/isPartOfID
         '@type':
           title: Is Part Of
           description: A related resource in which the described resource is physically or logically included.
@@ -1208,10 +1218,14 @@ components:
         -  $ref: '#/components/schemas/dcatResource'
         - type: object
           properties:
+            dcterms:hasVersion:
+              title: has version
+              description: A related ontology that is a version, edition, or adtapation of the described ontology.
+			  $ref: "#/components/schemas/dctermsHasVersion"
             dcterms:isPartOf:
-               title: is part of (view of)
-               description: Shall be used to identify a subset or a view of an ontology
-               $ref: "#/components/schemas/dctermsIisPartOf"
+              title: is part of (view of)
+              description: Shall be used to identify a subset or a view of an ontology.
+			  $ref: "#/components/schemas/dctermsIsPartOf"
             mod:acronym:
               title: acronym
               description: Short acronym label, often used as an identifier within some ontology platforms such as BioPortal or OBO Foundry.
@@ -1283,6 +1297,22 @@ components:
               title: used in project
               description: An ontology that is used in a project.      
               $ref: "#/components/schemas/foafProject"
+            owl:deprecated:
+              title: deprecated
+              description: The annotation property that indicates that a given entity has been deprecated.   
+              $ref: "#/components/schemas/owlDeprecated"
+            owl:versionInfo:
+              title: version information
+              description: The version of the released ontology.   
+              $ref: "#/components/schemas/owlVersionInfo"
+            owl:versionIRI:
+              title: version IRI
+              description: The property that identifies the version IRI of an ontology.      
+              $ref: "#/components/schemas/owlVersionIRI"
+            void:propertyPartition:
+              title: property partition
+              description: A subset of a void:Dataset that contains only the triples of a certain rdf:Property.
+              $ref: "#/components/schemas/voidPropertyPartition"
 
     modSemanticArtefactCatalog:
       title: Semantic Artfeact Catalog
@@ -1302,7 +1332,15 @@ components:
             dcterms:isPartOf:
                title: is part of (view of)
                description: Shall be used to identify a subset or a view of an ontology
-               $ref: "#/components/schemas/dctermsIisPartOf"
+               $ref: "#/components/schemas/dctermsIsPartOf"
+            owl:deprecated:
+              title: deprecated
+              description: The annotation property that indicates that a given entity has been deprecated.   
+              $ref: "#/components/schemas/owlDeprecated"
+            owl:versionInfo:
+              title: version information
+              description: The version of the released ontology.   
+              $ref: "#/components/schemas/owlVersionInfo"
 
     modSemanticArtefactCatalogRecord:
       title: Semantic Artefact Catalog Record
@@ -1480,7 +1518,10 @@ components:
               title: engineering methodology
               description: A methodolgy following which an ontology is created.
               $ref: "#/components/schemas/modEngineeringMethodology"
-
+            owl:deprecated:
+              title: deprecated
+              description: The annotation property that indicates that a given entity has been deprecated.   
+              $ref: "#/components/schemas/owlDeprecated"
 
     modSemanticArtefactService:
       title: Semantic Artefact Service
@@ -1542,6 +1583,14 @@ components:
           description: An owl class.
           example: owl:Class
 
+    owlDeprecated:
+      type: object
+      properties:
+        '@type':
+          title: deprecated
+          description: The annotation property that indicates that a given entity has been deprecated.
+          example: owl:deprecated
+
     owlIndividual:
       type: object
       properties:
@@ -1549,6 +1598,22 @@ components:
           title: Individual
           description: An owl individual
           example: owl:Individual
+
+    owlVersionInfo:
+      type: object
+      properties:
+        '@type':
+          title: versionInfo
+          description: The annotation property that provides version information for an ontology or another OWL construct.
+          example: owl:versionInfo
+
+    owlVersionIRI:
+      type: object
+      properties:
+        '@type':
+          title: versionIRI
+          description: The property that identifies the version IRI of an ontology.
+          example: owl:versionIRI
 
     Pagination:
       type: object
@@ -1655,6 +1720,12 @@ components:
           example: Corky Crystal
         vcard:nickname:
           example: Corks
+
+    voidPropertyPartition:
+      type: object
+      properties:
+        '@type':
+          example: void:PropertyPartition
 
     xsdDecimal:
       type: object
