@@ -1107,7 +1107,7 @@ components:
           example: foaf:Document
 
     foafProject:
-      type: objectdcat:
+      type: object
       properties:
         '@id':
           example: https://example.org/Project/ProjectID
