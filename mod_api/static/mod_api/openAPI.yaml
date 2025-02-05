@@ -1650,7 +1650,7 @@ components:
               title: number of agents
               description: Total number of agents in a semantic artefact catalogue or number of agents related a given semantic artefact.
               $ref: "#/components/schemas/xsdNonNegativeInteger"
-            mod:numberOfEnsorments:
+            mod:numberOfEndorsements:
               title: number of endorsmements
               description: Number of endorsing organizations (maybe represented with mod:endorsedBy).
               $ref: "#/components/schemas/xsdNonNegativeInteger"
@@ -1935,6 +1935,10 @@ components:
               title: endorsed by
               description: An ontology endorsed by an agent.
               $ref: "#/components/schemas/dctermsAgent"
+            mod:fairScore:
+              title: FAIR assessment
+              description: A FAIRness assessment result produced by a known or identified FAIRness assessment method or tool. It can be either a simple number or a structured result document explaining the assessment.
+              $ref: "#/components/schemas/xsdNonNegativeInteger"
             mod:group:
               title: group
               description: A group of ontologies that the ontology is usually considered into.
@@ -1958,6 +1962,10 @@ components:
               title: number of agents
               description: Total number of agents in a semantic artefact catalogue or number of agents related a given semantic artefact.
               $ref: "#/components/schemas/xsdNonNegativeInteger"
+            mod:numberOfArtefacts:
+              title: number of semantic artefacts
+              description: Total number of semantic artefacts within a catalog.
+              $ref: "#/components/schemas/xsdNonNegativeInteger"
             mod:numberOfAxioms:
               title: number of axioms or triples
               description: The total number of axioms in an ontology.
@@ -1974,7 +1982,7 @@ components:
               title: number of deprecated objects
               description: The total number of  in an ontology.
               $ref: "#/components/schemas/xsdNonNegativeInteger"
-            mod:numberOfEnsorments:
+            mod:numberOfEndorsements:
               title: number of endorsmements
               description: Number of endorsing organizations (maybe represented with mod:endorsedBy).
               $ref: "#/components/schemas/xsdNonNegativeInteger"
@@ -2121,6 +2129,10 @@ components:
               title: creation date
               description: Date of creation of the resource.
               $ref: "#/components/schemas/rdfsLiteral"
+            mod:curatedBy:
+              title: curator
+              description: A curator who restructure the previously authored content and shape it to be appropriate for the intended representation (e.g. by normalizing the fields for being represented in a spreadsheet).
+              $ref: "#/components/schemas/modCuratedBy"
             mod:curatedOn:
               title: curation date
               $ref: "#/components/schemas/xsdDate"
