@@ -27,16 +27,24 @@ components:
         The response format.
         
         This will override any value of `Accept` in the request headers.
-        Possible values are `html`, `json`, `ttl` and `xml`. The default value is `html`.
+        Possible values are `html`, `jsonld`, `ttl` and `rdfxml`. 
+
+        - `html` (default) a web page that is the most appropriate to answer the call.
+
+        - `jsonld` a JSON-LD representation of the result.
+
+        - `ttl` a ttl representation of the result.
+
+        - `rdfxml` a RDF/XML representation of the result.
       name: format
       in: query
       schema:
         type: string
         enum: 
           - html
-          - json
+          - jsonld
           - ttl
-          - xml
+          - rdfxml
         default: html
 
     artefactID:
