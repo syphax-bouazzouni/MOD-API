@@ -605,18 +605,12 @@ components:
             dcterms:
               title: dcterms
               example: http://purl.org/dc/terms/
-            dctype:
-              title: dct
-              example: http://purl.org/dc/dcmitype/
             doap:
               title: doap
-              example: http://usefulinc.com/ns/doap/
+              example: http://usefulinc.com/ns/doap#
             foaf:
               title: foaf
               example: http://xmlns.com/foaf/0.1/
-            locn:
-              title: locn
-              example: http://www.w3.org/ns/locn#
             mod:
               title: mod
               example: https://w3id.org/mod#
@@ -644,9 +638,6 @@ components:
             skos:
               title: skos
               example: http://www.w3.org/2004/02/skos/core#
-            time:
-              title: time
-              example: http://www.w3.org/2006/time#
             vann:
               title: vann
               example: https://vocab.org/vann/
