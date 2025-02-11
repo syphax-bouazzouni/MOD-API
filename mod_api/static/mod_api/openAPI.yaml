@@ -2629,7 +2629,7 @@ components:
         '@type':
           title: ConceptScheme
           example: skos:ConceptScheme
-        dcterms:title:
+        skos:prefLabel:
           example: cars scheme
 
     vannChanges:
