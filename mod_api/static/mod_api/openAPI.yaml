@@ -518,7 +518,6 @@ components:
                 title: List of Semantic Artefacts
                 items:
                   $ref: "#/components/schemas/modSemanticArtefact"
-              - $ref: "#/components/schemas/modSemanticArtefactCatalog"
               - type: array
                 title: List of Owl Classes
                 items:
@@ -531,11 +530,6 @@ components:
                 title: List of Skos Concepts
                 items:
                   $ref: "#/components/schemas/skosConcept"
-              - $ref: "#/components/schemas/modSemanticArtefactDistribution"
-              - type: array
-                title: List of Semantic Artefact Distributions
-                items:
-                  $ref: "#/components/schemas/modSemanticArtefactDistribution"
               - type: array
                 title: List of Owl Individuals
                 items:
@@ -544,11 +538,6 @@ components:
                 title: List of RDFS Properties
                 items:
                   $ref: "#/components/schemas/rdfsProperty"
-              - $ref: "#/components/schemas/modSemanticArtefactCatalogRecord"
-              - type: array
-                title: List of Semantic Artefact Catalog Records
-                items:
-                  $ref: "#/components/schemas/modSemanticArtefactCatalogRecord"
               - type: array
                 title: List of RDFS Resources
                 items:
@@ -557,6 +546,79 @@ components:
                 title: List of Skos Schemes
                 items:
                   $ref: "#/components/schemas/skosScheme"
+        application/rdf+xml:
+          schema:
+            type: array
+            xml:
+              name: rdf
+              wrapped: true
+            items:
+              example: In progress
+
+    searchResultContent:
+      description: "OK"
+      content:
+        text/html:
+          schema:
+            $ref: "#/components/schemas/html"
+        text/turtle:
+          schema:
+            type: string
+        application/ld+json:
+          schema:
+            oneOf:
+              - type: array
+                title: List of Owl Classes
+                items:
+                  $ref: "#/components/schemas/owlClass"
+              - type: array
+                title: List of Skos Collections
+                items:
+                  $ref: "#/components/schemas/skosCollection"
+              - type: array
+                title: List of Skos Concepts
+                items:
+                  $ref: "#/components/schemas/skosConcept"
+              - type: array
+                title: List of Owl Individuals
+                items:
+                  $ref: "#/components/schemas/owlNamedIndividual"
+              - type: array
+                title: List of RDFS Properties
+                items:
+                  $ref: "#/components/schemas/rdfsProperty"
+              - type: array
+                title: List of RDFS Resources
+                items:
+                  $ref: "#/components/schemas/rdfsResource"
+              - type: array
+                title: List of Skos Schemes
+                items:
+                  $ref: "#/components/schemas/skosScheme"
+        application/rdf+xml:
+          schema:
+            type: array
+            xml:
+              name: rdf
+              wrapped: true
+            items:
+              example: In progress
+
+    searchResultMetadata:
+      description: "OK"
+      content:
+        text/html:
+          schema:
+            $ref: "#/components/schemas/html"
+        text/turtle:
+          schema:
+            type: string
+        application/ld+json:
+          schema:
+              type: array
+              title: List of Semantic Artefacts
+              items:
+                  $ref: "#/components/schemas/modSemanticArtefact"
         application/rdf+xml:
           schema:
             type: array
@@ -3161,7 +3223,7 @@ paths:
       operationId: searchContent
       responses:
         "200":
-          $ref: "#/components/responses/searchResult"
+          $ref: "#/components/responses/searchResultContent"
         "404":
           $ref: "#/components/responses/error_message"
 
@@ -3180,6 +3242,6 @@ paths:
       operationId: searchMetadata
       responses:
         "200":
-          $ref: "#/components/responses/searchResult"
+          $ref: "#/components/responses/searchResultMetadata"
         "404":
           $ref: "#/components/responses/error_message"
