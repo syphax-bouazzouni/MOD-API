@@ -340,7 +340,7 @@ components:
             type: array
             title: List of Owl Individuals
             items:
-              $ref: "#/components/schemas/owlIndividual"
+              $ref: "#/components/schemas/owlNamedIndividual"
         application/rdf+xml:
           schema:
             type: array
@@ -539,7 +539,7 @@ components:
               - type: array
                 title: List of Owl Individuals
                 items:
-                  $ref: "#/components/schemas/owlIndividual"
+                  $ref: "#/components/schemas/owlNamedIndividual"
               - type: array
                 title: List of RDFS Properties
                 items:
@@ -2424,13 +2424,13 @@ components:
           description: An owl class.
           example: owl:Class
 
-    owlIndividual:
+    owlNamedIndividual:
       type: object
       properties:
         '@type':
-          title: Individual
-          description: An owl individual
-          example: owl:Individual
+          title: NamedIndividual
+          description: The class of named individuals.
+          example: owl:NamedIndividual
 
     owlOntology:
       type: object
@@ -3048,7 +3048,7 @@ paths:
         "404":
           $ref: "#/components/responses/error_message"
 
-  # Get a list of all the instances (owl individuals) within an artefact
+  # Get a list of all the instances (owl named individual) within an artefact
   /artefacts/{artefactID}/resources/individuals:
     parameters:
       - $ref: "#/components/parameters/artefactID"
@@ -3059,8 +3059,8 @@ paths:
     get:
       tags:
         - Artefact
-      summary: Get a list of all the instances (owl individuals) within an artefact.
-      description: Retrieves a list of all the instances (owl individuals) within an artefact.
+      summary: Get a list of all the instances (owl named individual) within an artefact.
+      description: Retrieves a list of all the instances (owl named individual) within an artefact.
       operationId: getArtefactIndividuals
       responses:
         "200":
