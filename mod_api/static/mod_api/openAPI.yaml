@@ -158,13 +158,10 @@ components:
               - type: object
                 title: Context
                 $ref: "#/components/schemas/Context"
-              - modSemanticArtefact:
-                type: object
-                properties:
-                  mod:SemanticArtefact:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/modSemanticArtefact"
+              - type: array
+                title: List of Semantic Artefact
+                items:
+                  $ref: "#/components/schemas/modSemanticArtefact"
         application/rdf+xml:
           schema:
             type: array
