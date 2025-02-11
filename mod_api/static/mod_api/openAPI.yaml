@@ -29,9 +29,9 @@ components:
         This will override any value of `Accept` in the request headers.
         Possible values are `html`, `jsonld`, `ttl` and `rdfxml`. 
 
-        - `html` (default) a web page that is the most appropriate to answer the call.
+        - `html` a web page that is the most appropriate to answer the call.
 
-        - `jsonld` a JSON-LD representation of the result.
+        - `jsonld` (default) a JSON-LD representation of the result.
 
         - `ttl` a ttl representation of the result.
 
@@ -45,7 +45,7 @@ components:
           - jsonld
           - ttl
           - rdfxml
-        default: html
+        default: jsonld
 
     artefactID:
       description: The ID of the artefact.
