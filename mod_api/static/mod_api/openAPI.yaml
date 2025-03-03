@@ -115,12 +115,6 @@ components:
     artefact:
       description: "OK"
       content:
-        text/html:
-          schema:
-            $ref: "#/components/schemas/html"
-        text/turtle:
-          schema:
-            $ref: "./sa_ttl.yaml"
         application/ld+json:
           schema:
             allOf:
@@ -128,6 +122,12 @@ components:
                 title: Context
                 $ref: "#/components/schemas/Context"
               - $ref: "#/components/schemas/modSemanticArtefact"
+        text/html:
+          schema:
+            $ref: "#/components/schemas/html"
+        text/turtle:
+          schema:
+            $ref: "./sa_ttl.yaml"
         application/rdf+xml:
           schema:
             type: array
@@ -141,14 +141,6 @@ components:
     artefacts:
       description: "OK"
       content:
-        text/html:
-          schema:
-            $ref: "#/components/schemas/html"
-        text/turtle:
-          schema:
-            type: array
-            items:
-              $ref: "./sa_ttl.yaml"
         application/ld+json:
           schema:
             allOf:
@@ -162,6 +154,14 @@ components:
                 title: List of Semantic Artefact
                 items:
                   $ref: "#/components/schemas/modSemanticArtefact"
+        text/html:
+          schema:
+            $ref: "#/components/schemas/html"
+        text/turtle:
+          schema:
+            type: array
+            items:
+              $ref: "./sa_ttl.yaml"
         application/rdf+xml:
           schema:
             type: array
@@ -175,12 +175,6 @@ components:
     catalog:
       description: "OK"
       content:
-        text/html:
-          schema:
-            $ref: "#/components/schemas/html"
-        text/turtle:
-          schema:
-            type: string
         application/ld+json:
           schema:
             allOf:
@@ -188,6 +182,12 @@ components:
                 title: Context
                 $ref: "#/components/schemas/Context"
               - $ref: "#/components/schemas/modSemanticArtefactCatalog"
+        text/html:
+          schema:
+            $ref: "#/components/schemas/html"
+        text/turtle:
+          schema:
+            type: string
         application/rdf+xml:
           schema:
             type: array
@@ -200,18 +200,18 @@ components:
     classes:
       description: "OK"
       content:
-        text/html:
-          schema:
-            $ref: "#/components/schemas/html"
-        text/turtle:
-          schema:
-            type: string
         application/ld+json:
           schema:
             type: array
             title: List of Owl Classes
             items:
               $ref: "#/components/schemas/owlClass"
+        text/html:
+          schema:
+            $ref: "#/components/schemas/html"
+        text/turtle:
+          schema:
+            type: string
         application/rdf+xml:
           schema:
             type: array
@@ -224,18 +224,18 @@ components:
     collections:
       description: "OK"
       content:
-        text/html:
-          schema:
-            $ref: "#/components/schemas/html"
-        text/turtle:
-          schema:
-            type: string
         application/ld+json:
           schema:
             type: array
             title: List of Skos Collections
             items:
               $ref: "#/components/schemas/skosCollection"
+        text/html:
+          schema:
+            $ref: "#/components/schemas/html"
+        text/turtle:
+          schema:
+            type: string
         application/rdf+xml:
           schema:
             type: array
@@ -248,18 +248,18 @@ components:
     concepts:
       description: "OK"
       content:
-        text/html:
-          schema:
-            $ref: "#/components/schemas/html"
-        text/turtle:
-          schema:
-            type: string
         application/ld+json:
           schema:
             type: array
             title: List of Skos Concepts
             items:
               $ref: "#/components/schemas/skosConcept"
+        text/html:
+          schema:
+            $ref: "#/components/schemas/html"
+        text/turtle:
+          schema:
+            type: string
         application/rdf+xml:
           schema:
             type: array
@@ -272,12 +272,6 @@ components:
     distribution:
       description: "OK"
       content:
-        text/html:
-          schema:
-            $ref: "#/components/schemas/html"
-        text/turtle:
-          schema:
-            type: string
         application/ld+json:
           schema:
             allOf:
@@ -285,6 +279,12 @@ components:
                 title: Context
                 $ref: "#/components/schemas/Context"
               - $ref: "#/components/schemas/modSemanticArtefactDistribution"
+        text/html:
+          schema:
+            $ref: "#/components/schemas/html"
+        text/turtle:
+          schema:
+            type: string
         application/rdf+xml:
           schema:
             type: array
@@ -297,16 +297,6 @@ components:
     distributions:
       description: "OK"
       content:
-        text/html:
-          schema:
-            type: array
-            items:
-              $ref: "#/components/schemas/html"
-        text/turtle:
-          schema:
-            type: array
-            items:
-              type: string
         application/ld+json:
           schema:
             allOf:
@@ -317,6 +307,16 @@ components:
                 title: List of Semantic Artefact Distributions
                 items:
                   $ref: "#/components/schemas/modSemanticArtefactDistribution"
+        text/html:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/html"
+        text/turtle:
+          schema:
+            type: array
+            items:
+              type: string
         application/rdf+xml:
           schema:
             type: array
@@ -329,18 +329,18 @@ components:
     individuals:
       description: "OK"
       content:
-        text/html:
-          schema:
-            $ref: "#/components/schemas/html"
-        text/turtle:
-          schema:
-            type: string
         application/ld+json:
           schema:
             type: array
             title: List of Owl Individuals
             items:
               $ref: "#/components/schemas/owlNamedIndividual"
+        text/html:
+          schema:
+            $ref: "#/components/schemas/html"
+        text/turtle:
+          schema:
+            type: string
         application/rdf+xml:
           schema:
             type: array
@@ -353,18 +353,18 @@ components:
     properties:
       description: "OK"
       content:
-        text/html:
-          schema:
-            $ref: "#/components/schemas/html"
-        text/turtle:
-          schema:
-            type: string
         application/ld+json:
           schema:
             type: array
             title: List of RDFS Properties
             items:
               $ref: "#/components/schemas/rdfsProperty"
+        text/html:
+          schema:
+            $ref: "#/components/schemas/html"
+        text/turtle:
+          schema:
+            type: string
         application/rdf+xml:
           schema:
             type: array
@@ -377,12 +377,6 @@ components:
     record:
       description: "OK"
       content:
-        text/html:
-          schema:
-            $ref: "#/components/schemas/html"
-        text/turtle:
-          schema:
-            type: string
         application/ld+json:
           schema:
             allOf:
@@ -390,6 +384,12 @@ components:
                 title: Context
                 $ref: "#/components/schemas/Context"
               - $ref: "#/components/schemas/modSemanticArtefactCatalogRecord"
+        text/html:
+          schema:
+            $ref: "#/components/schemas/html"
+        text/turtle:
+          schema:
+            type: string
         application/rdf+xml:
           schema:
             type: array
@@ -402,16 +402,6 @@ components:
     records:
       description: "OK"
       content:
-        text/html:
-          schema:
-            type: array
-            items:
-              $ref: "#/components/schemas/html"
-        text/turtle:
-          schema:
-            type: array
-            items:
-              type: string
         application/ld+json:
           schema:
             allOf:
@@ -422,6 +412,16 @@ components:
                 title: List of Semantic Artefact Catalog Records
                 items:
                   $ref: "#/components/schemas/modSemanticArtefactCatalogRecord"
+        text/html:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/html"
+        text/turtle:
+          schema:
+            type: array
+            items:
+              type: string
         application/rdf+xml:
           schema:
             type: array
@@ -434,17 +434,17 @@ components:
     resources:
       description: "OK"
       content:
+        application/ld+json:
+          schema:
+            type: object
+            title: RDFS Resource
+            $ref: "#/components/schemas/rdfsResource"
         text/html:
           schema:
             $ref: "#/components/schemas/html"
         text/turtle:
           schema:
             type: string
-        application/ld+json:
-          schema:
-            type: object
-            title: RDFS Resource
-            $ref: "#/components/schemas/rdfsResource"
         application/rdf+xml:
           schema:
             type: array
@@ -457,18 +457,18 @@ components:
     resource:
       description: "OK"
       content:
-        text/html:
-          schema:
-            $ref: "#/components/schemas/html"
-        text/turtle:
-          schema:
-            type: string
         application/ld+json:
           schema:
             type: array
             title: List of RDFS Resources
             items:
               $ref: "#/components/schemas/rdfsResource"
+        text/html:
+          schema:
+            $ref: "#/components/schemas/html"
+        text/turtle:
+          schema:
+            type: string
         application/rdf+xml:
           schema:
             type: array
@@ -481,18 +481,18 @@ components:
     schemes:
       description: "OK"
       content:
-        text/html:
-          schema:
-            $ref: "#/components/schemas/html"
-        text/turtle:
-          schema:
-            type: string
         application/ld+json:
           schema:
             type: array
             title: List of Skos Concept Schemes
             items:
               $ref: "#/components/schemas/skosScheme"
+        text/html:
+          schema:
+            $ref: "#/components/schemas/html"
+        text/turtle:
+          schema:
+            type: string
         application/rdf+xml:
           schema:
             type: array
@@ -505,12 +505,6 @@ components:
     searchResult:
       description: "OK"
       content:
-        text/html:
-          schema:
-            $ref: "#/components/schemas/html"
-        text/turtle:
-          schema:
-            type: string
         application/ld+json:
           schema:
             oneOf:
@@ -546,6 +540,12 @@ components:
                 title: List of Skos Concept Schemes
                 items:
                   $ref: "#/components/schemas/skosScheme"
+        text/html:
+          schema:
+            $ref: "#/components/schemas/html"
+        text/turtle:
+          schema:
+            type: string
         application/rdf+xml:
           schema:
             type: array
@@ -558,12 +558,6 @@ components:
     searchResultContent:
       description: "OK"
       content:
-        text/html:
-          schema:
-            $ref: "#/components/schemas/html"
-        text/turtle:
-          schema:
-            type: string
         application/ld+json:
           schema:
             oneOf:
@@ -595,6 +589,12 @@ components:
                 title: List of Skos Concept Schemes
                 items:
                   $ref: "#/components/schemas/skosScheme"
+        text/html:
+          schema:
+            $ref: "#/components/schemas/html"
+        text/turtle:
+          schema:
+            type: string
         application/rdf+xml:
           schema:
             type: array
@@ -607,18 +607,18 @@ components:
     searchResultMetadata:
       description: "OK"
       content:
-        text/html:
-          schema:
-            $ref: "#/components/schemas/html"
-        text/turtle:
-          schema:
-            type: string
         application/ld+json:
           schema:
               type: array
               title: List of Semantic Artefacts
               items:
                   $ref: "#/components/schemas/modSemanticArtefact"
+        text/html:
+          schema:
+            $ref: "#/components/schemas/html"
+        text/turtle:
+          schema:
+            type: string
         application/rdf+xml:
           schema:
             type: array
