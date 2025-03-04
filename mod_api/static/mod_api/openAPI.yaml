@@ -962,7 +962,7 @@ components:
         dcterms:description:
           title: description
           description: A free-text account of the item.
-          $ref: "#/components/schemas/dctermsIdentifier"
+          $ref: "#/components/schemas/rdfsLiteral"
         odrl:hasPolicy:
           title: has policy
           description: An ODRL conformant policy expressing the rights associated with the resource.
@@ -1026,7 +1026,7 @@ components:
         dcterms:title:
           title: title
           description: A name given to the item.
-          $ref: "#/components/schemas/dctermsIdentifier"
+          $ref: "#/components/schemas/rdfsLiteral"
         dcterms:type:
           title: type/genre
           description: The nature or genre of the resource.
