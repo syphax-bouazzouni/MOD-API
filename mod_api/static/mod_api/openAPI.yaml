@@ -3151,7 +3151,7 @@ paths:
           $ref: "#/components/responses/error_message"
 
   # Get a list of all the skos:Collection within an artefact
-  /artefacts/{artefactID}/resources/collection:
+  /artefacts/{artefactID}/resources/collections:
     parameters:
       - $ref: "#/components/parameters/artefactID"
       - $ref: "#/components/parameters/format_param"
