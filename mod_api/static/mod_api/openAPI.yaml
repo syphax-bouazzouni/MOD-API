@@ -943,7 +943,7 @@ components:
           description: Most recent date on which the item was changed, updated or modified.
         dcterms:publisher:
           title: publisher
-          descrip#tion: The entity responsible for making the item available.
+          description: The entity responsible for making the item available.
         prov:qualifiedAttribution:
           title: qualified attribution
           description: Link to an Agent having some form of responsibility for the resource
@@ -2193,24 +2193,22 @@ paths:
           $ref: "#/components/responses/error_message"
 
 
-  # Information about a semantic artefact's resources for the latest distribution
-  /artefacts/{artefactID}/distributions/latest/resources:
+  # Information about a semantic artefact's latest distribution
+  /artefacts/{artefactID}/distributions/latest:
     parameters:
       - $ref: "#/components/parameters/artefactID"
       - $ref: "#/components/parameters/format_param"
-      - $ref: "#/components/parameters/page"
-      - $ref: "#/components/parameters/pagesize"
       - $ref: "#/components/parameters/display"
 
     get:
       tags:
         - Artefact
-      summary: Get information about a semantic artefact's resources for the latest distribution.
-      description: Retrieves a collection of a semantic artefact's resources for the latest distribution.
-      operationId: getArtefactDistributionsLatestResources
+      summary: Get information about a semantic artefact's latest distribution.
+      description: Get the 'latest' distribution for a given semantic artefact; latest being understood as the one that is currently served by the '/resources' calls
+      operationId: getArtefactDistributionsLatest
       responses:
         "200":
-          $ref: "#/components/responses/resources"
+          $ref: "#/components/responses/resource"
         "404":
           $ref: "#/components/responses/error_message"
 
