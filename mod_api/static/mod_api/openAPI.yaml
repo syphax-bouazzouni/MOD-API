@@ -2208,7 +2208,7 @@ paths:
       operationId: getArtefactDistributionsLatest
       responses:
         "200":
-          $ref: "#/components/responses/resource"
+          $ref: "#/components/responses/distribution"
         "404":
           $ref: "#/components/responses/error_message"
 
