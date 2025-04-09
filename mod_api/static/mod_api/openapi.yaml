@@ -117,13 +117,11 @@ components:
       content:
         application/ld+json:
           schema:
-            type: object
-            title: Semantic Artefact
-            properties:
-              '@context':
+            allOf:
+              - type: object
+                title: Context
                 $ref: "#/components/schemas/Context"
-              mod:SemanticArtefact:
-                $ref: "#/components/schemas/modSemanticArtefact"
+              - $ref: "#/components/schemas/modSemanticArtefact"
         text/html:
           schema:
             $ref: "#/components/schemas/html"
@@ -187,11 +185,11 @@ components:
           schema:
             type: object
             title: Semantic Artefact Catalog
-            properties:
-              '@context':
+            allOf:
+              - type: object
+                title: Context
                 $ref: "#/components/schemas/Context"
-              mod:SemanticArtefactCatalog:
-                $ref: "#/components/schemas/modSemanticArtefactCatalog"
+              - $ref: "#/components/schemas/modSemanticArtefactCatalog"
         text/html:
           schema:
             $ref: "#/components/schemas/html"
@@ -325,11 +323,11 @@ components:
           schema:
             type: object
             title: Semantic Artefact Distribution
-            properties:
-              '@context':
+            allOf:
+              - type: object
+                title: Context
                 $ref: "#/components/schemas/Context"
-              mod:SemanticArtefactDistribution:
-                $ref: "#/components/schemas/modSemanticArtefactDistribution"
+              - $ref: "#/components/schemas/modSemanticArtefactDistribution"
         text/html:
           schema:
             $ref: "#/components/schemas/html"
@@ -466,11 +464,11 @@ components:
           schema:
             type: object
             title: Semantic Artefact Catalog Record
-            properties:
-              '@context':
+            allOf:
+              - type: object
+                title: Context
                 $ref: "#/components/schemas/Context"
-              mod:SemanticArtefactCatalogRecord:
-                $ref: "#/components/schemas/modSemanticArtefactCatalogRecord"
+              - $ref: "#/components/schemas/modSemanticArtefactCatalogRecord"
         text/html:
           schema:
             $ref: "#/components/schemas/html"
@@ -768,10 +766,10 @@ components:
               totalItems:
               itemsPerPage:
               member:
-                  type: array
-                  title: List of Semantic Artefacts
-                  items:
-                    $ref: "#/components/schemas/modSemanticArtefact"
+                type: array
+                title: List of Semantic Artefacts
+                items:
+                  $ref: "#/components/schemas/modSemanticArtefact"
               view:
                 $ref: "#/components/schemas/view"
         text/html:
@@ -810,69 +808,72 @@ components:
     Context:
       type: object
       properties:
-        adms:
-          title: adms
-          example: http://www.w3.org/ns/adms#
-        cc:
-          title: cc
-          example: http://creativecommons.org/ns#
-        dc:
-          title: dc
-          example: http://purl.org/dc/elements/1.1/
-        dcat:
-          title: dcat
-          example: http://www.w3.org/ns/dcat#
-        dcterms:
-          title: dcterms
-          example: http://purl.org/dc/terms/
-        doap:
-          title: doap
-          example: http://usefulinc.com/ns/doap#
-        foaf:
-          title: foaf
-          example: http://xmlns.com/foaf/0.1/
-        mod:
-          title: mod
-          example: https://w3id.org/mod#
-        odrl:
-          title: odrl
-          example: http://www.w3.org/ns/odrl/2/
-        owl:
-          title: owl
-          example: http://www.w3.org/2002/07/owl#
-        pav:
-          title: pav
-          example: http://purl.org/pav/
-        prov:
-          title: prov
-          example: http://www.w3.org/ns/prov#
-        rdf:
-          title: rdf
-          example: http://www.w3.org/1999/02/22-rdf-syntax-ns#
-        rdfs:
-          title: rdfs
-          example: http://www.w3.org/2000/01/rdf-schema#
-        schema:
-          title: schema
-          example: https://schema.org/
-        sd:
-          title: sd
-          example: http://www.w3.org/ns/sparql-service-description#
-        skos:
-          title: skos
-          example: http://www.w3.org/2004/02/skos/core#
-        vann:
-          title: vann
-          example: https://vocab.org/vann/
-        vcard:
-          title: vcard
-          example: http://www.w3.org/2006/vcard/ns#
-        void:
-          title: void
-          example: http://rdfs.org/ns/void#
-        xsd:
-          title: xsd
-          example: http://www.w3.org/2001/XMLSchema#
+        '@context':
+          type: object
+          properties:
+            adms:
+              title: adms
+              example: http://www.w3.org/ns/adms#
+            cc:
+              title: cc
+              example: http://creativecommons.org/ns#
+            dc:
+              title: dc
+              example: http://purl.org/dc/elements/1.1/
+            dcat:
+              title: dcat
+              example: http://www.w3.org/ns/dcat#
+            dcterms:
+              title: dcterms
+              example: http://purl.org/dc/terms/
+            doap:
+              title: doap
+              example: http://usefulinc.com/ns/doap#
+            foaf:
+              title: foaf
+              example: http://xmlns.com/foaf/0.1/
+            mod:
+              title: mod
+              example: https://w3id.org/mod#
+            odrl:
+              title: odrl
+              example: http://www.w3.org/ns/odrl/2/
+            owl:
+              title: owl
+              example: http://www.w3.org/2002/07/owl#
+            pav:
+              title: pav
+              example: http://purl.org/pav/
+            prov:
+              title: prov
+              example: http://www.w3.org/ns/prov#
+            rdf:
+              title: rdf
+              example: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+            rdfs:
+              title: rdfs
+              example: http://www.w3.org/2000/01/rdf-schema#
+            schema:
+              title: schema
+              example: https://schema.org/
+            sd:
+              title: sd
+              example: http://www.w3.org/ns/sparql-service-description#
+            skos:
+              title: skos
+              example: http://www.w3.org/2004/02/skos/core#
+            vann:
+              title: vann
+              example: https://vocab.org/vann/
+            vcard:
+              title: vcard
+              example: http://www.w3.org/2006/vcard/ns#
+            void:
+              title: void
+              example: http://rdfs.org/ns/void#
+            xsd:
+              title: xsd
+              example: http://www.w3.org/2001/XMLSchema#
 
     CollectionContext:
       allOf:
@@ -882,7 +883,7 @@ components:
             hydra:
               title: hydra
               example: http://www.w3.org/ns/hydra/core#
-            Collection: 
+            Collection:
               example: "hydra:Collection"
             member:
               type: object
@@ -912,15 +913,15 @@ components:
         '@id':
           example: https://example.org/items?page=3
         '@type':
-         example: hydra:PartialCollectionView
+          example: hydra:PartialCollectionView
         firstPage:
-         example: https://example.org/items?page=1
+          example: https://example.org/items?page=1
         previousPage:
-         example: https://example.org/items?page=2
+          example: https://example.org/items?page=2
         nextPage:
-         example: https://example.org/items?page=4
+          example: https://example.org/items?page=4
         lastPage:
-         example: https://example.org/items?page=42
+          example: https://example.org/items?page=42
     modSemanticArtefact:
       title: Semantic Artefact
       description: Semantic Artefact is defined here as a machine-actionable and -readable formalisation of a conceptualisation enabling sharing and reuse by humans and machines. These artefacts may have a broad range of formalisation, from loose set of terms, taxonomies, thesauri to higher-order logics, and include the concepts/terms/classes constituting these. Moreover, semantic artefacts are serialised using a variety of digital representation formats, e.g., RDF Turtle, OWL-RDF, XML, JSON-LD.
