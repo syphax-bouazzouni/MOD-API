@@ -3,7 +3,7 @@ servers:
   - url: https://localhost
 
 info:
-  description: This Application Programming Interface (API) has been developed to promote interoperability of Semantic Artefact Catalogues in the European Open Science Cloud (EOSC) ecosystem and beyond. 
+  description: This Application Programming Interface (API) has been developed to promote interoperability of Semantic Artefact Catalogues in the European Open Science Cloud (EOSC) ecosystem and beyond.
   title: Metadata for Ontology Description and Publication Ontology Application Program Interface
   version: 0.0.1
 
@@ -23,7 +23,7 @@ components:
 
   parameters:
     format_param:
-      description: | 
+      description: |
         The response format.
         
         This will override any value of `Accept` in the request headers.
@@ -40,7 +40,7 @@ components:
       in: query
       schema:
         type: string
-        enum: 
+        enum:
           - html
           - jsonld
           - ttl
@@ -609,10 +609,10 @@ components:
       content:
         application/ld+json:
           schema:
-              type: array
-              title: List of Semantic Artefacts
-              items:
-                  $ref: "#/components/schemas/modSemanticArtefact"
+            type: array
+            title: List of Semantic Artefacts
+            items:
+              $ref: "#/components/schemas/modSemanticArtefact"
         text/html:
           schema:
             $ref: "#/components/schemas/html"
@@ -713,259 +713,6 @@ components:
               title: xsd
               example: http://www.w3.org/2001/XMLSchema#
 
-    admsAsset:
-      type: object
-      properties:
-        '@type':
-          title: Asset
-          description: An Asset is an abstract entity that reflects the intellectual content of the asset and represents those characteristics of the asset that are independent of its physical embodiment. This abstract entity combines the FRBR entities work (a distinct intellectual or artistic creation) and expression (the intellectual or artistic realization of a work). Assets can be versioned. Every time the intellectual content of an asset changes, the result is considered to be a new asset that can be linked to previous and next versions of the Asset. The physical embodiment of an Asset is called an Asset Distribution. A particular Asset may have zero or more Asset Distributions.
-          example: adms:Asset
-
-    # see https://www.w3.org/TR/vocab-dcat-2/#Class:Catalog
-    dcatCatalog:
-      title: Catalog
-      description: A curated collection of metadata about resources (e.g., datasets and data services in the context of a data catalog)
-      allOf:
-        - $ref: '#/components/schemas/dcatDataset'
-        - type: object
-          properties:
-            dcat:catalog:
-              title: catalog
-              description: A catalog whose contents are of interest in the context of this catalog.
-            dcat:dataset:
-              title: dataset
-              description: A collection of data that is listed in the catalog.
-            dcterms:hasPart:
-              title: has part
-              description: An item that is listed in the catalog.
-            foaf:homepage:
-              title: homepage
-              description: A homepage of the catalog (a public Web document usually available in HTML).
-            dcat:record:
-              title: catalog record
-              description: A record describing the registration of a single dataset or data service that is part of the catalog.
-              type: array
-            dcat:resource:
-              title: resource
-              description: A resource that is listed in the catalog.
-            dcat:service:
-              title: service
-              description: A site or end-point that is listed in the catalog.
-            dcat:themeTaxonomy:
-              title: themes
-              description: A knowledge organization system (KOS) used to classify catalog's datasets and services.
-
-    # see https://www.w3.org/TR/vocab-dcat-2/#Class:Catalog_Record
-    dcatCatalogRecord:
-      title: Catalog Record
-      description: A record in a data catalog, describing the registration of a single dataset or data service.
-      allOf:
-        - type: object
-          properties:
-            dcterms:conformsTo:
-              title: conforms to
-              description: An established standard to which the described resource conforms.
-            dcterms:description:
-              title: Description
-              description: A free-text account of the record.
-            dcterms:issued:
-              title: listing date
-              description: The date of listing (i.e. formal recording) of the corresponding dataset or service in the catalog.
-            dcterms:modified:
-              title: update/modification date
-              description: Most recent date on which the catalog entry was changed, updated or modified.
-            dcterms:title:
-              title: Title
-              description: A name given to the resource.
-            foaf:primaryTopic:
-              title: primary topic
-              description: The Resource (dataset or service) described in the record.
-
-    # see https://www.w3.org/TR/vocab-dcat-2/#Class:Data_Service
-    dcatDataService:
-      title: Data service
-      description: A collection of operations that provides access to one or more datasets or data processing functions.
-      allOf:
-        - $ref: '#/components/schemas/dcatResource'
-        - type: object
-          properties:
-            dcat:endpointDescription:
-              title: endpoint description
-              description: A description of the services available via the end-points, including their operations, parameters etc.
-            dcat:endpointURL:
-              title: endpoint URL
-              description: The root location or primary endpoint of the service (a web-resolvable IRI).
-            dcat:servesDataset:
-              tile: serves dataset
-              description: A collection of data that this data service can distribute.
-
-    # see https://www.w3.org/TR/vocab-dcat-2/#Class:Dataset
-    dcatDataset:
-      title: Dataset
-      description: A collection of data, published or curated by a single agent, and available for access or download in one or more representations.
-      allOf:
-        - $ref: '#/components/schemas/dcatResource'
-        - type: object
-          properties:
-            dcterms:accrualPeriodicity:
-              title: frequency
-              description: The frequency at which dataset is published.
-            dcat:distribution:
-              title: dataset distribution
-              description: An available distribution of the dataset.
-            dcterms:spatial:
-              title: spatial/geographical coverage
-              description: The geographical area covered by the dataset.
-            dcat:spatialResolutionInMeters:
-              title: spatial resolution
-              description: Minimum spatial separation resolvable in a dataset, measured in meters.
-            dcterms:temporal:
-              title: temporal coverage
-              description: The temporal period that the dataset covers.
-            dcat:temporalResolution:
-              title: temporal resolution
-              description: Minimum time period resolvable in the dataset.
-            prov:wasGeneratedBy:
-              title: was generated by
-              description: An activity that generated, or provides the business context for, the creation of the dataset.
-
-    # see https://www.w3.org/TR/vocab-dcat-2/#Class:Distribution
-    dcatDistribution:
-      title: Distribution
-      description: A specific representation of a dataset. A dataset might be available in multiple serializations that may differ in various ways, including natural language, media-type or format, schematic organization, temporal and spatial resolution, level of detail or profiles (which might specify any or all of the above).
-      type: object
-      properties:
-        dcat:accessService:
-          title: access service
-          description: A data service that gives access to the distribution of the dataset
-        dcterms:accessRights:
-          title: access rights
-          description: A rights statement that concerns how the distribution is accessed.
-        dcat:accessURL:
-          title: access URL
-          description: A URL of the resource that gives access to a distribution of the dataset. E.g. landing page, feed, SPARQL endpoint.
-        dcat:byteSize:
-          title: byte size
-          description: The size of a distribution in bytes.
-        dcat:compressFormat:
-          title: compression format
-          description: The compression format of the distribution in which the data is contained in a compressed form, e.g. to reduce the size of the downloadable file.
-        dcterms:conformsTo:
-          title: conforms to
-          description: An established standard to which the distribution conforms.
-        dcterms:description:
-          title: description
-          description: A free-text account of the distribution.
-        dcat:downloadURL:
-          title: download URL
-          description: The URL of the downloadable file in a given format. E.g. CSV file or RDF file. The format is indicated by the distribution's dcterms:format and/or dcat:mediaType
-        dcterms:format:
-          title: format
-          description: The file format of the distribution.
-        odrl:hasPolicy:
-          title: has policy
-          description: An ODRL conformant policy expressing the rights associated with the distribution.
-        dcterms:issued:
-          title: release date
-          description: Date of formal issuance (e.g., publication) of the distribution.
-        dcterms:license:
-          title: license
-          description: A legal document under which the distribution is made available.
-        dcat:mediaType:
-          title: media type
-          description: The media type of the distribution as defined by IANA.
-        dcterms:modified:
-          title: update/modification date
-          description: Most recent date on which the distribution was changed, updated or modified.
-        dcat:packageFormat:
-          title: packaging format
-          description: The package format of the distribution in which one or more data files are grouped together, e.g. to enable a set of related files to be downloaded together.
-        dcterms:rights:
-          title: rights
-          description: Information about rights held in and over the distribution.
-        dcat:spatialResolutionInMeters:
-          title: spatial resolution
-          description: The minimum spatial separation resolvable in a dataset distribution, measured in meters.
-        dcat:temporalResolution:
-          title: temporal resolution
-          description: Minimum time period resolvable in the dataset distribution.
-        dcterms:title:
-          title: title
-          description: A name given to the distribution.
-
-    # see https://www.w3.org/TR/vocab-dcat-2/#Class:Resource
-    dcatResource:
-      title: Catalogued resource
-      description: Resource published or curated by a single agent.
-      type: object
-      properties:
-        dcterms:accessRights:
-          title: access rights
-          description: Information about who can access the resource or an indication of its security status.
-        dcterms:conformsTo:
-          title: conforms to
-          description: An established standard to which the described resource conforms.
-        dcat:contactPoint:
-          title: contact point
-          description: Relevant contact information for the cataloged resource. Use of vCard is recommended [VCARD-RDF].
-        dcterms:creator:
-          title: resource creator
-          description: The entity responsible for producing the resource.
-        dcterms:description:
-          title: description
-          description: A free-text account of the item.
-        odrl:hasPolicy:
-          title: has policy
-          description: An ODRL conformant policy expressing the rights associated with the resource.
-        dcterms:identifier:
-          title: identifier
-          description: A unique identifier of the item.
-        dcterms:isReferencedBy:
-          title: is referenced by
-          description: A related resource, such as a publication, that references, cites, or otherwise points to the cataloged resource.
-        dcterms:issued:
-          title: release date
-          description: Date of formal issuance (e.g., publication) of the item.
-        dcat:keyword:
-          title:  keyword/tag
-          description: A keyword or tag describing the resource.
-        dcat:landingPage:
-          title: landing page
-          description: A Web page that can be navigated to in a Web browser to gain access to the catalog, a dataset, its distributions and/or additional information.
-        dcterms:language:
-          title: language
-          description: A language of the item. This refers to the natural language used for textual metadata (i.e. titles, descriptions, etc) of a cataloged resource (i.e. dataset or service) or the textual values of a dataset distribution
-        dcterms:license:
-          title: license
-          description: A legal document under which the resource is made available.
-        dcterms:modified:
-          title: update/modification date
-          description: Most recent date on which the item was changed, updated or modified.
-        dcterms:publisher:
-          title: publisher
-          description: The entity responsible for making the item available.
-        prov:qualifiedAttribution:
-          title: qualified attribution
-          description: Link to an Agent having some form of responsibility for the resource
-        dcat:qualifiedRelation:
-          title: qualified relation
-          description: Link to a description of a relationship with another resource.
-        dcterms:relation:
-          title: resource relation
-          description: A resource with an unspecified relationship to the cataloged item.
-        dcterms:rights:
-          title: rights
-          description: A statement that concerns all rights not addressed with dcterms:license or dcterms:accessRights, such as copyright statements.
-        dcterms:subject:
-          title: theme/category
-          description: A main category of the resource. A resource can have multiple themes.
-        dcterms:title:
-          title: title
-          description: A name given to the item.
-        dcterms:type:
-          title: type/genre
-          description: The nature or genre of the resource.
-
     modSemanticArtefact:
       title: Semantic Artefact
       description: Semantic Artefact is defined here as a machine-actionable and -readable formalisation of a conceptualisation enabling sharing and reuse by humans and machines. These artefacts may have a broad range of formalisation, from loose set of terms, taxonomies, thesauri to higher-order logics, and include the concepts/terms/classes constituting these. Moreover, semantic artefacts are serialised using a variety of digital representation formats, e.g., RDF Turtle, OWL-RDF, XML, JSON-LD.
@@ -1023,7 +770,7 @@ components:
               description: The URI of the ontology which is described by this metadata.
             owl:versionIRI:
               title: version IRI
-              description: The property that identifies the version IRI of an ontology.      
+              description: The property that identifies the version IRI of an ontology.
             dcterms:accessRights:
               title: access rights
               description: Information about who can access the resource or an indication of its security status.
@@ -1040,7 +787,7 @@ components:
               title: identifier
               description: A unique identifier of the item.
             dcat:keyword:
-              title:  keyword/tag
+              title: keyword/tag
               description: A keyword or tag describing the resource.
             dcat:landingPage:
               title: landing page
@@ -1166,8 +913,8 @@ components:
               title: bug database
               description: Bug tracker for a project.
             doap:mailing-list:
-              title: 
-              description: 
+              title:
+              description:
             doap:repository:
               title: repository
               description: Source code repository.
@@ -1254,13 +1001,13 @@ components:
               description: Indicates that the subject vocabulary is used by the object vocabulary.
             mod:usedInProject:
               title: used in project
-              description: An ontology that is used in a project.      
+              description: An ontology that is used in a project.
             owl:backwardCompatibleWith:
               title: backward compatible
               description: This identifies the specified ontology as a prior version of the containing ontology, and further indicates that it is backward compatible with it.
             owl:deprecated:
               title: deprecated
-              description: The annotation property that indicates that a given entity has been deprecated.   
+              description: The annotation property that indicates that a given entity has been deprecated.
             owl:incompatibleWith:
               title: incompatible
               description: This indicates that the containing ontology is a later version of the referenced ontology, but is not backward compatible with it.
@@ -1269,7 +1016,7 @@ components:
               description: This identifies the specified ontology as a prior version of the containing ontology.
             owl:versionInfo:
               title: version information
-              description: The version of the released ontology.   
+              description: The version of the released ontology.
             pav:curatedBy:
               title: curator
               description: A curator who restructure the previously authored content and shape it to be appropriate for the intended representation (e.g. by normalizing the fields for being represented in a spreadsheet).
@@ -1278,10 +1025,10 @@ components:
               description: Invalidation is the start of the destruction, cessation, or expiry of an existing entity by an activity. The entity is no longer available for use (or further invalidation) after invalidation. Any generation or usage of an entity precedes its invalidation."@en ;
             rdfs:comment:
               title: notes or comments
-              description: A description of the subject resource.      
+              description: A description of the subject resource.
             schema:associatedMedia:
               title:
-              description: A media object that encodes this CreativeWork. This property is a synonym for encoding.      
+              description: A media object that encodes this CreativeWork. This property is a synonym for encoding.
             schema:award:
               title: award
               description: An award won by or for this item.
@@ -1302,7 +1049,7 @@ components:
               description: A pointer to the translated ontology(ies) for an existing ontology.
             skos:hiddenLabel:
               title: hidden label
-              description: Hidden or past name.   
+              description: Hidden or past name.
             vann:changes:
               title: Changes
               description: A reference to a resource that describes changes between this version of a vocabulary and the previous.
@@ -1407,7 +1154,7 @@ components:
               title: identifier
               description: A unique identifier of the item.
             dcat:keyword:
-              title:  keyword/tag
+              title: keyword/tag
               description: A keyword or tag describing the resource.
             dcterms:bibliographicCitation:
               title: bibliographic reference
@@ -1550,8 +1297,8 @@ components:
               title: bug database
               description: Bug tracker for a project.
             doap:mailing-list:
-              title: 
-              description: 
+              title:
+              description:
             doap:repository:
               title: repository
               description: Source code repository.
@@ -1632,13 +1379,13 @@ components:
               description: Describes future tasks planned by a resource curator. This property is primarily intended to be used for vocabularies or datasets, but the domain is left open, it can be used for any resource. Use iCalendar Vtodo class and its properties to further describe the task calendar, priorities etc.
             mod:usedInProject:
               title: used in project
-              description: An ontology that is used in a project.      
+              description: An ontology that is used in a project.
             owl:deprecated:
               title: deprecated
-              description: The annotation property that indicates that a given entity has been deprecated.   
+              description: The annotation property that indicates that a given entity has been deprecated.
             owl:versionInfo:
               title: version information
-              description: The version of the released ontology.   
+              description: The version of the released ontology.
             pav:curatedOn:
               title: curation date
             pav:curatedBy:
@@ -1646,10 +1393,10 @@ components:
               description: A curator who restructure the previously authored content and shape it to be appropriate for the intended representation (e.g. by normalizing the fields for being represented in a spreadsheet).
             rdfs:comment:
               title: notes or comments
-              description: A description of the subject resource.      
+              description: A description of the subject resource.
             schema:associatedMedia:
               title:
-              description: A media object that encodes this CreativeWork. This property is a synonym for encoding.      
+              description: A media object that encodes this CreativeWork. This property is a synonym for encoding.
             schema:award:
               title: award
               description: An award won by or for this item.
@@ -1670,7 +1417,7 @@ components:
               description: The SPARQL endpoint of an sd:Service that implements the SPARQL Protocol service. The object of the sd:endpoint property is an IRI.
             skos:hiddenLabel:
               title: hidden label
-              description: Hidden or past name.   
+              description: Hidden or past name.
             vann:changes:
               title: Changes
               description: A reference to a resource that describes changes between this version of a vocabulary and the previous.
@@ -1705,9 +1452,26 @@ components:
               type: array
               items:
                 example: mod:SemanticArtefactCatalogRecord
-        - $ref: '#/components/schemas/dcatCatalogRecord'
         - type: object
           properties:
+            dcterms:conformsTo:
+              title: conforms to
+              description: An established standard to which the described resource conforms.
+              dcterms:description:
+                title: Description
+                description: A free-text account of the record.
+              dcterms:issued:
+                title: listing date
+                description: The date of listing (i.e. formal recording) of the corresponding dataset or service in the catalog.
+              dcterms:modified:
+                title: update/modification date
+                description: Most recent date on which the catalog entry was changed, updated or modified.
+              dcterms:title:
+                title: Title
+                description: A name given to the resource.
+              foaf:primaryTopic:
+                title: primary topic
+                description: The Resource (dataset or service) described in the record
             dcterms:dateSubmitted:
               title: submission date
               description: Date of submission of the resource.
@@ -1782,7 +1546,7 @@ components:
               description: The syntax followed in the creation of an ontology.
             mod:conformsToKnowledgeRepresentationParadigm:
               title: knowledge representation paradigm
-              description: A representation formalism that is followed to describe knowledge in an ontology. Example includes description logics, first order logic, etc. 
+              description: A representation formalism that is followed to describe knowledge in an ontology. Example includes description logics, first order logic, etc.
             mod:definitionProperty:
               title: object definition property
               description: Property used to specify objects' definition.
@@ -1936,7 +1700,7 @@ components:
               description: The total number of properties in an ontology.
             mod:obsoleteParent:
               title: root of obsolete branch
-              description: Property used to specify the root of an obsolete branch in the ontology.  
+              description: Property used to specify the root of an obsolete branch in the ontology.
             mod:obsoleteProperty:
               title: object obsolete property
               description: Property used to specify obsolete objects.
@@ -2017,7 +1781,6 @@ components:
           title: Resource
           description: The class resource, everything.
           example: rdfs:Resource
-
 
     skosCollection:
       type: object
@@ -2112,7 +1875,7 @@ paths:
         "200":
           $ref: "#/components/responses/notes"
 
-   # Information about all semantic artefacts
+    # Information about all semantic artefacts
   /artefacts:
     parameters:
       - $ref: "#/components/parameters/format_param"
@@ -2131,8 +1894,8 @@ paths:
           $ref: "#/components/responses/artefacts"
         "404":
           $ref: "#/components/responses/error_message"
-          
- # Information about a semantic artefact
+
+  # Information about a semantic artefact
   /artefacts/{artefactID}:
     parameters:
       - $ref: "#/components/parameters/artefactID"
