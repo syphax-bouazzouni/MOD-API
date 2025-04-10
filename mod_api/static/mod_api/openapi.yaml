@@ -20,7 +20,6 @@ tags:
     description: Get documentation about the service.
 
 components:
-
   parameters:
     format_param:
       description: |
@@ -103,8 +102,25 @@ components:
       schema:
         type: string
 
-  responses:
+  pathItems:
+    rdfResource:
+      parameters:
+        - $ref: "#/components/parameters/artefactID"
+        - $ref: "#/components/parameters/resourceID"
+        - $ref: "#/components/parameters/format_param"
+      get:
+        tags:
+          - Artefact
+        summary: Get a specific resource.
+        description: Retrieves a specific resource.
+        operationId: getArtefactResource
+        responses:
+          "200":
+            $ref: "#/components/responses/resource"
+          "404":
+            $ref: "#/components/responses/error_message"
 
+  responses:
     notes:
       description: "OK"
       content:
@@ -2190,7 +2206,6 @@ paths:
         "404":
           $ref: "#/components/responses/error_message"
 
-  # Get a list of all the resources within an artefact
   /artefacts/{artefactID}/resources:
     parameters:
       - $ref: "#/components/parameters/artefactID"
@@ -2209,27 +2224,6 @@ paths:
           $ref: "#/components/responses/resources"
         "404":
           $ref: "#/components/responses/error_message"
-
-  # Get a resource within an artefact
-  /artefacts/{artefactID}/resources/{resourceID}:
-    parameters:
-      - $ref: "#/components/parameters/artefactID"
-      - $ref: "#/components/parameters/resourceID"
-      - $ref: "#/components/parameters/format_param"
-
-    get:
-      tags:
-        - Artefact
-      summary: Get a specific resources from within an artefact.
-      description: Retrieves a specific resources from within an artefact.
-      operationId: getArtefactResource
-      responses:
-        "200":
-          $ref: "#/components/responses/resource"
-        "404":
-          $ref: "#/components/responses/error_message"
-
-  # Get a list of all owl:Classes within an artefact
   /artefacts/{artefactID}/resources/classes:
     parameters:
       - $ref: "#/components/parameters/artefactID"
@@ -2248,8 +2242,6 @@ paths:
           $ref: "#/components/responses/classes"
         "404":
           $ref: "#/components/responses/error_message"
-
-  # Get a list of all skos:Concept within an artefact
   /artefacts/{artefactID}/resources/concepts:
     parameters:
       - $ref: "#/components/parameters/artefactID"
@@ -2268,8 +2260,6 @@ paths:
           $ref: "#/components/responses/concepts"
         "404":
           $ref: "#/components/responses/error_message"
-
-  # Get a list of all the rdf:Property within an artefact
   /artefacts/{artefactID}/resources/properties:
     parameters:
       - $ref: "#/components/parameters/artefactID"
@@ -2289,7 +2279,7 @@ paths:
         "404":
           $ref: "#/components/responses/error_message"
 
-  # Get a list of all the instances (owl named individual) within an artefact
+
   /artefacts/{artefactID}/resources/individuals:
     parameters:
       - $ref: "#/components/parameters/artefactID"
@@ -2308,8 +2298,6 @@ paths:
           $ref: "#/components/responses/individuals"
         "404":
           $ref: "#/components/responses/error_message"
-
-  # Get a list of all the skos:ConceptScheme within an artefact
   /artefacts/{artefactID}/resources/schemes:
     parameters:
       - $ref: "#/components/parameters/artefactID"
@@ -2328,8 +2316,6 @@ paths:
           $ref: "#/components/responses/schemes"
         "404":
           $ref: "#/components/responses/error_message"
-
-  # Get a list of all the skos:Collection within an artefact
   /artefacts/{artefactID}/resources/collections:
     parameters:
       - $ref: "#/components/parameters/artefactID"
@@ -2348,8 +2334,6 @@ paths:
           $ref: "#/components/responses/collections"
         "404":
           $ref: "#/components/responses/error_message"
-
-  # Get a list of all the skos-xl:Label within an artefact
   /artefacts/{artefactID}/resources/labels:
     parameters:
       - $ref: "#/components/parameters/artefactID"
@@ -2368,6 +2352,22 @@ paths:
           $ref: "#/components/responses/resources"
         "404":
           $ref: "#/components/responses/error_message"
+
+
+  /artefacts/{artefactID}/resources/{resourceID}:
+    $ref: "#/components/pathItems/rdfResource"
+  /artefacts/{artefactID}/resources/classes/{resourceID}:
+    $ref: "#/components/pathItems/rdfResource"
+  /artefacts/{artefactID}/resources/concepts/{resourceID}:
+    $ref: "#/components/pathItems/rdfResource"
+  /artefacts/{artefactID}/resources/properties/{resourceID}:
+    $ref: "#/components/pathItems/rdfResource"
+  /artefacts/{artefactID}/resources/individuals/{resourceID}:
+    $ref: "#/components/pathItems/rdfResource"
+  /artefacts/{artefactID}/resources/collections/{resourceID}:
+    $ref: "#/components/pathItems/rdfResource"
+  /artefacts/{artefactID}/resources/labels/{resourceID}:
+    $ref: "#/components/pathItems/rdfResource"
 
   # Search the metadata and content in the catalogue
   /search:
